@@ -1,0 +1,133 @@
+{
+  "hero": {
+    "title": "Build your delivery rocket with KubeRocketCI",
+    "description": "Boost your delivery with the development culture based on the modern CI/CD stack, golden path and self-service capabilities of the KubeRocketCI.",
+    "contactButton": "Contact Us",
+    "demoButton": "Request Demo"
+  },
+  "about": {
+    "title": "You will get",
+    "description": "KubeRocketCI users gain essential productivity boost throughout entire software development lifecycle.",
+    "statistics": {
+      "migrationTime": "days to migrate to KubeRocketCI",
+      "fasterDeploy": "faster code push to deploy time",
+      "automatedTasks": "routine tasks automated",
+      "hoursSaved": "hours saved per developer annually"
+    }
+  },
+  "benefits": {
+    "title": "Benefits",
+    "description": "Experience the proven advantages of a mature development acceleration platform.",
+    "items": {
+      "quickStart": {
+        "title": "Quick start",
+        "description": "Elementary setup, predefined pipelines and application templates let users scaffold or migrate to a CI/CD flow in a few hours."
+      },
+      "cloudAgnostic": {
+        "title": "Cloud agnostic",
+        "description": "Go beyond any cloud provider without limiting your project's infrastructure flexibility, ensuring broad infrastructure compatibility."
+      },
+      "easySetup": {
+        "title": "Easy setup and maintenance",
+        "description": "KubeRocketCI follows the GitOps approach and stores configurations as code in Git for simple and reliable maintenance."
+      },
+      "reduceCosts": {
+        "title": "Reduce development time and cost",
+        "description": "Automated event-driven scalers reduce infrastructure costs while automated pipeline code reviews, builds, and deployments save days of developer work."
+      },
+      "healthMonitor": {
+        "title": "Delivery health monitor",
+        "description": "Code quality and vulnerability scanners, plus persistent logging tools with smart alerts, allow you to detect deviations and prevent downtime at the earliest stage."
+      },
+      "aiAdoption": {
+        "title": "AI-adoption",
+        "description": "Built-in AI agents help to efficiently manage the platform. The standalone KubeRocketAI framework will help users develop new features for applications."
+      }
+    }
+  },
+  "features": {
+    "title": "Features",
+    "description": "KubeRocketCI stands out with powerful features that enable teams to build advanced, secure, and robust CI/CD workflows.",
+    "items": {
+      "appTemplates": {
+        "title": "Application Templates",
+        "description": "Quickly scaffold and deploy applications with predefined pipelines, leveraging solution scaffolding and template governance for streamlined development."
+      },
+      "sso": {
+        "title": "Single Sign-On with Identity Providers",
+        "description": "Easily integrate using OIDC or SAML for secure access across the platform, simplifying workflow and enhancing security."
+      },
+      "openSource": {
+        "title": "Open Source and CNCF Toolsets",
+        "description": "Embrace the power of open-source and Cloud Native Computing Foundation (CNCF) principles for innovative and collaborative project development."
+      },
+      "kubernetes": {
+        "title": "Kubernetes-Native",
+        "description": "Deploy in a Kubernetes cluster for unmatched scalability, access management, and cloud-agnostic deployment, all accessible via an intuitive UI and API."
+      }
+    }
+  },
+  "keyDifferentiation": {
+    "title": "Key differentiation",
+    "description": "The KubeRocketCI architecture was designed to address the unique challenges of modern software development teams.",
+    "items": {
+      "goldenPath": {
+        "title": "Golden Path",
+        "description": "The KubeRocketCI architecture was designed to address the unique challenges of modern software development teams."
+      },
+      "security": {
+        "title": "Security and Quality Assurance",
+        "description": "Built-in security features and quality assurance tools ensure your applications meet the highest standards."
+      },
+      "flexibility": {
+        "title": "Flexibility & Modular deployment",
+        "description": "Modular architecture allows for flexible deployment options that adapt to your specific infrastructure needs."
+      }
+    }
+  },
+  "testimonials": {
+    "title": "Testimonials",
+    "description": "Leading organizations worldwide trust KubeRocketCI to accelerate their software delivery and enhance development workflows."
+  },
+  "cta": {
+    "title": "Ready to accelerate your development and raise quality standards?",
+    "subtitle": "Start building better software today.",
+    "button": "Request Demo"
+  },
+  "footer": {
+    "sections": {
+      "readings": {
+        "title": "Readings",
+        "links": {
+          "whatIs": "What is KubeRocketCI",
+          "blogs": "Blogs: Interesting Facts From The DevSecOps Life",
+          "userGuide": "User Guide: How To Use KubeRocketCI",
+          "developerGuide": "Developer Guide: How We Build KubeRocketCI",
+          "apiReference": "API Reference: Use KubeRocketCI To Build Your Solutions"
+        }
+      },
+      "learnMore": {
+        "title": "Learn more",
+        "links": {
+          "github": "KubeRocketCI on the GitHub",
+          "artifactHub": "KubeRocketCI on the ArtifactHub",
+          "operatorHub": "KubeRocketCI on the OperatorHub",
+          "dockerHub": "Docker Hub",
+          "blogCategories": "Blog categories",
+          "rssFeed": "RSS feed",
+          "atomFeed": "Atom feed"
+        }
+      },
+      "community": {
+        "title": "Our Community"
+      },
+      "subscribe": {
+        "title": "Subscribe",
+        "label": "Join our newsletter",
+        "placeholder": "Enter your email",
+        "button": "Subscribe"
+      }
+    },
+    "copyright": "Copyright © {year} KubeRocketCI."
+  }
+}

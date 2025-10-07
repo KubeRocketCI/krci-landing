@@ -1,0 +1,328 @@
+@import "tailwindcss";
+
+@theme {
+  /* ===== COLOR SYSTEM ===== */
+  --color-neutral-0: #ffffff;
+  --color-neutral-10: #cecedb;
+  --color-neutral-20: #b6b6c2;
+  --color-neutral-30: #9e9ea8;
+  --color-neutral-40: #83838f;
+  --color-neutral-50: #676775;
+  --color-neutral-60: #51515c;
+  --color-neutral-70: #3a3a42;
+  --color-neutral-80: #242429;
+  --color-neutral-90: #141414;
+  --color-background: #0e0e0e;
+  --color-error: #e50861;
+
+  /* ===== TYPOGRAPHY SYSTEM ===== */
+  --font-primary: "Alexandria", system-ui, sans-serif;
+
+  /* Font Sizes */
+  --font-size-caption: 12px;
+  --font-size-body-2: 14px;
+  --font-size-body: 16px;
+  --font-size-button: 16px;
+  --font-size-subtitle: 20px;
+  --font-size-h2: 32px;
+  --font-size-h1: 64px;
+
+  /* Line Heights */
+  --line-height-tight: 1;
+  --line-height-snug: 1.25;
+  --line-height-base: 1.5;
+  --line-height-relaxed: 1.4;
+  --line-height-loose: 1.4285714285714286;
+  --line-height-normal: 1.3333333333333333;
+
+  /* ===== GRADIENT SYSTEM ===== */
+  --gradient-h1: linear-gradient(
+    226deg,
+    rgba(74, 229, 254, 1) 13%,
+    rgba(90, 194, 255, 1) 58%,
+    rgba(230, 21, 255, 1) 98%
+  );
+  --gradient-numbers: linear-gradient(
+    140deg,
+    rgba(74, 229, 255, 1) 1%,
+    rgba(147, 124, 255, 1) 70%
+  );
+  --gradient-icon: linear-gradient(
+    165deg,
+    rgba(245, 0, 255, 1) 10%,
+    rgba(66, 0, 255, 1) 100%
+  );
+  --gradient-button: linear-gradient(
+    165deg,
+    rgba(168, 33, 255, 1) 60%,
+    rgba(230, 21, 255, 1) 100%
+  );
+  --gradient-button-hover: linear-gradient(
+    -90deg,
+    rgba(214, 16, 241, 1) 0%,
+    rgba(152, 88, 255, 1) 100%
+  );
+  --gradient-stroke: radial-gradient(
+    circle at 0% 0%,
+    rgba(235, 20, 241, 1) 0%,
+    rgba(32, 36, 225, 1) 49%,
+    rgba(3, 8, 14, 1) 100%
+  );
+  --gradient-stroke-simple: linear-gradient(
+    90deg,
+    rgba(158, 158, 168, 1) 0%,
+    rgba(3, 8, 14, 1) 100%
+  );
+  --gradient-dark-purple: linear-gradient(
+    136deg,
+    rgba(20, 20, 20, 1) 1%,
+    rgba(31, 29, 53, 1) 100%
+  );
+  --gradient-black: linear-gradient(
+    137deg,
+    rgba(20, 20, 20, 0.8) 0%,
+    rgba(36, 36, 41, 0.3) 100%
+  );
+  --gradient-bright-purple: linear-gradient(
+    136deg,
+    rgba(19, 0, 16, 1) 1%,
+    rgba(3, 0, 50, 1) 100%
+  );
+  --gradient-white: linear-gradient(
+    165deg,
+    rgba(255, 255, 255, 1) 10%,
+    rgba(61, 61, 61, 0) 100%
+  );
+
+  /* ===== SHADOW SYSTEM ===== */
+  --shadow-button: 4px 4px 19.2px -2px rgba(247, 19, 230, 0.25);
+  --shadow-button-hover: 4px 4px 21.9px -2px rgba(247, 19, 230, 0.4);
+  --shadow-card: 0px 4px 52px 0px rgba(0, 0, 0, 0.04);
+  --shadow-level-3: 0px 9px 15px 0px rgba(29, 30, 38, 0.05),
+    0px 6px 36px 0px rgba(29, 30, 38, 0.12),
+    0px 0px 10px 0px rgba(29, 30, 38, 0.05);
+
+  /* ===== TAILWIND THEME MAPPINGS ===== */
+  /* Use reserved Tailwind color names */
+  --color-background: #0e0e0e;
+  --color-foreground: #ffffff;
+
+  /* Font Families */
+  --font-mono: "Source Code Pro", monospace;
+
+  /* Background Images (Gradients) */
+  --background-image-gradient-h1: linear-gradient(
+    226deg,
+    rgba(74, 229, 254, 1) 13%,
+    rgba(90, 194, 255, 1) 58%,
+    rgba(230, 21, 255, 1) 98%
+  );
+  --background-image-gradient-numbers: linear-gradient(
+    140deg,
+    rgba(74, 229, 255, 1) 1%,
+    rgba(147, 124, 255, 1) 70%
+  );
+  --background-image-gradient-icon: linear-gradient(
+    165deg,
+    rgba(245, 0, 255, 1) 10%,
+    rgba(66, 0, 255, 1) 100%
+  );
+  --background-image-gradient-button: linear-gradient(
+    165deg,
+    rgba(168, 33, 255, 1) 60%,
+    rgba(230, 21, 255, 1) 100%
+  );
+  --background-image-gradient-button-hover: linear-gradient(
+    -90deg,
+    rgba(214, 16, 241, 1) 0%,
+    rgba(152, 88, 255, 1) 100%
+  );
+  --background-image-gradient-stroke: radial-gradient(
+    circle at 0% 0%,
+    rgba(235, 20, 241, 1) 0%,
+    rgba(32, 36, 225, 1) 49%,
+    rgba(3, 8, 14, 1) 100%
+  );
+  --background-image-gradient-stroke-simple: linear-gradient(
+    90deg,
+    rgba(158, 158, 168, 1) 0%,
+    rgba(3, 8, 14, 1) 100%
+  );
+  --background-image-gradient-dark-purple: linear-gradient(
+    136deg,
+    rgba(20, 20, 20, 1) 1%,
+    rgba(31, 29, 53, 1) 100%
+  );
+  --background-image-gradient-black: linear-gradient(
+    137deg,
+    rgba(20, 20, 20, 0.8) 0%,
+    rgba(36, 36, 41, 0.3) 100%
+  );
+  --background-image-gradient-bright-purple: linear-gradient(
+    136deg,
+    rgba(19, 0, 16, 1) 1%,
+    rgba(3, 0, 50, 1) 100%
+  );
+  --background-image-gradient-white: linear-gradient(
+    165deg,
+    rgba(255, 255, 255, 1) 10%,
+    rgba(61, 61, 61, 0) 100%
+  );
+
+  /* Box Shadows */
+  --box-shadow-button: 4px 4px 19.2px -2px rgba(247, 19, 230, 0.25);
+  --box-shadow-button-hover: 4px 4px 21.9px -2px rgba(247, 19, 230, 0.4);
+  --box-shadow-card: 0px 4px 52px 0px rgba(0, 0, 0, 0.04);
+  --box-shadow-level-3: 0px 9px 15px 0px rgba(29, 30, 38, 0.05),
+    0px 6px 36px 0px rgba(29, 30, 38, 0.12),
+    0px 0px 10px 0px rgba(29, 30, 38, 0.05);
+
+  /* Border Radius */
+  --radius: 0.5rem;
+  --bg-hero-rocket: url("/hero-rocket.png");
+  --bg-hero-stars: url("/hero-stars.png");
+}
+
+/* Button Shadow Class */
+.button-shadow {
+  box-shadow: var(--shadow-button);
+}
+
+/* Shadow Button Hover Class */
+.shadow-button-hover {
+  box-shadow: var(--shadow-button-hover);
+}
+
+/* Text Button Class */
+.text-button {
+  font-family: var(--font-secondary);
+  font-size: var(--font-size-button);
+  font-weight: 500;
+  line-height: var(--line-height-snug);
+}
+
+/* Background Neutral 90 Class */
+.bg-neutral-90 {
+  background-color: #141414;
+}
+
+/* Input Field Styles */
+.input-field {
+  background-color: var(--color-neutral-90);
+  border: 1px solid var(--color-neutral-20);
+  border-radius: 3px;
+  padding: 8px;
+  font-family: var(--font-secondary);
+  font-size: var(--font-size-body-2);
+  color: var(--color-neutral-0);
+  transition: all 0.2s ease;
+}
+
+.input-field:focus {
+  border-color: var(--gradient-stroke);
+  outline: none;
+  box-shadow: var(--shadow-button-hover);
+}
+
+.input-field:hover {
+  box-shadow: var(--shadow-button-hover);
+}
+
+.input-field:disabled {
+  background-color: var(--color-neutral-70);
+  border-color: var(--color-neutral-40);
+  color: var(--color-neutral-40);
+}
+
+.input-field.error {
+  border-color: var(--color-error);
+}
+
+.input-field::placeholder {
+  color: var(--color-neutral-20);
+}
+
+/* Button Styles */
+.btn-primary {
+  background: var(--gradient-button);
+  color: var(--color-neutral-0);
+  border: none;
+  border-radius: 4px;
+  padding: 12px 20px;
+  font-family: var(--font-secondary);
+  font-size: var(--font-size-button);
+  font-weight: 500;
+  line-height: var(--line-height-snug);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: var(--shadow-button);
+}
+
+.btn-primary:hover {
+  background: var(--gradient-button-hover);
+  box-shadow: var(--shadow-button-hover);
+}
+
+.btn-primary:disabled {
+  background: var(--color-neutral-70);
+  color: var(--color-neutral-40);
+  box-shadow: none;
+  cursor: not-allowed;
+}
+
+.btn-secondary {
+  background: var(--color-neutral-90);
+  color: var(--color-neutral-0);
+  border: 1px solid var(--color-neutral-0);
+  border-radius: 4px;
+  padding: 12px 20px;
+  font-family: var(--font-secondary);
+  font-size: var(--font-size-button);
+  font-weight: 500;
+  line-height: var(--line-height-snug);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: var(--shadow-button);
+}
+
+.btn-secondary:hover {
+  background: var(--gradient-button-hover);
+  border-color: var(--gradient-button-hover);
+  color: var(--gradient-button-hover);
+  box-shadow: var(--shadow-button-hover);
+}
+
+.btn-secondary:disabled {
+  background: var(--color-neutral-70);
+  border-color: var(--color-neutral-40);
+  color: var(--color-neutral-40);
+  box-shadow: none;
+  cursor: not-allowed;
+}
+
+.btn-ghost {
+  background: var(--color-neutral-90);
+  color: var(--color-neutral-0);
+  border: none;
+  border-radius: 4px;
+  padding: 12px 20px;
+  font-family: var(--font-secondary);
+  font-size: var(--font-size-button);
+  font-weight: 500;
+  line-height: var(--line-height-snug);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: var(--shadow-button);
+}
+
+.btn-ghost:hover {
+  background: var(--gradient-button-hover);
+  box-shadow: var(--shadow-button-hover);
+}
+
+.btn-ghost:disabled {
+  background: var(--color-neutral-90);
+  color: var(--color-neutral-40);
+  box-shadow: none;
+  cursor: not-allowed;
+}
