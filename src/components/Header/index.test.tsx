@@ -1,8 +1,9 @@
-import { render, screen, fireEvent } from "@testing-library/react";
+import { fireEvent, render, screen } from "@testing-library/react";
 import Header from "./index";
 
 // Mock Next.js Link component
 jest.mock("next/link", () => {
+  // biome-ignore lint/suspicious/noExplicitAny: Test mock requires flexible typing
   return function MockLink({ children, href, ...props }: any) {
     return (
       <a href={href} {...props}>

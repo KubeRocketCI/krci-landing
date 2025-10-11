@@ -1,10 +1,11 @@
-import { cn } from "@/lib/utils";
+import Image from "next/image";
 import { Container } from "@/components/Container";
 import { getTranslationKey } from "@/lib/i18n";
+import { cn } from "@/lib/utils";
+import type { Translations } from "@/types/translations";
 import { FOOTER_LINKS } from "./constants";
-import Image from "next/image";
 
-const Footer = ({ translations }: { translations: any }) => {
+const Footer = ({ translations }: { translations: Translations }) => {
   const t = (key: string) => getTranslationKey(translations, key);
 
   return (
@@ -16,13 +17,13 @@ const Footer = ({ translations }: { translations: any }) => {
         <div className={cn("relative z-10 ")}>
           <div
             className={cn(
-              "flex flex-wrap lg:flex-nowrap justify-between gap-8 mb-18"
+              "flex flex-wrap lg:flex-nowrap justify-between gap-8 mb-18",
             )}
           >
             <div className={cn("space-y-2 w-full lg:w-auto")}>
               <h3
                 className={cn(
-                  "text-button font-medium bg-gradient-numbers bg-clip-text text-transparent"
+                  "text-button font-medium bg-gradient-numbers bg-clip-text text-transparent",
                 )}
               >
                 {t("footer.sections.readings.title")}
@@ -31,7 +32,7 @@ const Footer = ({ translations }: { translations: any }) => {
                 <a
                   href={FOOTER_LINKS.readings.whatIs}
                   className={cn(
-                    "block text-body text-neutral-0 hover:text-neutral-20 transition-colors"
+                    "block text-body text-neutral-0 hover:text-neutral-20 transition-colors",
                   )}
                 >
                   {t("footer.sections.readings.links.whatIs")}
@@ -39,7 +40,7 @@ const Footer = ({ translations }: { translations: any }) => {
                 <a
                   href={FOOTER_LINKS.readings.blogs}
                   className={cn(
-                    "block text-body text-neutral-0 hover:text-neutral-20 transition-colors"
+                    "block text-body text-neutral-0 hover:text-neutral-20 transition-colors",
                   )}
                 >
                   {t("footer.sections.readings.links.blogs")}
@@ -47,7 +48,7 @@ const Footer = ({ translations }: { translations: any }) => {
                 <a
                   href={FOOTER_LINKS.readings.userGuide}
                   className={cn(
-                    "block text-body text-neutral-0 hover:text-neutral-20 transition-colors"
+                    "block text-body text-neutral-0 hover:text-neutral-20 transition-colors",
                   )}
                 >
                   {t("footer.sections.readings.links.userGuide")}
@@ -55,7 +56,7 @@ const Footer = ({ translations }: { translations: any }) => {
                 <a
                   href={FOOTER_LINKS.readings.developerGuide}
                   className={cn(
-                    "block text-body text-neutral-0 hover:text-neutral-20 transition-colors"
+                    "block text-body text-neutral-0 hover:text-neutral-20 transition-colors",
                   )}
                 >
                   {t("footer.sections.readings.links.developerGuide")}
@@ -63,7 +64,7 @@ const Footer = ({ translations }: { translations: any }) => {
                 <a
                   href={FOOTER_LINKS.readings.apiReference}
                   className={cn(
-                    "block text-body text-neutral-0 hover:text-neutral-20 transition-colors"
+                    "block text-body text-neutral-0 hover:text-neutral-20 transition-colors",
                   )}
                 >
                   {t("footer.sections.readings.links.apiReference")}
@@ -74,7 +75,7 @@ const Footer = ({ translations }: { translations: any }) => {
             <div className={cn("space-y-2 lg:max-w-77 w-full lg:w-auto")}>
               <h3
                 className={cn(
-                  "text-button font-medium bg-gradient-numbers bg-clip-text text-transparent"
+                  "text-button font-medium bg-gradient-numbers bg-clip-text text-transparent",
                 )}
               >
                 {t("footer.sections.learnMore.title")}
@@ -83,7 +84,7 @@ const Footer = ({ translations }: { translations: any }) => {
                 <a
                   href={FOOTER_LINKS.learnMore.github}
                   className={cn(
-                    "block text-[length:var(--font-size-body-2)] text-neutral-0 hover:text-neutral-20 transition-colors"
+                    "block text-[length:var(--font-size-body-2)] text-neutral-0 hover:text-neutral-20 transition-colors",
                   )}
                 >
                   {t("footer.sections.learnMore.links.github")}
@@ -91,7 +92,7 @@ const Footer = ({ translations }: { translations: any }) => {
                 <a
                   href={FOOTER_LINKS.learnMore.artifactHub}
                   className={cn(
-                    "block text-[length:var(--font-size-body-2)] text-neutral-0 hover:text-neutral-20 transition-colors"
+                    "block text-[length:var(--font-size-body-2)] text-neutral-0 hover:text-neutral-20 transition-colors",
                   )}
                 >
                   {t("footer.sections.learnMore.links.artifactHub")}
@@ -99,7 +100,7 @@ const Footer = ({ translations }: { translations: any }) => {
                 <a
                   href={FOOTER_LINKS.learnMore.operatorHub}
                   className={cn(
-                    "block text-[length:var(--font-size-body-2)] text-neutral-0 hover:text-neutral-20 transition-colors"
+                    "block text-[length:var(--font-size-body-2)] text-neutral-0 hover:text-neutral-20 transition-colors",
                   )}
                 >
                   {t("footer.sections.learnMore.links.operatorHub")}
@@ -107,7 +108,7 @@ const Footer = ({ translations }: { translations: any }) => {
                 <a
                   href={FOOTER_LINKS.learnMore.dockerHub}
                   className={cn(
-                    "block text-[length:var(--font-size-body-2)] text-neutral-0 hover:text-neutral-20 transition-colors"
+                    "block text-[length:var(--font-size-body-2)] text-neutral-0 hover:text-neutral-20 transition-colors",
                   )}
                 >
                   {t("footer.sections.learnMore.links.dockerHub")}
@@ -115,7 +116,7 @@ const Footer = ({ translations }: { translations: any }) => {
                 <a
                   href={FOOTER_LINKS.learnMore.blogCategories}
                   className={cn(
-                    "block text-[length:var(--font-size-body-2)] text-neutral-0 hover:text-neutral-20 transition-colors"
+                    "block text-[length:var(--font-size-body-2)] text-neutral-0 hover:text-neutral-20 transition-colors",
                   )}
                 >
                   {t("footer.sections.learnMore.links.blogCategories")}
@@ -123,7 +124,7 @@ const Footer = ({ translations }: { translations: any }) => {
                 <a
                   href={FOOTER_LINKS.learnMore.rssFeed}
                   className={cn(
-                    "block text-[length:var(--font-size-body-2)] text-neutral-0 hover:text-neutral-20 transition-colors"
+                    "block text-[length:var(--font-size-body-2)] text-neutral-0 hover:text-neutral-20 transition-colors",
                   )}
                 >
                   {t("footer.sections.learnMore.links.rssFeed")}
@@ -131,7 +132,7 @@ const Footer = ({ translations }: { translations: any }) => {
                 <a
                   href={FOOTER_LINKS.learnMore.atomFeed}
                   className={cn(
-                    "block text-[length:var(--font-size-body-2)] text-neutral-0 hover:text-neutral-20 transition-colors"
+                    "block text-[length:var(--font-size-body-2)] text-neutral-0 hover:text-neutral-20 transition-colors",
                   )}
                 >
                   {t("footer.sections.learnMore.links.atomFeed")}
@@ -143,7 +144,7 @@ const Footer = ({ translations }: { translations: any }) => {
               <div className={cn("space-y-3")}>
                 <h3
                   className={cn(
-                    "text-button font-medium bg-gradient-numbers bg-clip-text text-transparent"
+                    "text-button font-medium bg-gradient-numbers bg-clip-text text-transparent",
                   )}
                 >
                   {t("footer.sections.community.title")}
@@ -152,7 +153,7 @@ const Footer = ({ translations }: { translations: any }) => {
                   <a
                     href={FOOTER_LINKS.community.youtube}
                     className={cn(
-                      "w-6 h-6 text-neutral-0 hover:text-neutral-20 transition-colors"
+                      "w-6 h-6 text-neutral-0 hover:text-neutral-20 transition-colors",
                     )}
                     aria-label="YouTube"
                   >
@@ -167,7 +168,7 @@ const Footer = ({ translations }: { translations: any }) => {
                   <a
                     href={FOOTER_LINKS.community.github}
                     className={cn(
-                      "w-6 h-6 text-neutral-0 hover:text-neutral-20 transition-colors"
+                      "w-6 h-6 text-neutral-0 hover:text-neutral-20 transition-colors",
                     )}
                     aria-label="GitHub"
                   >
@@ -182,7 +183,7 @@ const Footer = ({ translations }: { translations: any }) => {
                   <a
                     href={FOOTER_LINKS.community.medium}
                     className={cn(
-                      "w-6 h-6 text-neutral-0 hover:text-neutral-20 transition-colors"
+                      "w-6 h-6 text-neutral-0 hover:text-neutral-20 transition-colors",
                     )}
                     aria-label="Medium"
                   >
@@ -234,7 +235,7 @@ const Footer = ({ translations }: { translations: any }) => {
           <p className={cn("text-xs text-neutral-40")}>
             {t("footer.copyright").replace(
               "{year}",
-              new Date().getFullYear().toString()
+              new Date().getFullYear().toString(),
             )}
           </p>
         </div>

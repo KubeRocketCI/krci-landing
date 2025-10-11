@@ -1,10 +1,11 @@
-import { cn } from "@/lib/utils";
-import { getTranslationKey } from "@/lib/i18n";
 import { Container } from "@/components/Container";
+import { getTranslationKey } from "@/lib/i18n";
+import { cn } from "@/lib/utils";
+import type { Translations } from "@/types/translations";
 import Carousel from "./components/Carousel";
 
 interface TestimonialsProps {
-  translations: any;
+  translations: Translations;
 }
 
 const Testimonials = ({ translations }: TestimonialsProps) => {
@@ -54,7 +55,7 @@ const Testimonials = ({ translations }: TestimonialsProps) => {
         <div className={cn("relative")}>
           <h2
             className={cn(
-              "text-(length:--font-size-h2) leading-10 text-neutral-0 mb-3"
+              "text-(length:--font-size-h2) leading-10 text-neutral-0 mb-3",
             )}
           >
             {t("testimonials.title")}

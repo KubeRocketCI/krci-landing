@@ -28,6 +28,29 @@ Development Standards: Code follows TypeScript strict mode, Biome linting rules,
 
 Project Structure: Source code organized in `src/app` for pages, `src/components` for reusable components, and `src/lib` for utilities. Components follow clear separation of concerns with proper TypeScript interfaces and responsive design implementation.
 
+## Essential Patterns
+
+### TypeScript Best Practices
+
+- Strict Typing: Replace `any` with proper interface definitions, especially for translation objects
+- Component Props: Use `interface` for component props, `type` for unions and computed types
+- Conditional Props: Implement function overloads for components with dependent props
+- Key Props: Use stable, unique identifiers instead of array indices for React keys
+
+### Next.js App Router Standards
+
+- Server vs Client: Default to Server Components, use 'use client' only when needed for interactivity
+- Image Optimization: Use `next/image` with proper `priority`, `loading`, and responsive sizing
+- SEO Optimization: Include proper metadata, Open Graph tags, and structured data
+- Performance: Implement proper loading states, error boundaries, and lazy loading
+
+### TailwindCSS Patterns
+
+- Responsive Design: Mobile-first approach with consistent breakpoint usage
+- Utility Composition: Use `cn()` utility for conditional classes and variant management
+- Accessibility: Include proper ARIA attributes, focus states, and semantic HTML
+- Design System: Maintain consistent spacing, typography, and color schemes
+
 ## Output Format
 
 - Code files: Proper file structure in `src/` following project conventions

@@ -1,20 +1,37 @@
-import { cn } from "@/lib/utils";
-import { getTranslationKey } from "@/lib/i18n";
-import { Container } from "@/components/Container";
 import Image from "next/image";
+import { Container } from "@/components/Container";
+import { getTranslationKey } from "@/lib/i18n";
+import { cn } from "@/lib/utils";
+import type { Translations } from "@/types/translations";
 
 interface AboutProps {
-  translations: any;
+  translations: Translations;
 }
 
 const About = ({ translations }: AboutProps) => {
   const t = (key: string) => getTranslationKey(translations, key);
 
   const statisticsData = [
-    { value: "< 1", label: t("about.statistics.migrationTime") },
-    { value: "2x", label: t("about.statistics.fasterDeploy") },
-    { value: "70%", label: t("about.statistics.automatedTasks") },
-    { value: "200+", label: t("about.statistics.hoursSaved") },
+    {
+      id: "migration-time",
+      value: "< 1",
+      label: t("about.statistics.migrationTime"),
+    },
+    {
+      id: "faster-deploy",
+      value: "2x",
+      label: t("about.statistics.fasterDeploy"),
+    },
+    {
+      id: "automated-tasks",
+      value: "70%",
+      label: t("about.statistics.automatedTasks"),
+    },
+    {
+      id: "hours-saved",
+      value: "200+",
+      label: t("about.statistics.hoursSaved"),
+    },
   ];
 
   return (
@@ -23,7 +40,7 @@ const About = ({ translations }: AboutProps) => {
         <div className={cn("mb-6")}>
           <h2
             className={cn(
-              "text-(length:--font-size-h2) leading-10 text-foreground mb-4"
+              "text-(length:--font-size-h2) leading-10 text-foreground mb-4",
             )}
           >
             {t("about.title")}
@@ -34,14 +51,14 @@ const About = ({ translations }: AboutProps) => {
         </div>
 
         <div className={cn("flex flex-wrap gap-6")}>
-          {statisticsData.map((statistic, index) => (
-            <div key={index} className="flex-1">
+          {statisticsData.map((statistic) => (
+            <div key={statistic.id} className="flex-1">
               <div
                 className={cn("text-(length:--font-size-h1)  font-bold mb-1")}
               >
                 <span
                   className={cn(
-                    "bg-gradient-numbers bg-clip-text text-transparent"
+                    "bg-gradient-numbers bg-clip-text text-transparent",
                   )}
                 >
                   {statistic.value}
