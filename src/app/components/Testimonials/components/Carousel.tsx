@@ -1,8 +1,9 @@
 "use client";
 
-import { cn } from "@/lib/utils";
+import type { EmblaCarouselType } from "embla-carousel";
 import useEmblaCarousel from "embla-carousel-react";
 import { useCallback, useEffect, useState } from "react";
+import { cn } from "@/lib/utils";
 
 interface Testimonial {
   name: string;
@@ -32,7 +33,7 @@ const Carousel = ({ testimonials }: CarouselProps) => {
     if (emblaApi) emblaApi.scrollNext();
   }, [emblaApi]);
 
-  const onSelect = useCallback((emblaApi: any) => {
+  const onSelect = useCallback((emblaApi: EmblaCarouselType) => {
     setPrevBtnDisabled(!emblaApi.canScrollPrev());
     setNextBtnDisabled(!emblaApi.canScrollNext());
   }, []);
@@ -49,13 +50,14 @@ const Carousel = ({ testimonials }: CarouselProps) => {
       <div className={cn("flex justify-end mb-4")}>
         <div className={cn("flex gap-3")}>
           <button
+            type="button"
             onClick={scrollPrev}
             disabled={prevBtnDisabled}
             className={cn(
               "w-6 h-6 transition-colors duration-200",
               "flex items-center justify-center",
               "group",
-              prevBtnDisabled ? "cursor-not-allowed" : "hover:opacity-80"
+              prevBtnDisabled ? "cursor-not-allowed" : "hover:opacity-80",
             )}
             aria-label="Previous testimonials"
           >
@@ -66,9 +68,12 @@ const Carousel = ({ testimonials }: CarouselProps) => {
               fill="none"
               className={cn(
                 "transition-colors duration-200",
-                prevBtnDisabled ? "text-neutral-50" : "text-neutral-0"
+                prevBtnDisabled ? "text-neutral-50" : "text-neutral-0",
               )}
+              role="img"
+              aria-label="Previous arrow"
             >
+              <title>Previous</title>
               <path
                 d="M15 18L9 12L15 6"
                 stroke="currentColor"
@@ -79,13 +84,14 @@ const Carousel = ({ testimonials }: CarouselProps) => {
             </svg>
           </button>
           <button
+            type="button"
             onClick={scrollNext}
             disabled={nextBtnDisabled}
             className={cn(
               "w-6 h-6 transition-colors duration-200",
               "flex items-center justify-center",
               "group",
-              nextBtnDisabled ? "cursor-not-allowed" : "hover:opacity-80"
+              nextBtnDisabled ? "cursor-not-allowed" : "hover:opacity-80",
             )}
             aria-label="Next testimonials"
           >
@@ -96,9 +102,12 @@ const Carousel = ({ testimonials }: CarouselProps) => {
               fill="none"
               className={cn(
                 "transition-colors duration-200",
-                nextBtnDisabled ? "text-neutral-50" : "text-neutral-0"
+                nextBtnDisabled ? "text-neutral-50" : "text-neutral-0",
               )}
+              role="img"
+              aria-label="Next arrow"
             >
+              <title>Next</title>
               <path
                 d="M9 18L15 12L9 6"
                 stroke="currentColor"
@@ -115,16 +124,16 @@ const Carousel = ({ testimonials }: CarouselProps) => {
         <div className={cn("flex gap-4")}>
           {testimonials.map((testimonial, index) => (
             <div
-              key={index}
+              key={`testimonial-${testimonial.name.replace(/\s+/g, "-")}-${index}`}
               className={cn(
                 "flex-shrink-0 w-full max-w-[432px] min-w-0",
                 "rounded-lg p-[1px] box-shadow-card backdrop-blur-42px",
-                "[background-image:var(--gradient-stroke)] bg-size-[150%]"
+                "[background-image:var(--gradient-stroke)] bg-size-[150%]",
               )}
             >
               <div
                 className={cn(
-                  "px-6 py-7 rounded-[calc(0.5rem-1px)] bg-gradient-dark-purple h-full"
+                  "px-6 py-7 rounded-[calc(0.5rem-1px)] bg-gradient-dark-purple h-full",
                 )}
               >
                 <div className={cn("flex flex-col gap-6 h-full")}>
@@ -132,7 +141,7 @@ const Carousel = ({ testimonials }: CarouselProps) => {
                     <div
                       className={cn(
                         "w-14 h-14 rounded-full bg-gradient-to-br from-purple-500 to-pink-500",
-                        "flex items-center justify-center text-white font-bold text-lg"
+                        "flex items-center justify-center text-white font-bold text-lg",
                       )}
                     >
                       {testimonial.name.charAt(0)}
@@ -141,7 +150,7 @@ const Carousel = ({ testimonials }: CarouselProps) => {
                   <div className={cn("flex-1 flex flex-col")}>
                     <p
                       className={cn(
-                        "text-(length:--font-size-body-2) text-neutral-0 mb-6 line-clamp-5"
+                        "text-(length:--font-size-body-2) text-neutral-0 mb-6 line-clamp-5",
                       )}
                     >
                       "{testimonial.content}"
@@ -149,7 +158,7 @@ const Carousel = ({ testimonials }: CarouselProps) => {
                     <div className={cn("space-y-1 mt-auto")}>
                       <h4
                         className={cn(
-                          "text-(length:--font-size-body-2) font-medium text-neutral-0"
+                          "text-(length:--font-size-body-2) font-medium text-neutral-0",
                         )}
                       >
                         {testimonial.name}

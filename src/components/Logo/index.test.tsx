@@ -23,7 +23,7 @@ describe("Logo", () => {
       "rounded",
       "flex",
       "items-center",
-      "justify-center"
+      "justify-center",
     );
   });
 });

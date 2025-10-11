@@ -1,11 +1,12 @@
-import { cn } from "@/lib/utils";
-import { getTranslationKey } from "@/lib/i18n";
-import { Container } from "@/components/Container";
 import Image from "next/image";
+import { Container } from "@/components/Container";
+import { getTranslationKey } from "@/lib/i18n";
+import { cn } from "@/lib/utils";
+import type { Translations } from "@/types/translations";
 import CTAButton from "../CTAButton";
 
 interface CTAProps {
-  translations: any;
+  translations: Translations;
 }
 
 const CTA = ({ translations }: CTAProps) => {
@@ -28,7 +29,7 @@ const CTA = ({ translations }: CTAProps) => {
           <h2
             className={cn(
               "text-lg lg:text-(length:--font-size-h2) font-normal text-neutral-0 text-center leading-tight",
-              "max-w-[880px]"
+              "max-w-[880px]",
             )}
           >
             {t("cta.title")} <br /> {t("cta.subtitle")}

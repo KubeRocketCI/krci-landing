@@ -1,10 +1,11 @@
-import { cn } from "@/lib/utils";
-import { getTranslationKey } from "@/lib/i18n";
-import { Container } from "@/components/Container";
 import Image from "next/image";
+import { Container } from "@/components/Container";
+import { getTranslationKey } from "@/lib/i18n";
+import { cn } from "@/lib/utils";
+import type { Translations } from "@/types/translations";
 
 interface KeyDifferentiationProps {
-  translations: any;
+  translations: Translations;
 }
 
 const KeyDifferentiation = ({ translations }: KeyDifferentiationProps) => {
@@ -12,6 +13,7 @@ const KeyDifferentiation = ({ translations }: KeyDifferentiationProps) => {
 
   const differentiationData = [
     {
+      id: "golden-path",
       number: "01",
       title: t("keyDifferentiation.items.goldenPath.title"),
       description: t("keyDifferentiation.items.goldenPath.description"),
@@ -19,6 +21,7 @@ const KeyDifferentiation = ({ translations }: KeyDifferentiationProps) => {
       iconHover: "/keydiff/golden_path_hover.png",
     },
     {
+      id: "security",
       number: "02",
       title: t("keyDifferentiation.items.security.title"),
       description: t("keyDifferentiation.items.security.description"),
@@ -26,6 +29,7 @@ const KeyDifferentiation = ({ translations }: KeyDifferentiationProps) => {
       iconHover: "/keydiff/security_hover.png",
     },
     {
+      id: "flexibility",
       number: "03",
       title: t("keyDifferentiation.items.flexibility.title"),
       description: t("keyDifferentiation.items.flexibility.description"),
@@ -51,7 +55,7 @@ const KeyDifferentiation = ({ translations }: KeyDifferentiationProps) => {
         <div className={cn("mb-9")}>
           <h2
             className={cn(
-              "text-(length:--font-size-h2) leading-10 text-neutral-0 mb-3"
+              "text-(length:--font-size-h2) leading-10 text-neutral-0 mb-3",
             )}
           >
             {t("keyDifferentiation.title")}
@@ -62,23 +66,23 @@ const KeyDifferentiation = ({ translations }: KeyDifferentiationProps) => {
         </div>
         <div
           className={cn(
-            "flex flex-wrap lg:flex-nowrap gap-4 [&:has(:hover)]:gap-2 relative z-2"
+            "flex flex-wrap lg:flex-nowrap gap-4 [&:has(:hover)]:gap-2 relative z-2",
           )}
         >
-          {differentiationData.map((diff, index) => (
+          {differentiationData.map((diff) => (
             <div
-              key={index}
+              key={diff.id}
               className={cn(
                 "group relative overflow-hidden rounded-lg bg-gradient-dark-purple",
                 "px-6 py-8 min-h-[365px] transition-all duration-300 ease-in-out",
                 "hover:[background-image:var(--gradient-bright-purple)]",
                 "flex-grow flex-shrink-0 basis-full lg:flex-1 lg:hover:flex-[2]",
-                "cursor-pointer"
+                "cursor-pointer",
               )}
             >
               <div
                 className={cn(
-                  "absolute inset-0 w-full h-full opacity-0 lg:opacity-100 lg:group-hover:opacity-0 transition-opacity duration-300"
+                  "absolute inset-0 w-full h-full opacity-0 lg:opacity-100 lg:group-hover:opacity-0 transition-opacity duration-300",
                 )}
               >
                 <Image
@@ -91,7 +95,7 @@ const KeyDifferentiation = ({ translations }: KeyDifferentiationProps) => {
 
               <div
                 className={cn(
-                  "absolute inset-0 w-full h-full opacity-100 lg:opacity-0 lg:group-hover:opacity-100 transition-opacity duration-300"
+                  "absolute inset-0 w-full h-full opacity-100 lg:opacity-0 lg:group-hover:opacity-100 transition-opacity duration-300",
                 )}
               >
                 <Image
@@ -115,7 +119,7 @@ const KeyDifferentiation = ({ translations }: KeyDifferentiationProps) => {
                   className={cn(
                     "text-(length:--font-size-body-2) text-neutral-0",
                     "opacity-100 lg:opacity-0 lg:group-hover:opacity-100 transition-opacity duration-300",
-                    "lg:group-hover:max-h-96 overflow-hidden"
+                    "lg:group-hover:max-h-96 overflow-hidden",
                   )}
                 >
                   {diff.description}

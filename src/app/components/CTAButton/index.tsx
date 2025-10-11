@@ -1,5 +1,5 @@
-import { cn } from "@/lib/utils";
 import Link from "next/link";
+import { cn } from "@/lib/utils";
 
 export const ctaButton = {
   label: "Request Demo",
@@ -14,7 +14,7 @@ const CTAButton = ({ onClick }: { onClick?: () => void }) => {
         "text-foreground leading-[1.25] cursor-pointer rounded-sm",
         "[background-image:var(--gradient-button)]",
         "hover:[background-image:var(--gradient-button-hover)] transition-colors",
-        "shadow-button-hover"
+        "shadow-button-hover",
       )}
       href={ctaButton.href}
       target="_blank"
