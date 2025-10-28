@@ -3,7 +3,7 @@ import { Container } from "@/components/Container";
 import { getTranslationKey } from "@/lib/i18n";
 import { cn } from "@/lib/utils";
 import type { Translations } from "@/types/translations";
-import CTAButton from "../CTAButton";
+import { HeroClient } from "./HeroClient";
 
 interface HeroProps {
   translations: Translations;
@@ -61,24 +61,10 @@ const Hero = ({ translations }: HeroProps) => {
               {t("hero.description")}
             </p>
 
-            <div
-              className={cn("flex items-center gap-4", "flex-col sm:flex-row")}
-            >
-              <button
-                type="button"
-                className={cn(
-                  "button-shadow px-5 py-3 text-button",
-                  "bg-neutral-90 text-foreground leading-[1] cursor-pointer",
-                  "border border-foreground rounded-sm",
-                  "hover:[background-image:var(--gradient-button-hover)] transition-colors",
-                  "min-w-[160px]",
-                )}
-              >
-                {t("hero.contactButton")}
-              </button>
-
-              <CTAButton />
-            </div>
+            <HeroClient
+              contactButtonText={t("hero.contactButton")}
+              contactFormTranslations={translations.contactForm}
+            />
           </div>
         </Container>
       </div>

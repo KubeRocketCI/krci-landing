@@ -185,5 +185,35 @@
     "effectiveDate": "Effective Date:",
     "lastUpdated": "Last Updated:",
     "date": "January 1, 2025"
+  },
+  "contactForm": {
+    "title": "Contact Us",
+    "description": "Have a question? Fill out the form below and we'll get back to you.",
+    "fields": {
+      "name": {
+        "label": "Your Name",
+        "placeholder": "John Doe"
+      },
+      "email": {
+        "label": "Email",
+        "placeholder": "john@example.com"
+      },
+      "question": {
+        "label": "Question",
+        "placeholder": "Tell us how we can help..."
+      }
+    },
+    "buttons": {
+      "submit": "Submit",
+      "submitting": "Sending...",
+      "cancel": "Cancel"
+    },
+    "messages": {
+      "success": "Thank you! We'll get back to you soon.",
+      "error": "Failed to send message. Please try again.",
+      "configError": "Email service is not configured. Please contact support.",
+      "securityError": "Security check failed. Please try again.",
+      "validationError": "Please check your form fields and try again."
+    }
   }
 }
