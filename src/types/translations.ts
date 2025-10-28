@@ -191,6 +191,76 @@ export interface TranslationContactForm {
   };
 }
 
+export interface TranslationPricingTier {
+  title: string;
+  description: string;
+  features: string[];
+  moreFeatures?: string[];
+  link: {
+    label: string;
+  };
+  label?: string;
+}
+
+export interface TranslationPricing {
+  title: string;
+  description: string;
+  tiers: {
+    openSource: TranslationPricingTier;
+    team: TranslationPricingTier;
+    scale: TranslationPricingTier;
+    enterprise: TranslationPricingTier;
+  };
+  notes: {
+    professionalServiceHours: string;
+    minimumCommitment: string;
+    disclaimer: string;
+  };
+  featuresTable: {
+    title: string;
+    headers: {
+      category: string;
+      description: string;
+      hours: string;
+    };
+    categories: {
+      deployment: {
+        title: string;
+        items: {
+          minimum: string;
+          full: string;
+          observability: string;
+          monitoring: string;
+          logging: string;
+          sonarqube: string;
+          security: string;
+        };
+      };
+      framework: {
+        title: string;
+        items: {
+          onboard: string;
+          template: string;
+        };
+      };
+      integration: {
+        title: string;
+        items: {
+          api: string;
+          kubernetes: string;
+          portal: string;
+        };
+      };
+      deployment_platform: {
+        title: string;
+        items: {
+          custom: string;
+        };
+      };
+    };
+  };
+}
+
 export interface Translations {
   hero: TranslationHero;
   about: TranslationAbout;
@@ -204,4 +274,5 @@ export interface Translations {
   privacy: TranslationPrivacy;
   terms: TranslationTerms;
   contactForm: TranslationContactForm;
+  pricing: TranslationPricing;
 }

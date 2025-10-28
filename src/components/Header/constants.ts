@@ -12,8 +12,7 @@ export const navigationItems: NavItem[] = [
   },
   {
     label: "Pricing",
-    href: "https://docs.kuberocketci.io/pricing",
-    target: "_blank",
+    href: "/pricing",
   },
   {
     label: "Documentation",
