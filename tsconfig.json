@@ -29,5 +29,10 @@
     "**/*.tsx",
     ".next/types/**/*.ts"
   ],
-  "exclude": ["node_modules", "**/*.test.*", "**/*.spec.*"]
+  "exclude": [
+    "node_modules",
+    "**/*.test.*",
+    "**/*.spec.*",
+    "botid-nextjs-starter"
+  ]
 }

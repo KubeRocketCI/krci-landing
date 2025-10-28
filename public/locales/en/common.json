@@ -215,5 +215,119 @@
       "securityError": "Security check failed. Please try again.",
       "validationError": "Please check your form fields and try again."
     }
+  },
+  "pricing": {
+    "title": "Professional Service Pricing",
+    "description": "Experience the flexibility of deploying KubeRocketCI on your on-premises infrastructure or in the Cloud. Your valuable data stays securely within your perimeter, ensuring uncompromising security at every step.",
+    "tiers": {
+      "openSource": {
+        "title": "Open Source",
+        "description": "Enjoy essential features at no cost, perfect for getting started.",
+        "features": [
+          "Community Support",
+          "Run on any Kubernetes Cluster",
+          "Pipelines for Polyglot Microservice"
+        ],
+        "link": {
+          "label": "Start"
+        }
+      },
+      "team": {
+        "title": "Team",
+        "description": "Boost teamwork with a plan tailored for small to medium-sized teams.",
+        "features": [
+          "Community Support",
+          "Run on any Kubernetes Cluster",
+          "Pipelines for Polyglot Microservice"
+        ],
+        "moreFeatures": [
+          "25 professional service hours*",
+          "6 months minimum**"
+        ],
+        "link": {
+          "label": "Contact US"
+        },
+        "label": "Popular"
+      },
+      "scale": {
+        "title": "Scale",
+        "description": "Access advanced features and scalability options to meet the evolving needs of your growing enterprise.",
+        "features": [
+          "Community Support",
+          "Run on any Kubernetes Cluster",
+          "Pipelines for Polyglot Microservice"
+        ],
+        "moreFeatures": [
+          "60 professional service hours*",
+          "6 months minimum**"
+        ],
+        "link": {
+          "label": "Contact US"
+        }
+      },
+      "enterprise": {
+        "title": "Enterprise",
+        "description": "For mission-critical projects and extensive needs, it delivers top-tier features, priority support, and customizable solutions.",
+        "features": [
+          "Community Support",
+          "Run on any Kubernetes Cluster",
+          "Pipelines for Polyglot Microservice"
+        ],
+        "moreFeatures": [
+          "160 professional service hours*",
+          "3 months minimum**"
+        ],
+        "link": {
+          "label": "Contact US"
+        }
+      }
+    },
+    "notes": {
+      "professionalServiceHours": "Professional service hours are versatile, blended hours bundled within your subscription plan. They encompass expertise from diverse specialists, including business analysts, architects, lead automation engineers, DevOps (System Engineers), and performance engineers. These multi-functional hours cater to KubeRocketCI installation, configuration, integration, customization, feature implementation, updates, and use case implementation. They empower you to leverage a range of expertise for various aspects of optimizing and enhancing your KubeRocketCI experience.",
+      "minimumCommitment": "Minimum commitment of time for use of a certain subscription package.",
+      "disclaimer": "The values presented in the table are provided for reference purposes only and are subject to change based on the final scope of the work. Please note that these figures serve as estimates and may be adjusted accordingly as the project details are finalized."
+    },
+    "featuresTable": {
+      "headers": {
+        "category": "Service Category",
+        "description": "Description",
+        "hours": "Professional Service Hours*"
+      },
+      "categories": {
+        "deployment": {
+          "title": "Deployment, Installation, Configuration",
+          "items": {
+            "minimum": "Deploy Platform with Minimum Components in the existing Kubernetes Cluster: CI/CD, integration with existing SonarQube, Repository Manager, Container Registry",
+            "full": "Deploy Platform in an empty AWS Account, including components: Infrastructure, CI/CD, SSO integration, SonarQube, DependencyTrack, Nexus Repository, DefectDojo, Logging, Monitoring, Docker registry, Observability",
+            "observability": "Traceability and Observability customization: Storage backend configuration, performance tunning",
+            "monitoring": "Monitoring stack customization: Custom Dashboards, Alerts, Notifications",
+            "logging": "Logging stack customization: Custom filters and processing for fluent-bit, logs rotation policy tunning",
+            "sonarqube": "SonarQube Quality Gate and Quality Profile configuration",
+            "security": "Security (SAST/SCA) report analysis per single codebase"
+          }
+        },
+        "framework": {
+          "title": "Framework/Language",
+          "items": {
+            "onboard": "Onboard new Framework or Build tool with CI Pipelines: Implement KubeRocketCI standard CI Pipeline steps (build, test, lint, push)",
+            "template": "Marketplace Template Development: Create new Template, Implement KubeRocketCI standard CI Pipeline steps (build, test, lint, push)"
+          }
+        },
+        "integration": {
+          "title": "Custom Tool Integration",
+          "items": {
+            "api": "Integrate custom tool with CI Pipeline over API",
+            "kubernetes": "Integrate custom tool with KubeRocketCI Portal UI over Kubernetes API",
+            "portal": "Integrate custom tool with KubeRocketCI Portal UI over API"
+          }
+        },
+        "deployment_platform": {
+          "title": "Target Deployment Platform customization",
+          "items": {
+            "custom": "Add Custom Deployment Platform: Implement custom CD Pipeline"
+          }
+        }
+      }
+    }
   }
 }
