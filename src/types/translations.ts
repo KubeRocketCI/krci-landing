@@ -160,6 +160,37 @@ export interface TranslationTestimonials {
   description: string;
 }
 
+export interface TranslationContactForm {
+  title: string;
+  description: string;
+  fields: {
+    name: {
+      label: string;
+      placeholder: string;
+    };
+    email: {
+      label: string;
+      placeholder: string;
+    };
+    question: {
+      label: string;
+      placeholder: string;
+    };
+  };
+  buttons: {
+    submit: string;
+    submitting: string;
+    cancel: string;
+  };
+  messages: {
+    success: string;
+    error: string;
+    configError: string;
+    securityError: string;
+    validationError: string;
+  };
+}
+
 export interface Translations {
   hero: TranslationHero;
   about: TranslationAbout;
@@ -172,4 +203,5 @@ export interface Translations {
   cookieConsent: TranslationCookieConsent;
   privacy: TranslationPrivacy;
   terms: TranslationTerms;
+  contactForm: TranslationContactForm;
 }

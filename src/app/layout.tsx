@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Alexandria } from "next/font/google";
 import "./globals.css";
+import { Toaster } from "sonner";
 import { Analytics, GAScript } from "@/components/Analytics";
 import { CookieConsent } from "@/components/CookieConsent";
 import { ConsentProvider } from "@/lib/consent-context";
@@ -184,6 +185,7 @@ export default function RootLayout({
           <CookieConsent translations={cookieConsentTranslations} />
           <Analytics />
         </ConsentProvider>
+        <Toaster position="top-right" />
       </body>
     </html>
   );
