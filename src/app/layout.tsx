@@ -12,6 +12,83 @@ export const metadata: Metadata = {
   title: "KubeRocketCI - Build your delivery rocket",
   description:
     "Boost your delivery with the development culture based on the modern CI/CD stack, golden path and self-service capabilities of the KubeRocketCI.",
+  metadataBase: new URL("https://kuberocketci.io"),
+  keywords: [
+    "KubeRocketCI",
+    "CI/CD",
+    "Kubernetes",
+    "DevOps",
+    "Platform Engineering",
+    "Golden Path",
+    "Self-Service",
+    "Cloud Native",
+  ],
+  authors: [{ name: "KubeRocketCI" }],
+  creator: "KubeRocketCI",
+  publisher: "KubeRocketCI",
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false,
+  },
+  icons: {
+    icon: [
+      { url: "/favicon.ico" },
+      { url: "/favicon-16x16.png", sizes: "16x16", type: "image/png" },
+      { url: "/favicon-32x32.png", sizes: "32x32", type: "image/png" },
+    ],
+    apple: [
+      { url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" },
+    ],
+    other: [
+      {
+        rel: "mask-icon",
+        url: "/logo.svg",
+      },
+    ],
+  },
+  manifest: "/site.webmanifest",
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    url: "https://kuberocketci.io",
+    siteName: "KubeRocketCI",
+    title: "KubeRocketCI - Build your delivery rocket",
+    description:
+      "Boost your delivery with the development culture based on the modern CI/CD stack, golden path and self-service capabilities of the KubeRocketCI.",
+    images: [
+      {
+        url: "/kuberocketci-social-card.png",
+        width: 1020,
+        height: 615,
+        alt: "KubeRocketCI - Build your delivery rocket",
+        type: "image/png",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "KubeRocketCI - Build your delivery rocket",
+    description:
+      "Boost your delivery with the development culture based on the modern CI/CD stack, golden path and self-service capabilities of the KubeRocketCI.",
+    images: ["/kuberocketci-social-card.png"],
+    creator: "@KubeRocketCI",
+    site: "@KubeRocketCI",
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
+  verification: {
+    google: "google-site-verification-code",
+  },
 };
 
 export default function RootLayout({
