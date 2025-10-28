@@ -94,6 +94,70 @@ export interface TranslationFooter {
     };
   };
   copyright: string;
+  legal: {
+    privacyPolicy: string;
+    terms: string;
+  };
+}
+
+export interface TranslationCookieConsent {
+  banner: {
+    title: string;
+    description: string;
+    acceptAll: string;
+    onlyNecessary: string;
+    customize: string;
+  };
+  preferences: {
+    title: string;
+    savePreferences: string;
+    acceptAll: string;
+    onlyNecessary: string;
+    privacyLink: string;
+    privacyPolicy: string;
+  };
+  categories: {
+    necessary: {
+      title: string;
+      description: string;
+      required: string;
+    };
+    analytics: {
+      title: string;
+      description: string;
+    };
+    marketing: {
+      title: string;
+      description: string;
+    };
+    functionality: {
+      title: string;
+      description: string;
+    };
+  };
+  settingsButton: string;
+  closeLabel: string;
+}
+
+export interface TranslationPrivacy {
+  title: string;
+  backToHome: string;
+  effectiveDate: string;
+  lastUpdated: string;
+  date: string;
+}
+
+export interface TranslationTerms {
+  title: string;
+  backToHome: string;
+  effectiveDate: string;
+  lastUpdated: string;
+  date: string;
+}
+
+export interface TranslationTestimonials {
+  title: string;
+  description: string;
 }
 
 export interface Translations {
@@ -102,6 +166,10 @@ export interface Translations {
   benefits: TranslationBenefits;
   features: TranslationFeatures;
   keyDifferentiation: TranslationKeyDifferentiation;
+  testimonials: TranslationTestimonials;
   cta: TranslationCTA;
   footer: TranslationFooter;
+  cookieConsent: TranslationCookieConsent;
+  privacy: TranslationPrivacy;
+  terms: TranslationTerms;
 }

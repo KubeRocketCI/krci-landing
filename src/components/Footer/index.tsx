@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { Container } from "@/components/Container";
+import { CookieSettingsButton } from "@/components/CookieConsent";
 import { getTranslationKey } from "@/lib/i18n";
 import { cn } from "@/lib/utils";
 import type { Translations } from "@/types/translations";
@@ -232,12 +233,38 @@ const Footer = ({ translations }: { translations: Translations }) => {
               </div> */}
             </div>
           </div>
-          <p className={cn("text-xs text-neutral-40")}>
-            {t("footer.copyright").replace(
-              "{year}",
-              new Date().getFullYear().toString(),
-            )}
-          </p>
+
+          <div className={cn("space-y-2")}>
+            <p className={cn("text-xs text-neutral-40")}>
+              {t("footer.copyright").replace(
+                "{year}",
+                new Date().getFullYear().toString(),
+              )}
+            </p>
+            <div className={cn("flex items-center flex-wrap gap-x-2 text-xs")}>
+              <a
+                href="/privacy"
+                className={cn(
+                  "text-neutral-40 hover:text-neutral-20 transition-colors",
+                )}
+              >
+                {t("footer.legal.privacyPolicy")}
+              </a>
+              <span className={cn("text-neutral-60")}>•</span>
+              <a
+                href="/terms"
+                className={cn(
+                  "text-neutral-40 hover:text-neutral-20 transition-colors",
+                )}
+              >
+                {t("footer.legal.terms")}
+              </a>
+              <span className={cn("text-neutral-60")}>•</span>
+              <CookieSettingsButton
+                translations={t("cookieConsent.settingsButton")}
+              />
+            </div>
+          </div>
         </div>
       </Container>
     </footer>

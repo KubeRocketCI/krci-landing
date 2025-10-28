@@ -128,6 +128,62 @@
         "button": "Subscribe"
       }
     },
-    "copyright": "Copyright © {year} KubeRocketCI."
+    "copyright": "Copyright © {year} KubeRocketCI.",
+    "legal": {
+      "privacyPolicy": "Privacy Policy",
+      "terms": "Terms & Conditions"
+    }
+  },
+  "cookieConsent": {
+    "banner": {
+      "title": "🍪 Cookie Consent Required",
+      "description": "We use cookies to enhance your experience on our KubeRocketCI platform. Analytics cookies help us understand how you interact with our site.",
+      "acceptAll": "Accept All",
+      "onlyNecessary": "Only Necessary",
+      "customize": "Customize"
+    },
+    "preferences": {
+      "title": "Cookie Preferences",
+      "savePreferences": "Save Preferences",
+      "acceptAll": "Accept All",
+      "onlyNecessary": "Only Necessary",
+      "privacyLink": "We respect your privacy. You can change your preferences at any time. For more information, see our",
+      "privacyPolicy": "Privacy Policy"
+    },
+    "categories": {
+      "necessary": {
+        "title": "Strictly Necessary",
+        "description": "Essential cookies for website functionality and security",
+        "required": "[Required]"
+      },
+      "analytics": {
+        "title": "Analytics",
+        "description": "Help us understand site usage to improve performance"
+      },
+      "marketing": {
+        "title": "Marketing",
+        "description": "Used to deliver relevant ads and track campaigns"
+      },
+      "functionality": {
+        "title": "Functionality",
+        "description": "Enable enhanced features and personalization"
+      }
+    },
+    "settingsButton": "🍪 Cookie Settings",
+    "closeLabel": "Close cookie preferences"
+  },
+  "privacy": {
+    "title": "Privacy Policy",
+    "backToHome": "Back to Home",
+    "effectiveDate": "Effective Date:",
+    "lastUpdated": "Last Updated:",
+    "date": "January 1, 2025"
+  },
+  "terms": {
+    "title": "Terms & Conditions",
+    "backToHome": "Back to Home",
+    "effectiveDate": "Effective Date:",
+    "lastUpdated": "Last Updated:",
+    "date": "January 1, 2025"
   }
 }
