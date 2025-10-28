@@ -25,7 +25,7 @@ const CTA = ({ translations }: CTAProps) => {
           quality={95}
           sizes="100vw"
         />
-        <div className={cn("flex flex-col items-center gap-8")}>
+        <div className={cn("flex flex-col items-center gap-8 relative z-1")}>
           <h2
             className={cn(
               "text-lg lg:text-(length:--font-size-h2) font-normal text-neutral-0 text-center leading-tight",
