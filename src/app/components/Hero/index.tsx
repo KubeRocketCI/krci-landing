@@ -3,8 +3,8 @@ import { Container } from "@/components/Container";
 import { getTranslationKey } from "@/lib/i18n";
 import { cn } from "@/lib/utils";
 import type { Translations } from "@/types/translations";
-import CTAButton from "../CTAButton";
-
+import CTAButton, { ctaButton } from "../CTAButton";
+import Link from "next/link";
 interface HeroProps {
   translations: Translations;
 }
@@ -15,7 +15,7 @@ const Hero = ({ translations }: HeroProps) => {
   return (
     <section
       className={cn(
-        "h-screen max-h-[1200px] relative overflow-hidden bg-background",
+        "h-screen max-h-[1200px] relative overflow-hidden bg-background"
       )}
     >
       <div className="absolute inset-0">
@@ -47,7 +47,7 @@ const Hero = ({ translations }: HeroProps) => {
             <h1
               className={cn(
                 "[background-image:var(--gradient-h1)] bg-clip-text text-transparent",
-                "text-5xl md:text-6xl lg:text-(length:--font-size-h1) font-bold leading-[1] mb-4",
+                "text-5xl md:text-6xl lg:text-(length:--font-size-h1) font-bold leading-[1] mb-4"
               )}
             >
               {t("hero.title")}
@@ -55,7 +55,7 @@ const Hero = ({ translations }: HeroProps) => {
 
             <p
               className={cn(
-                "text-foreground text-base lg:text-xl max-w-[95%] mb-4",
+                "text-foreground text-base lg:text-xl max-w-[95%] mb-4"
               )}
             >
               {t("hero.description")}
@@ -64,18 +64,19 @@ const Hero = ({ translations }: HeroProps) => {
             <div
               className={cn("flex items-center gap-4", "flex-col sm:flex-row")}
             >
-              <button
-                type="button"
+              <Link
                 className={cn(
-                  "button-shadow px-5 py-3 text-button",
+                  "button-shadow px-5 py-3 text-button text-center",
                   "bg-neutral-90 text-foreground leading-[1] cursor-pointer",
                   "border border-foreground rounded-sm",
                   "hover:[background-image:var(--gradient-button-hover)] transition-colors",
-                  "min-w-[160px]",
+                  "min-w-[160px]"
                 )}
+                href={ctaButton.href}
+                target="_blank"
               >
                 {t("hero.contactButton")}
-              </button>
+              </Link>
 
               <CTAButton />
             </div>
