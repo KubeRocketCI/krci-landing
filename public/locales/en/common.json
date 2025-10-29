@@ -186,6 +186,11 @@
     "lastUpdated": "Last Updated:",
     "date": "January 1, 2025"
   },
+  "useCases": {
+    "title": "Use Cases",
+    "description": "Explore practical scenarios and solutions with KubeRocketCI. Learn how to scaffold applications, implement quality gates, manage secrets, and more.",
+    "readMore": "Read Full Story"
+  },
   "contactForm": {
     "title": "Contact Us",
     "description": "Have a question? Fill out the form below and we'll get back to you.",
