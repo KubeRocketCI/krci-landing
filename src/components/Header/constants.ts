@@ -7,8 +7,7 @@ export interface NavItem {
 export const navigationItems: NavItem[] = [
   {
     label: "Use cases",
-    href: "https://docs.kuberocketci.io/docs/use-cases",
-    target: "_blank",
+    href: "/use-cases",
   },
   {
     label: "Pricing",
