@@ -328,3 +328,29 @@
   box-shadow: none;
   cursor: not-allowed;
 }
+
+/* ===== REACT DAY PICKER CUSTOM STYLES ===== */
+.rdp-custom {
+  --rdp-cell-size: 40px;
+  --rdp-accent-color: #2563eb;
+  font-size: 0.875rem;
+}
+
+.rdp-custom .rdp-day_selected {
+  background-color: var(--rdp-accent-color);
+  color: white;
+}
+
+.rdp-custom .rdp-day_disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.rdp-custom .rdp-day:hover:not(.rdp-day_disabled):not(.rdp-day_selected) {
+  background-color: #eff6ff;
+}
+
+.rdp-custom .rdp-head_cell {
+  font-weight: 600;
+  color: #6b7280;
+}

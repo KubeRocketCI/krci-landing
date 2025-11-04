@@ -160,6 +160,14 @@ export interface TranslationTestimonials {
   description: string;
 }
 
+export interface PrivacyConsentTranslation {
+  prefix: string;
+  privacyLink: string;
+  middle: string;
+  termsLink: string;
+  suffix: string;
+}
+
 export interface TranslationContactForm {
   title: string;
   description: string;
@@ -182,13 +190,7 @@ export interface TranslationContactForm {
     submitting: string;
     cancel: string;
   };
-  privacyConsent: {
-    prefix: string;
-    privacyLink: string;
-    middle: string;
-    termsLink: string;
-    suffix: string;
-  };
+  privacyConsent: PrivacyConsentTranslation;
   messages: {
     success: string;
     error: string;
@@ -268,6 +270,42 @@ export interface TranslationPricing {
   };
 }
 
+export interface TranslationDemoForm {
+  title: string;
+  description: string;
+  fields: {
+    email: {
+      label: string;
+      placeholder: string;
+    };
+    date: {
+      label: string;
+      placeholder: string;
+    };
+    time: {
+      label: string;
+      placeholder: string;
+    };
+  };
+  buttons: {
+    submit: string;
+    submitting: string;
+    cancel: string;
+  };
+  privacyConsent: PrivacyConsentTranslation;
+  messages: {
+    success: string;
+    error: string;
+    selectDateTime: string;
+    invalidBusinessHours: string;
+  };
+  helper: {
+    yourTimezone: string;
+    businessHours: string;
+    selectedTime: string;
+  };
+}
+
 export interface Translations {
   hero: TranslationHero;
   about: TranslationAbout;
@@ -282,4 +320,5 @@ export interface Translations {
   terms: TranslationTerms;
   contactForm: TranslationContactForm;
   pricing: TranslationPricing;
+  demoForm: TranslationDemoForm;
 }

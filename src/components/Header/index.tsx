@@ -14,7 +14,7 @@ interface HeaderProps {
   translations: Translations;
 }
 
-const Header = ({ className }: HeaderProps) => {
+const Header = ({ className, translations }: HeaderProps) => {
   const { isMobileMenuOpen, toggleMobileMenu, closeMobileMenu } =
     useMobileMenu();
 
@@ -57,7 +57,7 @@ const Header = ({ className }: HeaderProps) => {
             </nav>
 
             <div className={cn("hidden lg:flex items-center gap-4")}>
-              <CTAButton />
+              <CTAButton demoFormTranslations={translations.demoForm} />
             </div>
 
             <button
@@ -128,7 +128,10 @@ const Header = ({ className }: HeaderProps) => {
                 ))}
 
                 <div className={cn("mt-2 space-y-2")}>
-                  <CTAButton onClick={closeMobileMenu} />
+                  <CTAButton
+                    onClick={closeMobileMenu}
+                    demoFormTranslations={translations.demoForm}
+                  />
                 </div>
               </nav>
             </div>
