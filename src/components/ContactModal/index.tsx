@@ -2,6 +2,7 @@
 
 import * as Dialog from "@radix-ui/react-dialog";
 import { X } from "lucide-react";
+import Link from "next/link";
 import { useActionState, useEffect } from "react";
 import { useFormStatus } from "react-dom";
 import { toast } from "sonner";
@@ -110,6 +111,28 @@ export function ContactModal({
                 className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none"
               />
             </div>
+
+            <p className="text-xs text-gray-500 mt-4">
+              {translations.privacyConsent.prefix}
+              <Link
+                href="/privacy"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-blue-600 hover:text-blue-700 underline"
+              >
+                {translations.privacyConsent.privacyLink}
+              </Link>
+              {translations.privacyConsent.middle}
+              <Link
+                href="/terms"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-blue-600 hover:text-blue-700 underline"
+              >
+                {translations.privacyConsent.termsLink}
+              </Link>
+              {translations.privacyConsent.suffix}
+            </p>
 
             <div className="flex gap-3 justify-end pt-2">
               <Dialog.Close asChild>

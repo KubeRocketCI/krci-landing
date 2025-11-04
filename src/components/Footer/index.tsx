@@ -32,6 +32,8 @@ const Footer = ({ translations }: { translations: Translations }) => {
               <div className={cn("space-y-3 max-w-95")}>
                 <a
                   href={FOOTER_LINKS.readings.whatIs}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className={cn(
                     "block text-body text-neutral-0 hover:text-neutral-20 transition-colors",
                   )}
@@ -40,6 +42,8 @@ const Footer = ({ translations }: { translations: Translations }) => {
                 </a>
                 <a
                   href={FOOTER_LINKS.readings.blogs}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className={cn(
                     "block text-body text-neutral-0 hover:text-neutral-20 transition-colors",
                   )}
@@ -48,6 +52,8 @@ const Footer = ({ translations }: { translations: Translations }) => {
                 </a>
                 <a
                   href={FOOTER_LINKS.readings.userGuide}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className={cn(
                     "block text-body text-neutral-0 hover:text-neutral-20 transition-colors",
                   )}
@@ -56,6 +62,8 @@ const Footer = ({ translations }: { translations: Translations }) => {
                 </a>
                 <a
                   href={FOOTER_LINKS.readings.developerGuide}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className={cn(
                     "block text-body text-neutral-0 hover:text-neutral-20 transition-colors",
                   )}
@@ -64,6 +72,8 @@ const Footer = ({ translations }: { translations: Translations }) => {
                 </a>
                 <a
                   href={FOOTER_LINKS.readings.apiReference}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className={cn(
                     "block text-body text-neutral-0 hover:text-neutral-20 transition-colors",
                   )}
@@ -84,6 +94,8 @@ const Footer = ({ translations }: { translations: Translations }) => {
               <div className={cn("space-y-2.5")}>
                 <a
                   href={FOOTER_LINKS.learnMore.github}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className={cn(
                     "block text-[length:var(--font-size-body-2)] text-neutral-0 hover:text-neutral-20 transition-colors",
                   )}
@@ -92,6 +104,8 @@ const Footer = ({ translations }: { translations: Translations }) => {
                 </a>
                 <a
                   href={FOOTER_LINKS.learnMore.artifactHub}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className={cn(
                     "block text-[length:var(--font-size-body-2)] text-neutral-0 hover:text-neutral-20 transition-colors",
                   )}
@@ -100,6 +114,8 @@ const Footer = ({ translations }: { translations: Translations }) => {
                 </a>
                 <a
                   href={FOOTER_LINKS.learnMore.operatorHub}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className={cn(
                     "block text-[length:var(--font-size-body-2)] text-neutral-0 hover:text-neutral-20 transition-colors",
                   )}
@@ -108,6 +124,8 @@ const Footer = ({ translations }: { translations: Translations }) => {
                 </a>
                 <a
                   href={FOOTER_LINKS.learnMore.dockerHub}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className={cn(
                     "block text-[length:var(--font-size-body-2)] text-neutral-0 hover:text-neutral-20 transition-colors",
                   )}
@@ -116,6 +134,8 @@ const Footer = ({ translations }: { translations: Translations }) => {
                 </a>
                 <a
                   href={FOOTER_LINKS.learnMore.blogCategories}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className={cn(
                     "block text-[length:var(--font-size-body-2)] text-neutral-0 hover:text-neutral-20 transition-colors",
                   )}
@@ -124,6 +144,8 @@ const Footer = ({ translations }: { translations: Translations }) => {
                 </a>
                 <a
                   href={FOOTER_LINKS.learnMore.rssFeed}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className={cn(
                     "block text-[length:var(--font-size-body-2)] text-neutral-0 hover:text-neutral-20 transition-colors",
                   )}
@@ -132,6 +154,8 @@ const Footer = ({ translations }: { translations: Translations }) => {
                 </a>
                 <a
                   href={FOOTER_LINKS.learnMore.atomFeed}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className={cn(
                     "block text-[length:var(--font-size-body-2)] text-neutral-0 hover:text-neutral-20 transition-colors",
                   )}
@@ -153,6 +177,8 @@ const Footer = ({ translations }: { translations: Translations }) => {
                 <div className={cn("flex gap-4")}>
                   <a
                     href={FOOTER_LINKS.community.youtube}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className={cn(
                       "w-6 h-6 text-neutral-0 hover:text-neutral-20 transition-colors",
                     )}
@@ -168,6 +194,8 @@ const Footer = ({ translations }: { translations: Translations }) => {
                   </a>
                   <a
                     href={FOOTER_LINKS.community.github}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className={cn(
                       "w-6 h-6 text-neutral-0 hover:text-neutral-20 transition-colors",
                     )}
@@ -183,6 +211,8 @@ const Footer = ({ translations }: { translations: Translations }) => {
                   </a>
                   <a
                     href={FOOTER_LINKS.community.medium}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className={cn(
                       "w-6 h-6 text-neutral-0 hover:text-neutral-20 transition-colors",
                     )}
