@@ -64,6 +64,7 @@ const Hero = ({ translations }: HeroProps) => {
             <HeroClient
               contactButtonText={t("hero.contactButton")}
               contactFormTranslations={translations.contactForm}
+              demoFormTranslations={translations.demoForm}
             />
           </div>
         </Container>

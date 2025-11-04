@@ -3,17 +3,22 @@
 import { useState } from "react";
 import { ContactModal } from "@/components/ContactModal";
 import { cn } from "@/lib/utils";
-import type { TranslationContactForm } from "@/types/translations";
+import type {
+  TranslationContactForm,
+  TranslationDemoForm,
+} from "@/types/translations";
 import CTAButton from "../CTAButton";
 
 interface HeroClientProps {
   contactButtonText: string;
   contactFormTranslations: TranslationContactForm;
+  demoFormTranslations: TranslationDemoForm;
 }
 
 export function HeroClient({
   contactButtonText,
   contactFormTranslations,
+  demoFormTranslations,
 }: HeroClientProps) {
   const [contactModalOpen, setContactModalOpen] = useState(false);
 
@@ -34,7 +39,7 @@ export function HeroClient({
           {contactButtonText}
         </button>
 
-        <CTAButton />
+        <CTAButton demoFormTranslations={demoFormTranslations} />
       </div>
 
       <ContactModal

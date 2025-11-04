@@ -341,5 +341,46 @@
         }
       }
     }
+  },
+  "demoForm": {
+    "title": "Request a Demo",
+    "description": "Schedule a personalized demo with our team. Select a date and time that works for you.",
+    "fields": {
+      "email": {
+        "label": "Email Address",
+        "placeholder": "your.email@company.com"
+      },
+      "date": {
+        "label": "Select Date",
+        "placeholder": "Choose a date"
+      },
+      "time": {
+        "label": "Select Time",
+        "placeholder": "Choose a time slot"
+      }
+    },
+    "buttons": {
+      "submit": "Schedule Demo",
+      "submitting": "Scheduling...",
+      "cancel": "Cancel"
+    },
+    "privacyConsent": {
+      "prefix": "By scheduling this demo, you agree to the processing of your personal data as described in our ",
+      "privacyLink": "Privacy Policy",
+      "middle": " and ",
+      "termsLink": "Terms & Conditions",
+      "suffix": "."
+    },
+    "messages": {
+      "success": "Demo scheduled! We'll send you a confirmation email shortly.",
+      "error": "Failed to schedule demo. Please try again.",
+      "selectDateTime": "Please select both date and time.",
+      "invalidBusinessHours": "Please select a time during business hours on a weekday."
+    },
+    "helper": {
+      "yourTimezone": "Your timezone:",
+      "businessHours": "Available time slots are shown in your local timezone.",
+      "selectedTime": "Selected time:"
+    }
   }
 }
