@@ -402,6 +402,8 @@ export default function TermsPage() {
                 <strong>Website:</strong>{" "}
                 <a
                   href="https://docs.kuberocketci.io"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="text-purple-400 hover:text-purple-300"
                 >
                   docs.kuberocketci.io

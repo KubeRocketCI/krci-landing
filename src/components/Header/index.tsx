@@ -42,6 +42,9 @@ const Header = ({ className }: HeaderProps) => {
                   key={item.href}
                   href={item.href}
                   target={item.target}
+                  rel={
+                    item.target === "_blank" ? "noopener noreferrer" : undefined
+                  }
                   className={cn(
                     "font-light",
                     "hover:[background-image:var(--gradient-numbers)] hover:bg-clip-text hover:text-transparent",
@@ -109,6 +112,11 @@ const Header = ({ className }: HeaderProps) => {
                     key={item.href}
                     href={item.href}
                     target={item.target}
+                    rel={
+                      item.target === "_blank"
+                        ? "noopener noreferrer"
+                        : undefined
+                    }
                     className={cn(
                       "text-body text-neutral-0",
                       "hover:text-neutral-20 transition-colors py-2",

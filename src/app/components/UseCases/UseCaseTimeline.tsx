@@ -29,7 +29,10 @@ const iconMap = {
   "git-branch": GitBranch,
 };
 
-export const UseCaseTimeline = ({ data, readMoreLabel }: UseCaseTimelineProps) => {
+export const UseCaseTimeline = ({
+  data,
+  readMoreLabel,
+}: UseCaseTimelineProps) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const lineRef = useRef<HTMLDivElement>(null);
   const [lineHeight, setLineHeight] = useState(0);

@@ -182,6 +182,13 @@ export interface TranslationContactForm {
     submitting: string;
     cancel: string;
   };
+  privacyConsent: {
+    prefix: string;
+    privacyLink: string;
+    middle: string;
+    termsLink: string;
+    suffix: string;
+  };
   messages: {
     success: string;
     error: string;

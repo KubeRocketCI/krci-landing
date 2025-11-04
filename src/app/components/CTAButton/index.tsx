@@ -18,6 +18,7 @@ const CTAButton = ({ onClick }: { onClick?: () => void }) => {
       )}
       href={ctaButton.href}
       target="_blank"
+      rel="noopener noreferrer"
       onClick={onClick}
     >
       {ctaButton.label}

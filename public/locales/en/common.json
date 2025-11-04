@@ -213,6 +213,13 @@
       "submitting": "Sending...",
       "cancel": "Cancel"
     },
+    "privacyConsent": {
+      "prefix": "By submitting this form, you agree to the processing of your personal data as described in our ",
+      "privacyLink": "Privacy Policy",
+      "middle": " and ",
+      "termsLink": "Terms & Conditions",
+      "suffix": "."
+    },
     "messages": {
       "success": "Thank you! We'll get back to you soon.",
       "error": "Failed to send message. Please try again.",
