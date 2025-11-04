@@ -39,7 +39,9 @@ const KeyDifferentiation = ({ translations }: KeyDifferentiationProps) => {
   ];
 
   return (
-    <section className={cn("bg-background pt-25 pb-17 relative")}>
+    <section
+      className={cn("bg-background pt-12 pb-8 lg:pt-25 lg:pb-17 relative")}
+    >
       <Container className="relative z-2">
         <Image
           src="/radial-bg.png"
@@ -55,7 +57,7 @@ const KeyDifferentiation = ({ translations }: KeyDifferentiationProps) => {
         <div className={cn("mb-9")}>
           <h2
             className={cn(
-              "text-(length:--font-size-h2) leading-10 text-neutral-0 mb-3",
+              "text-(length:--font-size-h2) leading-10 text-neutral-0 mb-3"
             )}
           >
             {t("keyDifferentiation.title")}
@@ -64,11 +66,7 @@ const KeyDifferentiation = ({ translations }: KeyDifferentiationProps) => {
             {t("keyDifferentiation.description")}
           </p>
         </div>
-        <div
-          className={cn(
-            "flex flex-wrap lg:flex-nowrap gap-4 [&:has(:hover)]:gap-2 relative z-2",
-          )}
-        >
+        <div className={cn("flex flex-wrap lg:flex-nowrap gap-4 relative z-2")}>
           {differentiationData.map((diff) => (
             <div
               key={diff.id}
@@ -77,12 +75,12 @@ const KeyDifferentiation = ({ translations }: KeyDifferentiationProps) => {
                 "px-6 py-8 min-h-[365px] transition-all duration-300 ease-in-out",
                 "hover:[background-image:var(--gradient-bright-purple)]",
                 "flex-grow flex-shrink-0 basis-full lg:flex-1 lg:hover:flex-[2]",
-                "cursor-pointer",
+                "cursor-pointer"
               )}
             >
               <div
                 className={cn(
-                  "absolute inset-0 w-full h-full opacity-0 lg:opacity-100 lg:group-hover:opacity-0 transition-opacity duration-300",
+                  "absolute inset-0 w-full h-full opacity-0 lg:opacity-100 lg:group-hover:opacity-0 transition-opacity duration-300"
                 )}
               >
                 <Image
@@ -95,7 +93,7 @@ const KeyDifferentiation = ({ translations }: KeyDifferentiationProps) => {
 
               <div
                 className={cn(
-                  "absolute inset-0 w-full h-full opacity-100 lg:opacity-0 lg:group-hover:opacity-100 transition-opacity duration-300",
+                  "absolute inset-0 w-full h-full opacity-100 lg:opacity-0 lg:group-hover:opacity-100 transition-opacity duration-300"
                 )}
               >
                 <Image
@@ -119,7 +117,7 @@ const KeyDifferentiation = ({ translations }: KeyDifferentiationProps) => {
                   className={cn(
                     "text-(length:--font-size-body-2) text-neutral-0",
                     "opacity-100 lg:opacity-0 lg:group-hover:opacity-100 transition-opacity duration-300",
-                    "lg:group-hover:max-h-96 overflow-hidden",
+                    "lg:group-hover:max-h-96 overflow-hidden"
                   )}
                 >
                   {diff.description}

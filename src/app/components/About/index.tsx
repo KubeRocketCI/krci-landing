@@ -35,12 +35,14 @@ const About = ({ translations }: AboutProps) => {
   ];
 
   return (
-    <section className={cn("bg-background pt-10 pb-17 relative")}>
+    <section
+      className={cn("bg-background pt-5 pb-8 lg:pt-10 lg:pb-17 relative")}
+    >
       <Container>
         <div className={cn("mb-6")}>
           <h2
             className={cn(
-              "text-(length:--font-size-h2) leading-10 text-foreground mb-4",
+              "text-(length:--font-size-h2) leading-10 text-foreground mb-4"
             )}
           >
             {t("about.title")}
@@ -50,15 +52,15 @@ const About = ({ translations }: AboutProps) => {
           </p>
         </div>
 
-        <div className={cn("flex flex-wrap gap-6")}>
+        <div className={cn("grid grid-cols-2 md:flex md:flex-wrap gap-6")}>
           {statisticsData.map((statistic) => (
-            <div key={statistic.id} className="flex-1">
+            <div key={statistic.id} className="md:flex-1">
               <div
                 className={cn("text-(length:--font-size-h1)  font-bold mb-1")}
               >
                 <span
                   className={cn(
-                    "bg-gradient-numbers bg-clip-text text-transparent",
+                    "bg-gradient-numbers bg-clip-text text-transparent"
                   )}
                 >
                   {statistic.value}

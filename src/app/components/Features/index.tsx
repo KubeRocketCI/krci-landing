@@ -39,7 +39,7 @@ const Features = ({ translations }: FeaturesProps) => {
   ];
 
   return (
-    <section className={cn("bg-background pt-26 relative")}>
+    <section className={cn("bg-background pt-13 lg:pt-26 relative")}>
       <Image
         src="/features-bg.png"
         alt="Features Background"
@@ -55,7 +55,7 @@ const Features = ({ translations }: FeaturesProps) => {
           <div className={cn("mb-9")}>
             <h2
               className={cn(
-                "text-(length:--font-size-h2) leading-10 text-neutral-0 mb-3",
+                "text-(length:--font-size-h2) leading-10 text-neutral-0 mb-3"
               )}
             >
               {t("features.title")}
@@ -65,7 +65,11 @@ const Features = ({ translations }: FeaturesProps) => {
             </p>
           </div>
           <div className={cn("pt-8")}>
-            <div className={cn("pl-8 pr-6 pt-8 pb-3 lg:max-w-[50%] ml-auto")}>
+            <div
+              className={cn(
+                "pl-3 md:pl-8 pr-3 md:pr-6 pt-8 pb-3 lg:max-w-[50%] ml-auto"
+              )}
+            >
               <div className={cn("space-y-8")}>
                 {featuresData.map((feature) => (
                   <div key={feature.id} className={cn("flex gap-3")}>
