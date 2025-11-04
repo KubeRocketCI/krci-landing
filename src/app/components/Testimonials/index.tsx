@@ -50,7 +50,7 @@ const Testimonials = ({ translations }: TestimonialsProps) => {
   ];
 
   return (
-    <section className={cn("bg-background pt-44 pb-15")}>
+    <section className={cn("bg-background pt-22 pb-7 lg:pt-44 lg:pb-15")}>
       <Container>
         <div className={cn("relative")}>
           <h2

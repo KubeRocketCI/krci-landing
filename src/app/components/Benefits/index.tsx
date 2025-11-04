@@ -63,7 +63,7 @@ const Benefits = ({ translations }: BenefitsProps) => {
   ];
 
   return (
-    <section className={cn("bg-background py-25")}>
+    <section className={cn("bg-background py-12 lg:py-25")}>
       <Container className="relative z-2">
         <div className={cn("mb-9")}>
           <h2

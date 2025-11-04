@@ -5,13 +5,14 @@ import { Resend } from "resend";
 import ContactNotificationEmail from "@/../emails/contact-notification";
 import { contactFormSchema } from "@/lib/validations/contact";
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+const resend =
+  process.env.RESEND_API_KEY && new Resend(process.env.RESEND_API_KEY);
 
 type State = { error: string } | { data: string } | undefined;
 
 export async function sendContactEmail(
   _prevState: State,
-  formData: FormData,
+  formData: FormData
 ): Promise<State> {
   try {
     // 1. Validate environment variables
@@ -51,6 +52,13 @@ export async function sendContactEmail(
     }
 
     const { name, email, question } = validation.data;
+
+    if (!resend) {
+      console.error("Resend is not configured");
+      return {
+        error: "Email service is not configured. Please contact support.",
+      };
+    }
 
     // 5. Send email via Resend
     const { data, error } = await resend.emails.send({
