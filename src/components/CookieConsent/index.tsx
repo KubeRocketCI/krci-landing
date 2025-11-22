@@ -105,7 +105,7 @@ export function CookieConsent({
         <div
           className={cn(
             "bg-gradient-to-br from-black/90 via-neutral-80/95 to-black/90",
-            "backdrop-blur-lg border border-purple-500/30 shadow-2xl rounded-lg"
+            "backdrop-blur-lg border border-purple-500/30 shadow-2xl rounded-lg",
           )}
         >
           {!showPreferences ? (
@@ -129,7 +129,7 @@ export function CookieConsent({
                       "px-4 py-2 text-sm font-medium rounded-lg transition-all",
                       "bg-gradient-to-r from-purple-600 to-pink-600",
                       "hover:from-purple-500 hover:to-pink-500",
-                      "text-white shadow-lg"
+                      "text-white shadow-lg",
                     )}
                   >
                     {translations.banner.acceptAll}
@@ -140,7 +140,7 @@ export function CookieConsent({
                     className={cn(
                       "px-4 py-2 text-sm font-medium rounded-lg transition-all",
                       "border border-purple-500/50 text-neutral-0",
-                      "hover:bg-purple-500/10 hover:border-purple-500"
+                      "hover:bg-purple-500/10 hover:border-purple-500",
                     )}
                   >
                     {translations.banner.onlyNecessary}
@@ -151,7 +151,7 @@ export function CookieConsent({
                     className={cn(
                       "px-4 py-2 text-sm font-medium rounded-lg transition-all",
                       "text-neutral-20 hover:text-neutral-0",
-                      "hover:bg-neutral-70/50"
+                      "hover:bg-neutral-70/50",
                     )}
                   >
                     {translations.banner.customize}
@@ -170,7 +170,7 @@ export function CookieConsent({
                   type="button"
                   onClick={() => setShowPreferences(false)}
                   className={cn(
-                    "text-neutral-40 hover:text-neutral-0 transition-colors"
+                    "text-neutral-40 hover:text-neutral-0 transition-colors",
                   )}
                   aria-label={translations.closeLabel}
                 >
@@ -201,7 +201,7 @@ export function CookieConsent({
                         key={category.id}
                         className={cn(
                           "flex items-start justify-between p-2 rounded-lg lg:p-4",
-                          "bg-neutral-90/50 border border-neutral-70"
+                          "bg-neutral-90/50 border border-neutral-70",
                         )}
                       >
                         <div className="flex-1">
@@ -235,13 +235,14 @@ export function CookieConsent({
                             isEnabled
                               ? "bg-gradient-to-r from-purple-600 to-pink-600"
                               : "bg-neutral-60",
-                            category.required && "cursor-not-allowed opacity-75"
+                            category.required &&
+                              "cursor-not-allowed opacity-75",
                           )}
                         >
                           <div
                             className={cn(
                               "w-5 h-5 bg-white rounded-full transition-transform duration-200",
-                              isEnabled ? "translate-x-6" : "translate-x-0.5"
+                              isEnabled ? "translate-x-6" : "translate-x-0.5",
                             )}
                           />
                         </button>
@@ -262,7 +263,7 @@ export function CookieConsent({
                       "flex-1 px-4 py-2 text-sm font-medium rounded-lg transition-all",
                       "bg-gradient-to-r from-purple-600 to-pink-600",
                       "hover:from-purple-500 hover:to-pink-500",
-                      "text-white shadow-lg"
+                      "text-white shadow-lg",
                     )}
                   >
                     {translations.preferences.savePreferences}
@@ -273,7 +274,7 @@ export function CookieConsent({
                     className={cn(
                       "flex-1 px-4 py-2 text-sm font-medium rounded-lg transition-all",
                       "border border-purple-500/50 text-neutral-0",
-                      "hover:bg-purple-500/10 hover:border-purple-500"
+                      "hover:bg-purple-500/10 hover:border-purple-500",
                     )}
                   >
                     {translations.preferences.acceptAll}
@@ -285,7 +286,7 @@ export function CookieConsent({
                   className={cn(
                     "px-4 py-2 text-sm font-medium rounded-lg transition-all sm:flex-1",
                     "text-neutral-20 hover:text-neutral-0",
-                    "hover:bg-neutral-70/50"
+                    "hover:bg-neutral-70/50",
                   )}
                 >
                   {translations.preferences.onlyNecessary}
@@ -331,7 +332,7 @@ export function CookieSettingsButton({
       className={cn(
         "text-xs transition-colors",
         "text-neutral-40 hover:text-neutral-20",
-        className
+        className,
       )}
     >
       {translations}

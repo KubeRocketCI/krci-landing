@@ -7,7 +7,7 @@ import { cn } from "@/lib/utils";
 import { getPricingList } from "../components/Pricing/data";
 import { FeaturesTable } from "../components/Pricing/FeaturesTable";
 import { Note } from "../components/Pricing/Note";
-import { PricingCard } from "../components/Pricing/PricingCard";
+import { PricingClient } from "./PricingClient";
 
 export const metadata: Metadata = {
   title: "Professional Service Pricing - KubeRocketCI",
@@ -48,17 +48,10 @@ export default function PricingPage() {
             </div>
 
             {/* Pricing Cards Grid */}
-            <div
-              className={cn(
-                "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-10",
-              )}
-            >
-              {pricingList.map((item) => (
-                <div key={item.id} className="flex">
-                  <PricingCard {...item} />
-                </div>
-              ))}
-            </div>
+            <PricingClient
+              pricingList={pricingList}
+              contactFormTranslations={translations.contactForm}
+            />
 
             {/* Professional Service Hours Note */}
             <Note>{t("pricing.notes.professionalServiceHours")}</Note>

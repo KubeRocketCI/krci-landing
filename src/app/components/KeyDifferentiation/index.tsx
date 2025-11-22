@@ -57,7 +57,7 @@ const KeyDifferentiation = ({ translations }: KeyDifferentiationProps) => {
         <div className={cn("mb-9")}>
           <h2
             className={cn(
-              "text-(length:--font-size-h2) leading-10 text-neutral-0 mb-3"
+              "text-(length:--font-size-h2) leading-10 text-neutral-0 mb-3",
             )}
           >
             {t("keyDifferentiation.title")}
@@ -75,12 +75,12 @@ const KeyDifferentiation = ({ translations }: KeyDifferentiationProps) => {
                 "px-6 py-8 min-h-[365px] transition-all duration-300 ease-in-out",
                 "hover:[background-image:var(--gradient-bright-purple)]",
                 "flex-grow flex-shrink-0 basis-full lg:flex-1 lg:hover:flex-[2]",
-                "cursor-pointer"
+                "cursor-pointer",
               )}
             >
               <div
                 className={cn(
-                  "absolute inset-0 w-full h-full opacity-0 lg:opacity-100 lg:group-hover:opacity-0 transition-opacity duration-300"
+                  "absolute inset-0 w-full h-full opacity-0 lg:opacity-100 lg:group-hover:opacity-0 transition-opacity duration-300",
                 )}
               >
                 <Image
@@ -93,7 +93,7 @@ const KeyDifferentiation = ({ translations }: KeyDifferentiationProps) => {
 
               <div
                 className={cn(
-                  "absolute inset-0 w-full h-full opacity-100 lg:opacity-0 lg:group-hover:opacity-100 transition-opacity duration-300"
+                  "absolute inset-0 w-full h-full opacity-100 lg:opacity-0 lg:group-hover:opacity-100 transition-opacity duration-300",
                 )}
               >
                 <Image
@@ -117,7 +117,7 @@ const KeyDifferentiation = ({ translations }: KeyDifferentiationProps) => {
                   className={cn(
                     "text-(length:--font-size-body-2) text-neutral-0",
                     "opacity-100 lg:opacity-0 lg:group-hover:opacity-100 transition-opacity duration-300",
-                    "lg:group-hover:max-h-96 overflow-hidden"
+                    "lg:group-hover:max-h-96 overflow-hidden",
                   )}
                 >
                   {diff.description}

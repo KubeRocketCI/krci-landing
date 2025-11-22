@@ -18,14 +18,14 @@ const UseCases = ({ translations }: UseCasesProps) => {
           <h1
             className={cn(
               "text-(length:--font-size-h1) leading-tight mb-6",
-              "bg-gradient-h1 bg-clip-text text-transparent"
+              "bg-gradient-h1 bg-clip-text text-transparent",
             )}
           >
             {t("useCases.title")}
           </h1>
           <p
             className={cn(
-              "text-(length:--font-size-body) text-neutral-20 max-w-3xl"
+              "text-(length:--font-size-body) text-neutral-20 max-w-3xl",
             )}
           >
             {t("useCases.description")}

@@ -12,7 +12,7 @@ type State = { error: string } | { data: string } | undefined;
 
 export async function sendContactEmail(
   _prevState: State,
-  formData: FormData
+  formData: FormData,
 ): Promise<State> {
   try {
     // 1. Validate environment variables
