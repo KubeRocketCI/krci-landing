@@ -42,7 +42,7 @@ const About = ({ translations }: AboutProps) => {
         <div className={cn("mb-6")}>
           <h2
             className={cn(
-              "text-(length:--font-size-h2) leading-10 text-foreground mb-4"
+              "text-(length:--font-size-h2) leading-10 text-foreground mb-4",
             )}
           >
             {t("about.title")}
@@ -60,7 +60,7 @@ const About = ({ translations }: AboutProps) => {
               >
                 <span
                   className={cn(
-                    "bg-gradient-numbers bg-clip-text text-transparent"
+                    "bg-gradient-numbers bg-clip-text text-transparent",
                   )}
                 >
                   {statistic.value}

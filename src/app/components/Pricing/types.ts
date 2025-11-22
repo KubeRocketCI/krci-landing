@@ -7,6 +7,7 @@ export interface PricingItem {
   link: {
     href: string;
     label: string;
+    action?: "contact" | "external";
   };
   moreFeatures?: {
     features: string[];

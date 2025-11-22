@@ -92,26 +92,26 @@ export const UseCaseTimeline = ({
             <div
               key={item.id}
               className={cn(
-                "flex flex-col lg:flex-row justify-start pt-10 lg:pt-40 lg:gap-10"
+                "flex flex-col lg:flex-row justify-start pt-10 lg:pt-40 lg:gap-10",
               )}
             >
               {/* Sticky Title Section */}
               <div
                 className={cn(
-                  "sticky flex flex-col lg:flex-row z-40 items-center top-40 self-start max-w-xs lg:max-w-sm lg:w-full"
+                  "sticky flex flex-col lg:flex-row z-40 items-center top-40 self-start max-w-xs lg:max-w-sm lg:w-full",
                 )}
               >
                 {/* Timeline Dot */}
                 <div
                   className={cn(
                     "h-10 absolute left-3 md:left-3 w-10 rounded-full flex items-center justify-center",
-                    "bg-background border border-neutral-700"
+                    "bg-background border border-neutral-700",
                   )}
                 >
                   <div
                     className={cn(
                       "h-4 w-4 rounded-full border border-neutral-700 p-2",
-                      "[background-image:var(--gradient-numbers)]"
+                      "[background-image:var(--gradient-numbers)]",
                     )}
                   />
                 </div>
@@ -120,7 +120,7 @@ export const UseCaseTimeline = ({
                 <h3
                   className={cn(
                     "hidden lg:block text-base lg:pl-20 lg:text-4xl font-bold",
-                    "[background-image:var(--gradient-numbers)] bg-clip-text text-transparent"
+                    "[background-image:var(--gradient-numbers)] bg-clip-text text-transparent",
                   )}
                 >
                   {item.title}
@@ -133,7 +133,7 @@ export const UseCaseTimeline = ({
                 <h3
                   className={cn(
                     "lg:hidden block text-lg mb-4 text-left font-bold",
-                    "[background-image:var(--gradient-numbers)] bg-clip-text text-transparent"
+                    "[background-image:var(--gradient-numbers)] bg-clip-text text-transparent",
                   )}
                 >
                   {item.title}
@@ -149,19 +149,19 @@ export const UseCaseTimeline = ({
                     "[background-image:var(--gradient-stroke)] bg-size-[150%]",
                     "transition-all duration-300 ease-in-out",
                     "hover:scale-[1.01] hover:shadow-lg",
-                    "group"
+                    "group",
                   )}
                 >
                   <div
                     className={cn(
                       "rounded-[calc(0.5rem-1px)] bg-gradient-dark-purple",
-                      "p-8"
+                      "p-8",
                     )}
                   >
                     {/* Icon and Description */}
                     <div
                       className={cn(
-                        "flex flex-col sm:flex-row items-start gap-4 sm:gap-6 mb-6"
+                        "flex flex-col sm:flex-row items-start gap-4 sm:gap-6 mb-6",
                       )}
                     >
                       <div
@@ -169,13 +169,13 @@ export const UseCaseTimeline = ({
                           "flex-shrink-0 p-2 sm:p-4 rounded-lg",
                           "bg-background border border-neutral-700",
                           "transition-transform duration-300",
-                          "group-hover:scale-110"
+                          "group-hover:scale-110",
                         )}
                       >
                         <IconComponent
                           className={cn(
                             "w-8 h-8 sm:w-12 sm:h-12 transition-colors duration-300",
-                            "[stroke:url(#gradient-icon)]"
+                            "[stroke:url(#gradient-icon)]",
                           )}
                         />
                         <svg width="0" height="0" aria-hidden="true">
@@ -197,7 +197,7 @@ export const UseCaseTimeline = ({
                       <div className={cn("flex-1")}>
                         <p
                           className={cn(
-                            "text-(length:--font-size-body-2) text-neutral-0 mb-4"
+                            "text-(length:--font-size-body-2) text-neutral-0 mb-4",
                           )}
                         >
                           {item.description}
@@ -210,7 +210,7 @@ export const UseCaseTimeline = ({
                       className={cn(
                         "flex items-center gap-2 text-sm text-neutral-0",
                         "group-hover:[background-image:var(--gradient-numbers)] group-hover:bg-clip-text group-hover:text-transparent",
-                        "transition-all duration-300"
+                        "transition-all duration-300",
                       )}
                     >
                       <span>{readMoreLabel}</span>
@@ -224,7 +224,7 @@ export const UseCaseTimeline = ({
                         aria-label="Arrow right"
                         className={cn(
                           "transition-transform duration-300",
-                          "group-hover:translate-x-1"
+                          "group-hover:translate-x-1",
                         )}
                       >
                         <path
@@ -266,7 +266,7 @@ export const UseCaseTimeline = ({
           ref={lineRef}
           className={cn(
             "absolute md:left-8 left-8 top-0 w-[2px]",
-            "overflow-hidden"
+            "overflow-hidden",
           )}
           style={{
             height: "100%",
@@ -276,7 +276,7 @@ export const UseCaseTimeline = ({
           <div
             className={cn(
               "absolute inset-0 w-[2px]",
-              "bg-gradient-to-b from-transparent via-neutral-700 to-transparent opacity-30"
+              "bg-gradient-to-b from-transparent via-neutral-700 to-transparent opacity-30",
             )}
           />
 
@@ -285,7 +285,7 @@ export const UseCaseTimeline = ({
             className={cn(
               "absolute top-0 left-0 w-[2px] rounded-full",
               "[background-image:var(--gradient-numbers)]",
-              "shadow-[0_0_10px_rgba(139,92,246,0.5)]"
+              "shadow-[0_0_10px_rgba(139,92,246,0.5)]",
             )}
             style={{
               height: `${lineHeight}%`,

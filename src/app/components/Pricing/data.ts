@@ -12,6 +12,7 @@ export function getPricingList(translations: Translations): PricingItem[] {
       link: {
         href: "https://docs.kuberocketci.io/docs/quick-start/quick-start-overview",
         label: translations.pricing.tiers.openSource.link.label,
+        action: "external",
       },
       color: "#efefff",
     },
@@ -25,8 +26,9 @@ export function getPricingList(translations: Translations): PricingItem[] {
         features: translations.pricing.tiers.team.moreFeatures || [],
       },
       link: {
-        href: "mailto:SupportEPMD-EDP@epam.com",
+        href: "#",
         label: translations.pricing.tiers.team.link.label,
+        action: "contact",
       },
       color: "#0094ff",
       label: {
@@ -44,8 +46,9 @@ export function getPricingList(translations: Translations): PricingItem[] {
         features: translations.pricing.tiers.scale.moreFeatures || [],
       },
       link: {
-        href: "mailto:SupportEPMD-EDP@epam.com",
+        href: "#",
         label: translations.pricing.tiers.scale.link.label,
+        action: "contact",
       },
       color: "#18be94",
     },
@@ -59,8 +62,9 @@ export function getPricingList(translations: Translations): PricingItem[] {
         features: translations.pricing.tiers.enterprise.moreFeatures || [],
       },
       link: {
-        href: "mailto:SupportEPMD-EDP@epam.com",
+        href: "#",
         label: translations.pricing.tiers.enterprise.link.label,
+        action: "contact",
       },
       color: "#9955ef",
     },

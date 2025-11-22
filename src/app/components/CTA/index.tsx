@@ -13,7 +13,9 @@ const CTA = ({ translations }: CTAProps) => {
   const t = (key: string) => getTranslationKey(translations, key);
 
   return (
-    <section className={cn("bg-background pt-11 pb-12 lg:pt-23 lg:pb-25 relative")}>
+    <section
+      className={cn("bg-background pt-11 pb-12 lg:pt-23 lg:pb-25 relative")}
+    >
       <Container>
         <Image
           src="/cta-bg.png"

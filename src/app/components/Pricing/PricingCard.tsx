@@ -3,6 +3,10 @@ import Link from "next/link";
 import { cn } from "@/lib/utils";
 import type { PricingItem } from "./types";
 
+interface PricingCardProps extends PricingItem {
+  onContactClick?: () => void;
+}
+
 export const PricingCard = ({
   title,
   price,
@@ -12,7 +16,9 @@ export const PricingCard = ({
   color,
   label,
   link,
-}: PricingItem) => {
+  onContactClick,
+}: PricingCardProps) => {
+  const isContactAction = link.action === "contact";
   return (
     <div
       className={cn(
@@ -95,19 +101,37 @@ export const PricingCard = ({
 
       {/* Footer Button */}
       <div className="p-6 pt-0">
-        <Link
-          href={link.href}
-          className={cn(
-            "block w-full py-3 px-6 text-center rounded-lg",
-            "text-(length:--font-size-button) font-medium uppercase",
-            "bg-gradient-button text-white",
-            "hover:bg-gradient-button-hover",
-            "transition-all duration-200",
-            "shadow-button hover:shadow-button-hover",
-          )}
-        >
-          {link.label}
-        </Link>
+        {isContactAction ? (
+          <button
+            type="button"
+            onClick={onContactClick}
+            className={cn(
+              "block w-full py-3 px-6 text-center rounded-lg",
+              "text-(length:--font-size-button) font-medium uppercase",
+              "bg-gradient-button text-white",
+              "hover:bg-gradient-button-hover",
+              "transition-all duration-200",
+              "shadow-button hover:shadow-button-hover",
+              "cursor-pointer",
+            )}
+          >
+            {link.label}
+          </button>
+        ) : (
+          <Link
+            href={link.href}
+            className={cn(
+              "block w-full py-3 px-6 text-center rounded-lg",
+              "text-(length:--font-size-button) font-medium uppercase",
+              "bg-gradient-button text-white",
+              "hover:bg-gradient-button-hover",
+              "transition-all duration-200",
+              "shadow-button hover:shadow-button-hover",
+            )}
+          >
+            {link.label}
+          </Link>
+        )}
       </div>
     </div>
   );
