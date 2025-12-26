@@ -68,13 +68,16 @@ export function ConsentProvider({ children }: { children: ReactNode }) {
     localStorage.setItem(CONSENT_STORAGE_KEY, JSON.stringify(newConsent));
     setShowBanner(false);
 
+    // Basic Consent Mode: Load GA script only when user grants analytics consent
+    // Don't call updateGtagConsent here - the script handles consent on load
     if (newConsent.analytics && !consent?.analytics) {
       initGA();
+    } else if (!newConsent.analytics && consent?.analytics) {
+      // User revoked consent - update the consent state
+      updateGtagConsent({
+        analytics: false,
+      });
     }
-
-    updateGtagConsent({
-      analytics: newConsent.analytics,
-    });
   };
 
   const acceptAll = () => {
