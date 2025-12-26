@@ -13,11 +13,8 @@ let gaScriptLoaded = false;
  * requests to Google before consent (full GDPR compliance).
  */
 export const loadGtagScript = (): Promise<void> => {
-  console.log("[GA Debug] loadGtagScript called");
-
   return new Promise((resolve, reject) => {
     if (!GA_MEASUREMENT_ID) {
-      console.log("[GA Debug] No GA_MEASUREMENT_ID found");
       if (!isProduction()) {
         console.log(
           "GA_MEASUREMENT_ID not defined - this is expected in development",
@@ -32,26 +29,20 @@ export const loadGtagScript = (): Promise<void> => {
     }
 
     if (!isProduction()) {
-      console.log("[GA Debug] Not production, skipping script load");
-      console.log("Google Analytics script loading skipped (development mode)");
       resolve();
       return;
     }
 
     if (typeof window === "undefined") {
-      console.log("[GA Debug] Window undefined (SSR), skipping");
       resolve();
       return;
     }
 
     // Prevent duplicate script loading
     if (gaScriptLoaded) {
-      console.log("Google Analytics script already loaded");
       resolve();
       return;
     }
-
-    console.log("[GA Debug] Loading GA script for ID:", GA_MEASUREMENT_ID);
 
     try {
       // Step 1: Inject inline script to set up dataLayer and gtag
@@ -62,11 +53,8 @@ export const loadGtagScript = (): Promise<void> => {
         function gtag(){dataLayer.push(arguments);}
         gtag('js', new Date());
         gtag('config', '${GA_MEASUREMENT_ID}', { send_page_view: true });
-        console.log('[GA Debug] Inline gtag script executed');
       `;
       document.head.appendChild(inlineScript);
-
-      console.log("[GA Debug] Inline script injected, loading gtag.js...");
 
       // Step 2: Load the gtag.js library (processes the queued commands)
       const gtagScript = document.createElement("script");
@@ -75,7 +63,6 @@ export const loadGtagScript = (): Promise<void> => {
 
       gtagScript.onload = () => {
         gaScriptLoaded = true;
-        console.log("[GA Debug] gtag.js loaded, tracking should be active");
         resolve();
       };
 
@@ -96,18 +83,7 @@ export const loadGtagScript = (): Promise<void> => {
  * Initialize Google Analytics - called when user grants consent
  */
 export const initGA = () => {
-  // Debug: Log initialization attempt
-  console.log("[GA Debug] initGA called", {
-    isProduction: isProduction(),
-    hasMeasurementId: !!GA_MEASUREMENT_ID,
-    hostname: typeof window !== "undefined" ? window.location.hostname : "SSR",
-    nodeEnv: process.env.NODE_ENV,
-  });
-
   if (!isProduction()) {
-    console.log(
-      "Google Analytics initialized in test mode (no data sent to GA)",
-    );
     return;
   }
 
@@ -122,7 +98,6 @@ export const initGA = () => {
  */
 export const trackPageView = (path: string, title?: string) => {
   if (!isProduction()) {
-    console.log("PageView (test mode):", path);
     return;
   }
 
@@ -145,7 +120,6 @@ export const trackPageView = (path: string, title?: string) => {
  */
 export const updateGtagConsent = (consentSettings: { analytics: boolean }) => {
   if (!isProduction()) {
-    console.log("Consent update (test mode):", consentSettings);
     return;
   }
 
