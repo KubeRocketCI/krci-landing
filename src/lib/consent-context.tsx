@@ -7,7 +7,7 @@ import {
   useEffect,
   useState,
 } from "react";
-import { initGA, initGtagConsent, updateGtagConsent } from "./analytics";
+import { initGA, updateGtagConsent } from "./analytics";
 
 interface ConsentState {
   necessary: boolean;
@@ -47,13 +47,11 @@ export function ConsentProvider({ children }: { children: ReactNode }) {
         setConsent(parsedConsent);
         setShowBanner(false);
 
+        // Basic Consent Mode: Only load GA script if user previously consented
+        // No script is loaded if analytics consent was not granted
         if (parsedConsent.analytics) {
           initGA();
         }
-
-        updateGtagConsent({
-          analytics: parsedConsent.analytics,
-        });
       } catch (error) {
         console.error("Error parsing stored consent:", error);
         setShowBanner(true);
@@ -62,7 +60,6 @@ export function ConsentProvider({ children }: { children: ReactNode }) {
       setShowBanner(true);
     }
 
-    initGtagConsent();
     setIsLoading(false);
   }, []);
 
