@@ -40,6 +40,7 @@ export function ConsentProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     const stored = localStorage.getItem(CONSENT_STORAGE_KEY);
+    console.log("[GA Debug] ConsentProvider mounted, stored consent:", stored);
 
     if (stored) {
       try {
@@ -50,6 +51,9 @@ export function ConsentProvider({ children }: { children: ReactNode }) {
         // Basic Consent Mode: Only load GA script if user previously consented
         // No script is loaded if analytics consent was not granted
         if (parsedConsent.analytics) {
+          console.log(
+            "[GA Debug] Found stored analytics consent, calling initGA",
+          );
           initGA();
         }
       } catch (error) {
@@ -64,6 +68,12 @@ export function ConsentProvider({ children }: { children: ReactNode }) {
   }, []);
 
   const saveConsent = (newConsent: ConsentState) => {
+    console.log("[GA Debug] saveConsent called", {
+      newConsent,
+      previousConsent: consent,
+      willCallInitGA: newConsent.analytics && !consent?.analytics,
+    });
+
     setConsent(newConsent);
     localStorage.setItem(CONSENT_STORAGE_KEY, JSON.stringify(newConsent));
     setShowBanner(false);
@@ -71,6 +81,7 @@ export function ConsentProvider({ children }: { children: ReactNode }) {
     // Basic Consent Mode: Load GA script only when user grants analytics consent
     // Don't call updateGtagConsent here - the script handles consent on load
     if (newConsent.analytics && !consent?.analytics) {
+      console.log("[GA Debug] User granted analytics consent, calling initGA");
       initGA();
     } else if (!newConsent.analytics && consent?.analytics) {
       // User revoked consent - update the consent state

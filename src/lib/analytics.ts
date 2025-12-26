@@ -13,8 +13,11 @@ let gaScriptLoaded = false;
  * requests to Google before consent (full GDPR compliance).
  */
 export const loadGtagScript = (): Promise<void> => {
+  console.log("[GA Debug] loadGtagScript called");
+
   return new Promise((resolve, reject) => {
     if (!GA_MEASUREMENT_ID) {
+      console.log("[GA Debug] No GA_MEASUREMENT_ID found");
       if (!isProduction()) {
         console.log(
           "GA_MEASUREMENT_ID not defined - this is expected in development",
@@ -29,12 +32,14 @@ export const loadGtagScript = (): Promise<void> => {
     }
 
     if (!isProduction()) {
+      console.log("[GA Debug] Not production, skipping script load");
       console.log("Google Analytics script loading skipped (development mode)");
       resolve();
       return;
     }
 
     if (typeof window === "undefined") {
+      console.log("[GA Debug] Window undefined (SSR), skipping");
       resolve();
       return;
     }
@@ -45,6 +50,8 @@ export const loadGtagScript = (): Promise<void> => {
       resolve();
       return;
     }
+
+    console.log("[GA Debug] Loading GA script for ID:", GA_MEASUREMENT_ID);
 
     try {
       // Initialize dataLayer and gtag function
@@ -95,6 +102,14 @@ export const loadGtagScript = (): Promise<void> => {
  * Initialize Google Analytics - called when user grants consent
  */
 export const initGA = () => {
+  // Debug: Log initialization attempt
+  console.log("[GA Debug] initGA called", {
+    isProduction: isProduction(),
+    hasMeasurementId: !!GA_MEASUREMENT_ID,
+    hostname: typeof window !== "undefined" ? window.location.hostname : "SSR",
+    nodeEnv: process.env.NODE_ENV,
+  });
+
   if (!isProduction()) {
     console.log(
       "Google Analytics initialized in test mode (no data sent to GA)",
