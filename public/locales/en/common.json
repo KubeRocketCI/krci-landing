@@ -159,14 +159,6 @@
       "analytics": {
         "title": "Analytics",
         "description": "Help us understand site usage to improve performance"
-      },
-      "marketing": {
-        "title": "Marketing",
-        "description": "Used to deliver relevant ads and track campaigns"
-      },
-      "functionality": {
-        "title": "Functionality",
-        "description": "Enable enhanced features and personalization"
       }
     },
     "settingsButton": "🍪 Cookie Settings",

@@ -1,15 +1,12 @@
 import { fireEvent, render, screen } from "@testing-library/react";
+import type { LinkProps } from "next/link";
+import type { PropsWithChildren } from "react";
 import Header from "./index";
 
 // Mock Next.js Link component
 jest.mock("next/link", () => {
-  // biome-ignore lint/suspicious/noExplicitAny: Test mock requires flexible typing
-  return function MockLink({ children, href, ...props }: any) {
-    return (
-      <a href={href} {...props}>
-        {children}
-      </a>
-    );
+  return function MockLink({ children, href }: PropsWithChildren<LinkProps>) {
+    return <a href={href.toString()}>{children}</a>;
   };
 });
 

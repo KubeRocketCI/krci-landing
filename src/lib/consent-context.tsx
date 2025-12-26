@@ -12,8 +12,6 @@ import { initGA, initGtagConsent, updateGtagConsent } from "./analytics";
 interface ConsentState {
   necessary: boolean;
   analytics: boolean;
-  marketing: boolean;
-  functionality: boolean;
 }
 
 interface ConsentContextType {
@@ -33,8 +31,6 @@ const CONSENT_STORAGE_KEY = "krci-cookie-consent";
 const defaultConsent: ConsentState = {
   necessary: true,
   analytics: false,
-  marketing: false,
-  functionality: false,
 };
 
 export function ConsentProvider({ children }: { children: ReactNode }) {
@@ -57,8 +53,6 @@ export function ConsentProvider({ children }: { children: ReactNode }) {
 
         updateGtagConsent({
           analytics: parsedConsent.analytics,
-          marketing: parsedConsent.marketing,
-          functionality: parsedConsent.functionality,
         });
       } catch (error) {
         console.error("Error parsing stored consent:", error);
@@ -83,8 +77,6 @@ export function ConsentProvider({ children }: { children: ReactNode }) {
 
     updateGtagConsent({
       analytics: newConsent.analytics,
-      marketing: newConsent.marketing,
-      functionality: newConsent.functionality,
     });
   };
 
@@ -92,8 +84,6 @@ export function ConsentProvider({ children }: { children: ReactNode }) {
     saveConsent({
       necessary: true,
       analytics: true,
-      marketing: true,
-      functionality: true,
     });
   };
 
