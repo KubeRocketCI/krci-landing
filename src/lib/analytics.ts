@@ -54,43 +54,37 @@ export const loadGtagScript = (): Promise<void> => {
     console.log("[GA Debug] Loading GA script for ID:", GA_MEASUREMENT_ID);
 
     try {
-      // Initialize dataLayer and gtag function
-      window.dataLayer = window.dataLayer || [];
-      window.gtag = function gtag(...args: unknown[]) {
-        window.dataLayer.push(args);
-      };
+      // Step 1: Inject inline script to set up dataLayer and gtag
+      // Using textContent creates a proper script execution context (same as dangerouslySetInnerHTML)
+      const inlineScript = document.createElement("script");
+      inlineScript.textContent = `
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', '${GA_MEASUREMENT_ID}', { send_page_view: true });
+        console.log('[GA Debug] Inline gtag script executed');
+      `;
+      document.head.appendChild(inlineScript);
 
-      // Set consent - analytics granted (user consented), ads denied (we don't use)
-      window.gtag("consent", "default", {
-        ad_storage: "denied",
-        ad_user_data: "denied",
-        ad_personalization: "denied",
-        analytics_storage: "granted",
-      });
+      console.log("[GA Debug] Inline script injected, loading gtag.js...");
 
-      // Initialize gtag
-      window.gtag("js", new Date());
-      window.gtag("config", GA_MEASUREMENT_ID, {
-        send_page_view: true,
-      });
+      // Step 2: Load the gtag.js library (processes the queued commands)
+      const gtagScript = document.createElement("script");
+      gtagScript.src = `https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`;
+      gtagScript.async = true;
 
-      // Dynamically inject the gtag.js script
-      const script = document.createElement("script");
-      script.src = `https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`;
-      script.async = true;
-
-      script.onload = () => {
+      gtagScript.onload = () => {
         gaScriptLoaded = true;
-        console.log("Google Analytics script loaded successfully");
+        console.log("[GA Debug] gtag.js loaded, tracking should be active");
         resolve();
       };
 
-      script.onerror = () => {
+      gtagScript.onerror = () => {
         console.error("Failed to load Google Analytics script");
         reject(new Error("Failed to load Google Analytics script"));
       };
 
-      document.head.appendChild(script);
+      document.head.appendChild(gtagScript);
     } catch (error) {
       console.error("Failed to initialize Google Analytics:", error);
       reject(error);
