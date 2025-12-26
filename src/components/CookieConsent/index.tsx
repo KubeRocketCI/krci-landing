@@ -7,8 +7,6 @@ import { cn } from "@/lib/utils";
 interface ConsentState {
   necessary: boolean;
   analytics: boolean;
-  marketing: boolean;
-  functionality: boolean;
 }
 
 interface CookieConsentTranslations {
@@ -30,8 +28,6 @@ interface CookieConsentTranslations {
   categories: {
     necessary: { title: string; description: string; required: string };
     analytics: { title: string; description: string };
-    marketing: { title: string; description: string };
-    functionality: { title: string; description: string };
   };
   settingsButton: string;
   closeLabel: string;
@@ -55,8 +51,6 @@ export function CookieConsent({
   const [tempConsent, setTempConsent] = useState<ConsentState>({
     necessary: true,
     analytics: false,
-    marketing: false,
-    functionality: false,
   });
 
   useEffect(() => {
@@ -83,18 +77,6 @@ export function CookieConsent({
       id: "analytics" as const,
       title: translations.categories.analytics.title,
       description: translations.categories.analytics.description,
-      required: false,
-    },
-    {
-      id: "marketing" as const,
-      title: translations.categories.marketing.title,
-      description: translations.categories.marketing.description,
-      required: false,
-    },
-    {
-      id: "functionality" as const,
-      title: translations.categories.functionality.title,
-      description: translations.categories.functionality.description,
       required: false,
     },
   ];

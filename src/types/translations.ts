@@ -126,14 +126,6 @@ export interface TranslationCookieConsent {
       title: string;
       description: string;
     };
-    marketing: {
-      title: string;
-      description: string;
-    };
-    functionality: {
-      title: string;
-      description: string;
-    };
   };
   settingsButton: string;
   closeLabel: string;

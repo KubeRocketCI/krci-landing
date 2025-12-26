@@ -151,22 +151,6 @@ export default function RootLayout({
           translations.cookieConsent?.categories?.analytics?.description ||
           "Analytics cookies",
       },
-      marketing: {
-        title:
-          translations.cookieConsent?.categories?.marketing?.title ||
-          "Marketing",
-        description:
-          translations.cookieConsent?.categories?.marketing?.description ||
-          "Marketing cookies",
-      },
-      functionality: {
-        title:
-          translations.cookieConsent?.categories?.functionality?.title ||
-          "Functionality",
-        description:
-          translations.cookieConsent?.categories?.functionality?.description ||
-          "Functionality cookies",
-      },
     },
     settingsButton:
       translations.cookieConsent?.settingsButton || "🍪 Cookie Settings",

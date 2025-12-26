@@ -51,7 +51,7 @@ export const trackPageView = (path: string, title?: string) => {
 export const initGtagConsent = () => {
   if (!isProduction()) {
     console.log("Consent initialization (test mode) - no tracking enabled");
-    return; // Don't initialize consent tracking in non-production
+    return;
   }
 
   if (typeof window !== "undefined") {
@@ -61,14 +61,15 @@ export const initGtagConsent = () => {
         window.dataLayer.push(args);
       };
 
+      // Google Consent Mode v2 - Set ALL defaults to denied
+      // This is a fallback in case GAScript hasn't run yet
+      // ad_* parameters are permanently denied (we don't use advertising)
       window.gtag("consent", "default", {
         ad_storage: "denied",
         ad_user_data: "denied",
         ad_personalization: "denied",
         analytics_storage: "denied",
-        functionality_storage: "denied",
-        personalization_storage: "denied",
-        security_storage: "granted",
+        wait_for_update: 500,
       });
     } catch (error) {
       console.error("Failed to initialize consent:", error);
@@ -76,30 +77,19 @@ export const initGtagConsent = () => {
   }
 };
 
-export const updateGtagConsent = (consentSettings: {
-  analytics: boolean;
-  marketing: boolean;
-  functionality: boolean;
-}) => {
+export const updateGtagConsent = (consentSettings: { analytics: boolean }) => {
   if (!isProduction()) {
     console.log("Consent update (test mode):", consentSettings);
-    return; // Don't update consent in non-production
+    return;
   }
 
   if (typeof window !== "undefined" && window.gtag) {
     try {
+      // Only update analytics_storage based on user consent
+      // ad_storage, ad_user_data, ad_personalization remain permanently denied
+      // since we don't use advertising features
       window.gtag("consent", "update", {
-        ad_storage: consentSettings.marketing ? "granted" : "denied",
-        ad_user_data: consentSettings.marketing ? "granted" : "denied",
-        ad_personalization: consentSettings.marketing ? "granted" : "denied",
         analytics_storage: consentSettings.analytics ? "granted" : "denied",
-        functionality_storage: consentSettings.functionality
-          ? "granted"
-          : "denied",
-        personalization_storage: consentSettings.functionality
-          ? "granted"
-          : "denied",
-        security_storage: "granted",
       });
     } catch (error) {
       console.error("Failed to update consent:", error);
