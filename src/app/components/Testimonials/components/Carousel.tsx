@@ -1,9 +1,12 @@
 "use client";
 
-import type { EmblaCarouselType } from "embla-carousel";
-import useEmblaCarousel from "embla-carousel-react";
+import useEmblaCarousel, {
+  type UseEmblaCarouselType,
+} from "embla-carousel-react";
 import { useCallback, useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
+
+type EmblaCarouselType = NonNullable<UseEmblaCarouselType[1]>;
 
 interface Testimonial {
   name: string;

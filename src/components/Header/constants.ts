@@ -6,6 +6,10 @@ export interface NavItem {
 
 export const navigationItems: NavItem[] = [
   {
+    label: "AI Factory",
+    href: "/ai-factory",
+  },
+  {
     label: "Use cases",
     href: "/use-cases",
   },

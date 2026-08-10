@@ -6,7 +6,8 @@ import { Resend } from "resend";
 import DemoNotificationEmail from "@/../emails/demo-notification";
 import { demoFormSchema } from "@/lib/validations/demo";
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+const resend =
+  process.env.RESEND_API_KEY && new Resend(process.env.RESEND_API_KEY);
 const BUSINESS_TIMEZONE = "Europe/Kyiv"; // Eastern European Time (EET/EEST, UTC+2/+3)
 
 type State = { error: string } | { data: string } | undefined;
@@ -61,6 +62,13 @@ export async function sendDemoRequest(
     );
 
     // 6. Send email via Resend
+    if (!resend) {
+      console.error("Resend is not configured");
+      return {
+        error: "Demo service is not configured. Please contact support.",
+      };
+    }
+
     const { data, error } = await resend.emails.send({
       from: process.env.FROM_EMAIL || "onboarding@resend.dev",
       to: [demoEmail],

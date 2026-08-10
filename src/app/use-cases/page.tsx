@@ -1,13 +1,14 @@
 import type { Metadata } from "next";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
+import { breadcrumbSchema, JsonLd } from "@/components/JsonLd";
 import { getTranslations } from "@/lib/i18n";
 import UseCases from "../components/UseCases";
 
 export const metadata: Metadata = {
-  title: "Use Cases | KubeRocketCI",
+  title: "CI/CD Use Cases and Scenarios | KubeRocketCI",
   description:
-    "Explore practical scenarios and solutions with KubeRocketCI. Learn how to scaffold applications, implement quality gates, manage secrets, create custom pipelines, and deploy from feature branches.",
+    "Practical KubeRocketCI scenarios: scaffold applications, enforce quality gates, manage secrets, build custom Tekton pipelines, and deploy from feature branches.",
   keywords: [
     "KubeRocketCI use cases",
     "CI/CD scenarios",
@@ -20,26 +21,26 @@ export const metadata: Metadata = {
     "autotest integration",
   ],
   openGraph: {
-    title: "Use Cases | KubeRocketCI",
+    title: "CI/CD Use Cases and Scenarios | KubeRocketCI",
     description:
-      "Explore practical scenarios and solutions with KubeRocketCI. Learn how to scaffold applications, implement quality gates, manage secrets, and more.",
+      "Practical KubeRocketCI scenarios: scaffold applications, enforce quality gates, manage secrets, build custom Tekton pipelines, and deploy from feature branches.",
     type: "website",
     url: "https://kuberocketci.io/use-cases",
     siteName: "KubeRocketCI",
     images: [
       {
         url: "https://kuberocketci.io/kuberocketci-social-card.png",
-        width: 1200,
-        height: 630,
+        width: 1020,
+        height: 615,
         alt: "KubeRocketCI Use Cases",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Use Cases | KubeRocketCI",
+    title: "CI/CD Use Cases and Scenarios | KubeRocketCI",
     description:
-      "Explore practical scenarios and solutions with KubeRocketCI. Learn how to scaffold applications, implement quality gates, manage secrets, and more.",
+      "Practical KubeRocketCI scenarios: scaffold applications, enforce quality gates, manage secrets, build custom Tekton pipelines, and deploy from feature branches.",
     images: ["https://kuberocketci.io/kuberocketci-social-card.png"],
   },
   alternates: {
@@ -52,6 +53,7 @@ export default function UseCasesPage() {
 
   return (
     <>
+      <JsonLd data={breadcrumbSchema("Use Cases", "/use-cases")} />
       <Header translations={translations} />
       <main className="bg-background min-h-screen">
         <UseCases translations={translations} />

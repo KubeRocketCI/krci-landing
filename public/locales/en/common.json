@@ -1,7 +1,7 @@
 {
   "hero": {
-    "title": "Build your delivery rocket with KubeRocketCI",
-    "description": "Boost your delivery with the development culture based on the modern CI/CD stack, golden path and self-service capabilities of the KubeRocketCI.",
+    "title": "The harness for your AI fabric.",
+    "description": "Delivery infrastructure for your engineers — and their agents. One golden path of opinionated pipelines, quality gates, and ephemeral environments to validate hypotheses at machine speed, safely.",
     "contactButton": "Contact Us",
     "demoButton": "Request Demo"
   },
@@ -40,8 +40,117 @@
         "description": "Code quality and vulnerability scanners, plus persistent logging tools with smart alerts, allow you to detect deviations and prevent downtime at the earliest stage."
       },
       "aiAdoption": {
-        "title": "AI-adoption",
-        "description": "Built-in AI agents help to efficiently manage the platform. The standalone KubeRocketAI framework will help users develop new features for applications."
+        "title": "Agent-ready platform",
+        "description": "Built-in AI helps manage the platform, and KubeRocketAI brings agents into feature development — inside the pipelines and quality gates your team trusts."
+      }
+    }
+  },
+  "aiFabric": {
+    "title": "The harness for AI fabrics",
+    "description": "Pipelines and quality gates didn't vanish in the agentic era — they became its control point. Agent fleets need exactly what a mature delivery platform does best.",
+    "stats": {
+      "ciMinutes": "CI minutes ran on GitHub Actions in a single week of 2026 — up from 500M weekly in 2023",
+      "agentPRs": "pull requests opened by AI agents in one month — a 4x jump in half a year",
+      "capacity": "capacity growth GitHub discovered it needed for agentic workloads — triple its plan",
+      "governance": "of agentic AI projects Gartner predicts will be canceled by 2027 over governance gaps"
+    },
+    "statsSource": "Sources: GitHub platform reports, 2026 · Gartner Hype Cycle for Platform Engineering, 2026",
+    "learnMore": "Explore the AI Factory",
+    "pillars": {
+      "harness": {
+        "title": "Execution harness",
+        "description": "Agents iterate at machine speed. Give every change — human or agent — the same loop: opinionated Tekton pipelines, automated reviews, and quality gates that turn agent output into evidence-backed, mergeable results."
+      },
+      "guardrails": {
+        "title": "Guardrails by default",
+        "description": "Route agents down the same golden path as your developers. RBAC, policy-aware self-service, and a GitOps audit trail make every agent action a reviewable commit — governance built in, not bolted on."
+      },
+      "ephemeral": {
+        "title": "Ephemeral velocity",
+        "description": "Validate hypotheses cheaply. Spin up an isolated, production-like environment per task, run the experiment, promote what passes the gates, and tear the rest down clean."
+      }
+    }
+  },
+  "aiFactory": {
+    "title": "From CI/CD platform to AI factory",
+    "description": "AI fabrics — fleets of agents that plan, code, test, and ship — don't replace delivery infrastructure. They multiply the demand for it. KubeRocketCI is the factory floor: the harness, guardrails, and disposable environments your agents need to produce software you can trust.",
+    "market": {
+      "title": "The market already moved",
+      "description": "In 2026 agentic development stopped being a pilot. The numbers from GitHub alone show a delivery layer under more load than at any point in its history.",
+      "stats": {
+        "commits": "commits processed by GitHub weekly — on pace for 14 billion in 2026",
+        "agentPRs": "pull requests opened by AI agents in a single month — 4x growth in six months",
+        "ciMinutes": "GitHub Actions CI minutes in one week — up from 500M weekly in 2023",
+        "capacity": "the infrastructure capacity GitHub discovered it needed — it had planned for 10x"
+      },
+      "statsSource": "Sources: GitHub platform reports, 2026 · Gartner Hype Cycle for Platform Engineering, 2026"
+    },
+    "shift": {
+      "title": "The layer that didn't vanish",
+      "paragraph1": "When coding agents arrived, some predicted pipelines and quality gates would fade away. The opposite happened: every agent-opened pull request triggers a pipeline, a review, a scan, a deployment. The delivery layer transformed from a developer convenience into the control point of the whole factory — and it has never been more active.",
+      "paragraph2": "Agents don't get tired, but they do get things wrong — at machine speed. A fabric only compounds value when every hypothesis it produces is validated by infrastructure that can spin up guardrailed environments in minutes, run the gates, promote what passes, and destroy the rest.",
+      "warningValue": "40%",
+      "warning": "of agentic AI projects will be canceled by 2027, Gartner predicts — not because models fail, but because governance wasn't built for autonomous actors. The platforms that survive route agents through the same golden paths as humans."
+    },
+    "needs": {
+      "title": "What an AI fabric needs from its factory",
+      "description": "Six capabilities separate a fleet that ships from a fleet that floods your review queue.",
+      "items": {
+        "harness": {
+          "title": "Execution harness",
+          "description": "A standing loop every change runs through: build, test, lint, scan, review. Agents produce output; the harness turns it into evidence."
+        },
+        "qualityGates": {
+          "title": "Quality gates",
+          "description": "Autotests and code-quality thresholds decide what gets promoted. When changes arrive at machine speed, the gate — not the author — is the trust boundary."
+        },
+        "guardrails": {
+          "title": "Guardrails and governance",
+          "description": "Agents are a new class of platform user. RBAC, scoped permissions, and policy-aware self-service keep the fleet on the paved road."
+        },
+        "auditTrail": {
+          "title": "Audit trail by design",
+          "description": "GitOps stores every configuration and every change as a commit. Everything an agent does is reviewable, revertible, and attributable."
+        },
+        "ephemeral": {
+          "title": "Ephemeral environments",
+          "description": "A disposable, production-like environment per hypothesis: create, validate, tear down clean. Fast enough that agents never queue."
+        },
+        "observability": {
+          "title": "Fleet observability",
+          "description": "Logs, metrics, and alerts across every pipeline run — so you notice drift, flakiness, and runaway costs before they compound."
+        }
+      }
+    },
+    "delivery": {
+      "title": "How KubeRocketCI delivers it today",
+      "description": "No roadmap promises — each capability maps to a platform feature you can use right now.",
+      "linkLabel": "Read the docs",
+      "items": {
+        "harness": {
+          "title": "Execution harness",
+          "description": "Predefined Tekton pipelines for polyglot microservices, plus custom pipelines when your flow needs its own steps."
+        },
+        "qualityGates": {
+          "title": "Quality gates",
+          "description": "Autotests as quality gates in CD pipelines — reliable versions get promoted, failures stop at the gate."
+        },
+        "guardrails": {
+          "title": "Guardrails and governance",
+          "description": "Single Sign-On with OIDC/SAML identity providers and Kubernetes RBAC across the whole platform."
+        },
+        "auditTrail": {
+          "title": "Audit trail by design",
+          "description": "The GitOps approach stores platform and application configuration as code in Git — every change is a commit."
+        },
+        "ephemeral": {
+          "title": "Ephemeral environments",
+          "description": "Deploy any feature branch into its own environment, test it deeply, and destroy it when the hypothesis is answered."
+        },
+        "observability": {
+          "title": "Fleet observability",
+          "description": "Logging, monitoring, and alerting stacks with code-quality and vulnerability scanning built into the platform."
+        }
       }
     }
   },
@@ -73,7 +182,7 @@
     "items": {
       "goldenPath": {
         "title": "Golden Path",
-        "description": "The KubeRocketCI architecture was designed to address the unique challenges of modern software development teams."
+        "description": "One paved road from commit to production — application templates, predefined pipelines, and self-service that developers and AI agents share, so every change follows the same proven path."
       },
       "security": {
         "title": "Security and Quality Assurance",
@@ -90,8 +199,8 @@
     "description": "Leading organizations worldwide trust KubeRocketCI to accelerate their software delivery and enhance development workflows."
   },
   "cta": {
-    "title": "Ready to accelerate your development and raise quality standards?",
-    "subtitle": "Start building better software today.",
+    "title": "Ready to run your AI fabric on rails?",
+    "subtitle": "Give your teams — and their agents — a platform built for machine-speed delivery.",
     "button": "Request Demo"
   },
   "footer": {
