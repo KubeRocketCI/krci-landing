@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Container } from "@/components/Container";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
+import { breadcrumbSchema, JsonLd } from "@/components/JsonLd";
 import { getTranslationKey, getTranslations } from "@/lib/i18n";
 import { cn } from "@/lib/utils";
 import { getPricingList } from "../components/Pricing/data";
@@ -18,6 +19,19 @@ export const metadata: Metadata = {
     description:
       "Experience the flexibility of deploying KubeRocketCI on your on-premises infrastructure or in the Cloud. Your valuable data stays securely within your perimeter.",
     type: "website",
+    url: "https://kuberocketci.io/pricing",
+    siteName: "KubeRocketCI",
+    images: [
+      {
+        url: "https://kuberocketci.io/kuberocketci-social-card.png",
+        width: 1020,
+        height: 615,
+        alt: "KubeRocketCI Professional Service Pricing",
+      },
+    ],
+  },
+  alternates: {
+    canonical: "https://kuberocketci.io/pricing",
   },
 };
 
@@ -28,6 +42,7 @@ export default function PricingPage() {
 
   return (
     <>
+      <JsonLd data={breadcrumbSchema("Pricing", "/pricing")} />
       <Header translations={translations} />
       <main className="bg-background min-h-screen">
         <section className={cn("pt-24 pb-20")}>

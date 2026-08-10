@@ -1,0 +1,25 @@
+# KubeRocketCI
+
+> KubeRocketCI is an open-source, Kubernetes-native software delivery platform. It provides one golden path for developers and AI agent fleets: opinionated Tekton pipelines, quality gates, RBAC guardrails, GitOps audit trails, and ephemeral environments that spin up per hypothesis and tear down clean.
+
+KubeRocketCI positions itself as the harness for AI fabrics — the delivery infrastructure that fleets of AI coding agents need to ship software safely at machine speed. Pipelines and quality gates did not vanish in the agentic era; they became its control point.
+
+## Pages
+
+- [Home](https://kuberocketci.io/): Platform overview — benefits, features, and why agent fleets need a delivery harness
+- [AI Factory](https://kuberocketci.io/ai-factory): Why the delivery layer became the control point of the AI factory, and how KubeRocketCI provides the execution harness, quality gates, guardrails, audit trail, ephemeral environments, and fleet observability
+- [Use Cases](https://kuberocketci.io/use-cases): Practical scenarios — application scaffolding, autotest quality gates, secrets management, custom Tekton pipelines, feature-branch deployments
+- [Pricing](https://kuberocketci.io/pricing): Open-source core plus professional service subscription tiers
+
+## Documentation
+
+- [What is KubeRocketCI](https://docs.kuberocketci.io/docs/about-platform): Platform architecture and concepts
+- [User Guide](https://docs.kuberocketci.io/docs/user-guide): How to use the platform
+- [Developer Guide](https://docs.kuberocketci.io/docs/developer-guide): How the platform is built
+- [API Reference](https://docs.kuberocketci.io/docs/api/overview): Build your own solutions on top
+
+## Community
+
+- [GitHub](https://github.com/kuberocketci): Source code and issues
+- [Medium](https://medium.com/kuberocketci): Engineering blog
+- [YouTube](https://www.youtube.com/@theplatformteam): Talks and demos

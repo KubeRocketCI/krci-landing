@@ -42,7 +42,7 @@ export const useCasesData: UseCaseItem[] = [
     id: "autotest-quality-gate",
     title: "Autotest as a Quality Gate",
     description:
-      "Implement autotests as a quality gate within the Continuous Deployment pipeline, verifying application stability and functionality, allowing reliable versions to be promoted while enabling quick creation of applications, streamlined testing, and seamless deployment updates.",
+      "Implement autotests as a quality gate within the Continuous Deployment pipeline, verifying application stability and functionality before promotion. Quality gates matter double when changes arrive at machine speed — the same mechanism validates agent-generated code before it reaches production.",
     iconName: "test-tube",
     link: "https://docs.kuberocketci.io/docs/use-cases/autotest-as-quality-gate",
   },
@@ -67,7 +67,7 @@ export const useCasesData: UseCaseItem[] = [
     id: "feature-branch",
     title: "Deploy Application from Feature Branch",
     description:
-      "Create a feature branch for your application and deploy it in a separate environment. Deploying a feature branch allows for deep testing of new features under development without merging them into the main branch.",
+      "Create a feature branch for your application and deploy it in a separate environment. Deep-test new features without touching the main branch — a disposable sandbox that works just as well for validating hypotheses proposed by AI agents before they merge.",
     iconName: "git-branch",
     link: "https://docs.kuberocketci.io/docs/use-cases/deploy-application-from-feature-branch",
   },

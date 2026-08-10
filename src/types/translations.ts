@@ -23,6 +23,82 @@ export interface TranslationBenefits {
   };
 }
 
+export interface TranslationAiFabricPillar {
+  title: string;
+  description: string;
+}
+
+export interface TranslationAiFabric {
+  title: string;
+  description: string;
+  stats: {
+    ciMinutes: string;
+    agentPRs: string;
+    capacity: string;
+    governance: string;
+  };
+  statsSource: string;
+  learnMore: string;
+  pillars: {
+    harness: TranslationAiFabricPillar;
+    guardrails: TranslationAiFabricPillar;
+    ephemeral: TranslationAiFabricPillar;
+  };
+}
+
+export interface TranslationAiFactoryItem {
+  title: string;
+  description: string;
+}
+
+export interface TranslationAiFactory {
+  title: string;
+  description: string;
+  market: {
+    title: string;
+    description: string;
+    stats: {
+      commits: string;
+      agentPRs: string;
+      ciMinutes: string;
+      capacity: string;
+    };
+    statsSource: string;
+  };
+  shift: {
+    title: string;
+    paragraph1: string;
+    paragraph2: string;
+    warningValue: string;
+    warning: string;
+  };
+  needs: {
+    title: string;
+    description: string;
+    items: {
+      harness: TranslationAiFactoryItem;
+      qualityGates: TranslationAiFactoryItem;
+      guardrails: TranslationAiFactoryItem;
+      auditTrail: TranslationAiFactoryItem;
+      ephemeral: TranslationAiFactoryItem;
+      observability: TranslationAiFactoryItem;
+    };
+  };
+  delivery: {
+    title: string;
+    description: string;
+    linkLabel: string;
+    items: {
+      harness: TranslationAiFactoryItem;
+      qualityGates: TranslationAiFactoryItem;
+      guardrails: TranslationAiFactoryItem;
+      auditTrail: TranslationAiFactoryItem;
+      ephemeral: TranslationAiFactoryItem;
+      observability: TranslationAiFactoryItem;
+    };
+  };
+}
+
 export interface TranslationFeatureItem {
   title: string;
   description: string;
@@ -302,6 +378,8 @@ export interface Translations {
   hero: TranslationHero;
   about: TranslationAbout;
   benefits: TranslationBenefits;
+  aiFabric: TranslationAiFabric;
+  aiFactory: TranslationAiFactory;
   features: TranslationFeatures;
   keyDifferentiation: TranslationKeyDifferentiation;
   testimonials: TranslationTestimonials;

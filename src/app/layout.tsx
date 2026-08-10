@@ -4,16 +4,20 @@ import "./globals.css";
 import { Toaster } from "sonner";
 import { Analytics, GAScript } from "@/components/Analytics";
 import { CookieConsent } from "@/components/CookieConsent";
+import { JsonLd, organizationSchema, websiteSchema } from "@/components/JsonLd";
 import { ConsentProvider } from "@/lib/consent-context";
 import { getTranslations } from "@/lib/i18n";
 
 const font = Alexandria({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "KubeRocketCI - Build your delivery rocket",
+  title: "KubeRocketCI - The harness for your AI fabric",
   description:
-    "Boost your delivery with the development culture based on the modern CI/CD stack, golden path and self-service capabilities of the KubeRocketCI.",
+    "One golden path for developers and AI agent fleets: opinionated pipelines, quality gates, and ephemeral environments to validate hypotheses at machine speed.",
   metadataBase: new URL("https://kuberocketci.io"),
+  alternates: {
+    canonical: "/",
+  },
   keywords: [
     "KubeRocketCI",
     "CI/CD",
@@ -23,6 +27,13 @@ export const metadata: Metadata = {
     "Golden Path",
     "Self-Service",
     "Cloud Native",
+    "AI Agents",
+    "AI Fabric",
+    "Agentic AI",
+    "Agent Experience",
+    "Quality Gates",
+    "Ephemeral Environments",
+    "AI Software Factory",
   ],
   authors: [{ name: "KubeRocketCI" }],
   creator: "KubeRocketCI",
@@ -54,24 +65,24 @@ export const metadata: Metadata = {
     locale: "en_US",
     url: "https://kuberocketci.io",
     siteName: "KubeRocketCI",
-    title: "KubeRocketCI - Build your delivery rocket",
+    title: "KubeRocketCI - The harness for your AI fabric",
     description:
-      "Boost your delivery with the development culture based on the modern CI/CD stack, golden path and self-service capabilities of the KubeRocketCI.",
+      "One golden path for developers and AI agent fleets: opinionated pipelines, quality gates, and ephemeral environments to validate hypotheses at machine speed.",
     images: [
       {
         url: "/kuberocketci-social-card.png",
         width: 1020,
         height: 615,
-        alt: "KubeRocketCI - Build your delivery rocket",
+        alt: "KubeRocketCI - The harness for your AI fabric",
         type: "image/png",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "KubeRocketCI - Build your delivery rocket",
+    title: "KubeRocketCI - The harness for your AI fabric",
     description:
-      "Boost your delivery with the development culture based on the modern CI/CD stack, golden path and self-service capabilities of the KubeRocketCI.",
+      "One golden path for developers and AI agent fleets: opinionated pipelines, quality gates, and ephemeral environments to validate hypotheses at machine speed.",
     images: ["/kuberocketci-social-card.png"],
     creator: "@KubeRocketCI",
     site: "@KubeRocketCI",
@@ -86,9 +97,6 @@ export const metadata: Metadata = {
       "max-image-preview": "large",
       "max-snippet": -1,
     },
-  },
-  verification: {
-    google: "google-site-verification-code",
   },
 };
 
@@ -162,6 +170,8 @@ export default function RootLayout({
     <html lang="en">
       <head>
         <GAScript />
+        <JsonLd data={organizationSchema} />
+        <JsonLd data={websiteSchema} />
       </head>
       <body className={font.className}>
         <ConsentProvider>
