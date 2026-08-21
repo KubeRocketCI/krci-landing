@@ -10,6 +10,7 @@ import { useFormStatus } from "react-dom";
 import { toast } from "sonner";
 import { PrivacyConsent } from "@/components/PrivacyConsent";
 import { sendDemoRequest } from "@/lib/actions/demo";
+import { trackEvent } from "@/lib/analytics";
 import { cn } from "@/lib/utils";
 import type { TranslationDemoForm } from "@/types/translations";
 import "react-day-picker/dist/style.css";
@@ -21,12 +22,14 @@ interface RequestDemoModalProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
   translations: TranslationDemoForm;
+  location?: string;
 }
 
 export function RequestDemoModal({
   open,
   onOpenChange,
   translations,
+  location,
 }: RequestDemoModalProps) {
   const [state, dispatch] = useActionState(sendDemoRequest, undefined);
   const [selectedDate, setSelectedDate] = useState<Date | undefined>();
@@ -39,6 +42,10 @@ export function RequestDemoModal({
     if (!state) return;
 
     if ("data" in state) {
+      trackEvent("generate_lead", {
+        form: "demo",
+        location: location ?? "unknown",
+      });
       toast.success(state.data);
       onOpenChange(false);
       // Reset form
@@ -47,7 +54,7 @@ export function RequestDemoModal({
     } else if ("error" in state) {
       toast.error(state.error);
     }
-  }, [state, onOpenChange]);
+  }, [state, onOpenChange, location]);
 
   // Generate time slots in user's timezone that align with business hours (10:00-17:00)
   const availableTimeSlots = useMemo(() => {

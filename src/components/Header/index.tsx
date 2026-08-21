@@ -57,7 +57,10 @@ const Header = ({ className, translations }: HeaderProps) => {
             </nav>
 
             <div className={cn("hidden lg:flex items-center gap-4")}>
-              <CTAButton demoFormTranslations={translations.demoForm} />
+              <CTAButton
+                demoFormTranslations={translations.demoForm}
+                location="header"
+              />
             </div>
 
             <button
@@ -131,6 +134,7 @@ const Header = ({ className, translations }: HeaderProps) => {
                   <CTAButton
                     onClick={closeMobileMenu}
                     demoFormTranslations={translations.demoForm}
+                    location="mobile_menu"
                   />
                 </div>
               </nav>

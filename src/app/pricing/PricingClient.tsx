@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { ContactModal } from "@/components/ContactModal";
+import { trackEvent } from "@/lib/analytics";
 import type { TranslationContactForm } from "@/types/translations";
 import { PricingCard } from "../components/Pricing/PricingCard";
 import type { PricingItem } from "../components/Pricing/types";
@@ -24,7 +25,13 @@ export function PricingClient({
           <div key={item.id} className="flex">
             <PricingCard
               {...item}
-              onContactClick={() => setContactModalOpen(true)}
+              onContactClick={() => {
+                trackEvent("contact_open", {
+                  location: "pricing",
+                  plan: item.id,
+                });
+                setContactModalOpen(true);
+              }}
             />
           </div>
         ))}
@@ -34,6 +41,7 @@ export function PricingClient({
         open={contactModalOpen}
         onOpenChange={setContactModalOpen}
         translations={contactFormTranslations}
+        location="pricing"
       />
     </>
   );

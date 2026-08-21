@@ -7,6 +7,7 @@ import { useFormStatus } from "react-dom";
 import { toast } from "sonner";
 import { PrivacyConsent } from "@/components/PrivacyConsent";
 import { sendContactEmail } from "@/lib/actions/contact";
+import { trackEvent } from "@/lib/analytics";
 import { cn } from "@/lib/utils";
 import type { TranslationContactForm } from "@/types/translations";
 
@@ -14,12 +15,14 @@ interface ContactModalProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
   translations: TranslationContactForm;
+  location?: string;
 }
 
 export function ContactModal({
   open,
   onOpenChange,
   translations,
+  location,
 }: ContactModalProps) {
   const [state, dispatch] = useActionState(sendContactEmail, undefined);
 
@@ -27,12 +30,16 @@ export function ContactModal({
     if (!state) return;
 
     if ("data" in state) {
+      trackEvent("generate_lead", {
+        form: "contact",
+        location: location ?? "unknown",
+      });
       toast.success(state.data);
       onOpenChange(false);
     } else if ("error" in state) {
       toast.error(state.error);
     }
-  }, [state, onOpenChange]);
+  }, [state, onOpenChange, location]);
 
   return (
     <Dialog.Root open={open} onOpenChange={onOpenChange}>

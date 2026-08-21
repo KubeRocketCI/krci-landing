@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { RequestDemoModal } from "@/components/RequestDemoModal";
+import { trackEvent } from "@/lib/analytics";
 import { cn } from "@/lib/utils";
 import type { TranslationDemoForm } from "@/types/translations";
 
@@ -12,12 +13,18 @@ export const ctaButton = {
 interface CTAButtonProps {
   onClick?: () => void;
   demoFormTranslations: TranslationDemoForm;
+  location: string;
 }
 
-const CTAButton = ({ onClick, demoFormTranslations }: CTAButtonProps) => {
+const CTAButton = ({
+  onClick,
+  demoFormTranslations,
+  location,
+}: CTAButtonProps) => {
   const [demoModalOpen, setDemoModalOpen] = useState(false);
 
   const handleClick = () => {
+    trackEvent("demo_request_open", { location });
     setDemoModalOpen(true);
     onClick?.();
   };
@@ -42,6 +49,7 @@ const CTAButton = ({ onClick, demoFormTranslations }: CTAButtonProps) => {
         open={demoModalOpen}
         onOpenChange={setDemoModalOpen}
         translations={demoFormTranslations}
+        location={location}
       />
     </>
   );
