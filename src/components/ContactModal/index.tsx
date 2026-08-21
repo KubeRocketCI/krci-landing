@@ -15,7 +15,8 @@ interface ContactModalProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
   translations: TranslationContactForm;
-  location?: string;
+  location: string;
+  plan?: string;
 }
 
 export function ContactModal({
@@ -23,6 +24,7 @@ export function ContactModal({
   onOpenChange,
   translations,
   location,
+  plan,
 }: ContactModalProps) {
   const [state, dispatch] = useActionState(sendContactEmail, undefined);
 
@@ -32,14 +34,15 @@ export function ContactModal({
     if ("data" in state) {
       trackEvent("generate_lead", {
         form: "contact",
-        location: location ?? "unknown",
+        location,
+        ...(plan ? { plan } : {}),
       });
       toast.success(state.data);
       onOpenChange(false);
     } else if ("error" in state) {
       toast.error(state.error);
     }
-  }, [state, onOpenChange, location]);
+  }, [state, onOpenChange, location, plan]);
 
   return (
     <Dialog.Root open={open} onOpenChange={onOpenChange}>

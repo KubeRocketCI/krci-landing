@@ -5,6 +5,10 @@ const GA_MEASUREMENT_ID = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID;
 // Track if GA script has been loaded to prevent duplicate loading
 let gaScriptLoaded = false;
 
+// Live consent state - the gtag script stays loaded after a mid-session
+// revoke, so tracking calls must check this flag, not just window.gtag
+let analyticsConsentGranted = false;
+
 /**
  * Dynamically loads the Google Analytics script - Basic Consent Mode
  *
@@ -83,6 +87,8 @@ export const loadGtagScript = (): Promise<void> => {
  * Initialize Google Analytics - called when user grants consent
  */
 export const initGA = () => {
+  analyticsConsentGranted = true;
+
   if (!isProduction()) {
     return;
   }
@@ -97,7 +103,7 @@ export const initGA = () => {
  * Track a page view - only works after consent is granted and script is loaded
  */
 export const trackPageView = (path: string, title?: string) => {
-  if (!isProduction()) {
+  if (!isProduction() || !analyticsConsentGranted) {
     return;
   }
 
@@ -126,7 +132,7 @@ export const trackEvent = (
   eventName: AnalyticsEventName,
   params?: Record<string, string | number | boolean>,
 ) => {
-  if (!isProduction()) {
+  if (!isProduction() || !analyticsConsentGranted) {
     return;
   }
 
@@ -145,6 +151,8 @@ export const trackEvent = (
  * but the script remains loaded (page refresh will reset)
  */
 export const updateGtagConsent = (consentSettings: { analytics: boolean }) => {
+  analyticsConsentGranted = consentSettings.analytics;
+
   if (!isProduction()) {
     return;
   }

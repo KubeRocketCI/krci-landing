@@ -22,7 +22,7 @@ interface RequestDemoModalProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
   translations: TranslationDemoForm;
-  location?: string;
+  location: string;
 }
 
 export function RequestDemoModal({
@@ -42,10 +42,7 @@ export function RequestDemoModal({
     if (!state) return;
 
     if ("data" in state) {
-      trackEvent("generate_lead", {
-        form: "demo",
-        location: location ?? "unknown",
-      });
+      trackEvent("generate_lead", { form: "demo", location });
       toast.success(state.data);
       onOpenChange(false);
       // Reset form
