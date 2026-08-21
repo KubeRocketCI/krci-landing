@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { ContactModal } from "@/components/ContactModal";
+import { trackEvent } from "@/lib/analytics";
 import { cn } from "@/lib/utils";
 import type {
   TranslationContactForm,
@@ -27,7 +28,10 @@ export function HeroClient({
       <div className={cn("flex items-center gap-4", "flex-col sm:flex-row")}>
         <button
           type="button"
-          onClick={() => setContactModalOpen(true)}
+          onClick={() => {
+            trackEvent("contact_open", { location: "hero" });
+            setContactModalOpen(true);
+          }}
           className={cn(
             "button-shadow px-5 py-3 text-button",
             "bg-neutral-90 text-foreground leading-[1] cursor-pointer",
@@ -39,13 +43,17 @@ export function HeroClient({
           {contactButtonText}
         </button>
 
-        <CTAButton demoFormTranslations={demoFormTranslations} />
+        <CTAButton
+          demoFormTranslations={demoFormTranslations}
+          location="hero"
+        />
       </div>
 
       <ContactModal
         open={contactModalOpen}
         onOpenChange={setContactModalOpen}
         translations={contactFormTranslations}
+        location="hero"
       />
     </>
   );

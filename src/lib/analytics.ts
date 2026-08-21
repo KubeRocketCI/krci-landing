@@ -52,7 +52,7 @@ export const loadGtagScript = (): Promise<void> => {
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
         gtag('js', new Date());
-        gtag('config', '${GA_MEASUREMENT_ID}', { send_page_view: true });
+        gtag('config', '${GA_MEASUREMENT_ID}', { send_page_view: false });
       `;
       document.head.appendChild(inlineScript);
 
@@ -109,6 +109,32 @@ export const trackPageView = (path: string, title?: string) => {
       });
     } catch (error) {
       console.error("Failed to track page view:", error);
+    }
+  }
+};
+
+export type AnalyticsEventName =
+  | "demo_request_open"
+  | "contact_open"
+  | "generate_lead";
+
+/**
+ * Track a custom event - only works after consent is granted and script is loaded.
+ * Silently no-ops when consent was not given (window.gtag is absent).
+ */
+export const trackEvent = (
+  eventName: AnalyticsEventName,
+  params?: Record<string, string | number | boolean>,
+) => {
+  if (!isProduction()) {
+    return;
+  }
+
+  if (typeof window !== "undefined" && window.gtag) {
+    try {
+      window.gtag("event", eventName, params ?? {});
+    } catch (error) {
+      console.error("Failed to track event:", error);
     }
   }
 };

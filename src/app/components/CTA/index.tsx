@@ -37,7 +37,10 @@ const CTA = ({ translations }: CTAProps) => {
             {t("cta.title")} <br /> {t("cta.subtitle")}
           </h2>
 
-          <CTAButton demoFormTranslations={translations.demoForm} />
+          <CTAButton
+            demoFormTranslations={translations.demoForm}
+            location="cta_section"
+          />
         </div>
       </Container>
     </section>
