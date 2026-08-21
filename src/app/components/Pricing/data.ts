@@ -1,3 +1,4 @@
+import { withUtm } from "@/lib/utm";
 import type { Translations } from "@/types/translations";
 import type { PricingItem } from "./types";
 
@@ -6,11 +7,15 @@ export function getPricingList(translations: Translations): PricingItem[] {
     {
       id: "open-source",
       title: translations.pricing.tiers.openSource.title,
+      tagline: translations.pricing.tiers.openSource.tagline,
+      isFree: true,
       description: translations.pricing.tiers.openSource.description,
-      price: 0,
       features: translations.pricing.tiers.openSource.features,
       link: {
-        href: "https://docs.kuberocketci.io/docs/quick-start/quick-start-overview",
+        href: withUtm(
+          "https://docs.kuberocketci.io/docs/quick-start/quick-start-overview",
+          "pricing-open-source",
+        ),
         label: translations.pricing.tiers.openSource.link.label,
         action: "external",
       },
@@ -19,12 +24,9 @@ export function getPricingList(translations: Translations): PricingItem[] {
     {
       id: "team",
       title: translations.pricing.tiers.team.title,
+      tagline: translations.pricing.tiers.team.tagline,
       description: translations.pricing.tiers.team.description,
-      price: 3000,
       features: translations.pricing.tiers.team.features,
-      moreFeatures: {
-        features: translations.pricing.tiers.team.moreFeatures || [],
-      },
       link: {
         href: "#",
         label: translations.pricing.tiers.team.link.label,
@@ -39,12 +41,9 @@ export function getPricingList(translations: Translations): PricingItem[] {
     {
       id: "scale",
       title: translations.pricing.tiers.scale.title,
+      tagline: translations.pricing.tiers.scale.tagline,
       description: translations.pricing.tiers.scale.description,
-      price: 6000,
       features: translations.pricing.tiers.scale.features,
-      moreFeatures: {
-        features: translations.pricing.tiers.scale.moreFeatures || [],
-      },
       link: {
         href: "#",
         label: translations.pricing.tiers.scale.link.label,
@@ -55,12 +54,9 @@ export function getPricingList(translations: Translations): PricingItem[] {
     {
       id: "enterprise",
       title: translations.pricing.tiers.enterprise.title,
+      tagline: translations.pricing.tiers.enterprise.tagline,
       description: translations.pricing.tiers.enterprise.description,
-      price: 13000,
       features: translations.pricing.tiers.enterprise.features,
-      moreFeatures: {
-        features: translations.pricing.tiers.enterprise.moreFeatures || [],
-      },
       link: {
         href: "#",
         label: translations.pricing.tiers.enterprise.link.label,

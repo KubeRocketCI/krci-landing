@@ -6,18 +6,18 @@ import { breadcrumbSchema, JsonLd } from "@/components/JsonLd";
 import { getTranslationKey, getTranslations } from "@/lib/i18n";
 import { cn } from "@/lib/utils";
 import { getPricingList } from "../components/Pricing/data";
-import { FeaturesTable } from "../components/Pricing/FeaturesTable";
+import { ExpertiseTable } from "../components/Pricing/ExpertiseTable";
 import { Note } from "../components/Pricing/Note";
 import { PricingClient } from "./PricingClient";
 
 export const metadata: Metadata = {
-  title: "Professional Service Pricing - KubeRocketCI",
+  title: "Pricing - KubeRocketCI",
   description:
-    "Experience the flexibility of deploying KubeRocketCI on your on-premises infrastructure or in the Cloud. Your valuable data stays securely within your perimeter.",
+    "KubeRocketCI is the harness for your AI fabric — free and open source to start, with expert-guided tiers to get to production, govern many teams, and scale into an AI factory.",
   openGraph: {
-    title: "Professional Service Pricing - KubeRocketCI",
+    title: "Pricing - KubeRocketCI",
     description:
-      "Experience the flexibility of deploying KubeRocketCI on your on-premises infrastructure or in the Cloud. Your valuable data stays securely within your perimeter.",
+      "KubeRocketCI is the harness for your AI fabric — free and open source to start, with expert-guided tiers to get to production, govern many teams, and scale into an AI factory.",
     type: "website",
     url: "https://kuberocketci.io/pricing",
     siteName: "KubeRocketCI",
@@ -26,7 +26,7 @@ export const metadata: Metadata = {
         url: "https://kuberocketci.io/kuberocketci-social-card.png",
         width: 1020,
         height: 615,
-        alt: "KubeRocketCI Professional Service Pricing",
+        alt: "KubeRocketCI Pricing",
       },
     ],
   },
@@ -68,16 +68,8 @@ export default function PricingPage() {
               contactFormTranslations={translations.contactForm}
             />
 
-            {/* Professional Service Hours Note */}
-            <Note>{t("pricing.notes.professionalServiceHours")}</Note>
-
-            {/* Minimum Commitment Note */}
-            <Note asteriskAmount={2}>
-              {t("pricing.notes.minimumCommitment")}
-            </Note>
-
-            {/* Features Table */}
-            <FeaturesTable translations={translations} />
+            {/* Expertise Table */}
+            <ExpertiseTable translations={translations} />
 
             {/* Disclaimer Note */}
             <Note>{t("pricing.notes.disclaimer")}</Note>

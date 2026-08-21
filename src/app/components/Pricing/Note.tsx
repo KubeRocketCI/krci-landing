@@ -3,10 +3,9 @@ import { cn } from "@/lib/utils";
 
 interface NoteProps {
   children: React.ReactNode;
-  asteriskAmount?: number;
 }
 
-export const Note = ({ children, asteriskAmount = 1 }: NoteProps) => {
+export const Note = ({ children }: NoteProps) => {
   return (
     <div
       className={cn(
@@ -17,9 +16,7 @@ export const Note = ({ children, asteriskAmount = 1 }: NoteProps) => {
       )}
     >
       <div className="flex gap-1 pt-0.5">
-        {asteriskAmount >= 1 && <Asterisk className="w-3 h-3 text-[#a821ff]" />}
-        {asteriskAmount >= 2 && <Asterisk className="w-3 h-3 text-[#a821ff]" />}
-        {asteriskAmount >= 3 && <Asterisk className="w-3 h-3 text-[#a821ff]" />}
+        <Asterisk className="w-3 h-3 text-[#a821ff]" />
       </div>
       <div>{children}</div>
     </div>
