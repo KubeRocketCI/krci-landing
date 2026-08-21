@@ -270,13 +270,26 @@ export interface TranslationContactForm {
 
 export interface TranslationPricingTier {
   title: string;
+  tagline: string;
   description: string;
   features: string[];
-  moreFeatures?: string[];
   link: {
     label: string;
   };
   label?: string;
+}
+
+export interface TranslationExpertiseRow {
+  label: string;
+  openSource: string;
+  team: string;
+  scale: string;
+  enterprise: string;
+}
+
+export interface TranslationExpertiseGroup {
+  label: string;
+  rows: TranslationExpertiseRow[];
 }
 
 export interface TranslationPricing {
@@ -289,52 +302,18 @@ export interface TranslationPricing {
     enterprise: TranslationPricingTier;
   };
   notes: {
-    professionalServiceHours: string;
-    minimumCommitment: string;
     disclaimer: string;
   };
-  featuresTable: {
+  expertiseTable: {
     title: string;
     headers: {
-      category: string;
-      description: string;
-      hours: string;
+      capability: string;
+      openSource: string;
+      team: string;
+      scale: string;
+      enterprise: string;
     };
-    categories: {
-      deployment: {
-        title: string;
-        items: {
-          minimum: string;
-          full: string;
-          observability: string;
-          monitoring: string;
-          logging: string;
-          sonarqube: string;
-          security: string;
-        };
-      };
-      framework: {
-        title: string;
-        items: {
-          onboard: string;
-          template: string;
-        };
-      };
-      integration: {
-        title: string;
-        items: {
-          api: string;
-          kubernetes: string;
-          portal: string;
-        };
-      };
-      deployment_platform: {
-        title: string;
-        items: {
-          custom: string;
-        };
-      };
-    };
+    groups: TranslationExpertiseGroup[];
   };
 }
 

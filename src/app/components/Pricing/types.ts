@@ -1,16 +1,14 @@
 export interface PricingItem {
   id: string;
   title: string;
+  tagline: string;
+  isFree?: boolean;
   description: string;
-  price: number;
   features: string[];
   link: {
     href: string;
     label: string;
     action?: "contact" | "external";
-  };
-  moreFeatures?: {
-    features: string[];
   };
   color?: string;
   label?: {

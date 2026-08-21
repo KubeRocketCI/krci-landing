@@ -41,7 +41,7 @@
       },
       "aiAdoption": {
         "title": "Agent-ready platform",
-        "description": "Built-in AI helps manage the platform, and KubeRocketAI brings agents into feature development — inside the pipelines and quality gates your team trusts."
+        "description": "Built-in AI helps manage the platform, and KubeRocketCI agents join feature development — inside the pipelines and quality gates your team trusts."
       }
     }
   },
@@ -330,117 +330,183 @@
     }
   },
   "pricing": {
-    "title": "Professional Service Pricing",
-    "description": "Experience the flexibility of deploying KubeRocketCI on your on-premises infrastructure or in the Cloud. Your valuable data stays securely within your perimeter, ensuring uncompromising security at every step.",
+    "title": "The harness for your AI fabric, sized to your team.",
+    "description": "Every tier ships the same golden path — opinionated pipelines, quality gates, and guardrails. What changes is how much of it we build and run with you.",
     "tiers": {
       "openSource": {
         "title": "Open Source",
-        "description": "Enjoy essential features at no cost, perfect for getting started.",
+        "tagline": "Start free, self-serve.",
+        "description": "Run the full platform yourself. Community-supported, no strings attached.",
         "features": [
-          "Community Support",
-          "Run on any Kubernetes Cluster",
-          "Pipelines for Polyglot Microservice"
+          "Community support",
+          "Run on any Kubernetes cluster",
+          "Pipelines for polyglot microservices"
         ],
         "link": {
-          "label": "Start"
+          "label": "Get Started"
         }
       },
       "team": {
         "title": "Team",
-        "description": "Boost teamwork with a plan tailored for small to medium-sized teams.",
+        "tagline": "Get to production with expert guidance.",
+        "description": "We stand up your golden path and get your first services shipping through it.",
         "features": [
-          "Community Support",
-          "Run on any Kubernetes Cluster",
-          "Pipelines for Polyglot Microservice"
-        ],
-        "moreFeatures": [
-          "25 professional service hours*",
-          "6 months minimum**"
+          "Guided platform install & onboarding",
+          "Golden-path pipelines & quality gates",
+          "Direct access to our engineers"
         ],
         "link": {
-          "label": "Contact US"
+          "label": "Talk to Us"
         },
         "label": "Popular"
       },
       "scale": {
         "title": "Scale",
-        "description": "Access advanced features and scalability options to meet the evolving needs of your growing enterprise.",
+        "tagline": "Govern many teams.",
+        "description": "SSO, guardrails, and integrations that hold as you add teams and environments.",
         "features": [
-          "Community Support",
-          "Run on any Kubernetes Cluster",
-          "Pipelines for Polyglot Microservice"
-        ],
-        "moreFeatures": [
-          "60 professional service hours*",
-          "6 months minimum**"
+          "SSO & centralized access control",
+          "Policy guardrails across teams",
+          "Custom tool integrations",
+          "Ephemeral environments on demand"
         ],
         "link": {
-          "label": "Contact US"
+          "label": "Talk to Us"
         }
       },
       "enterprise": {
         "title": "Enterprise",
-        "description": "For mission-critical projects and extensive needs, it delivers top-tier features, priority support, and customizable solutions.",
+        "tagline": "Your AI factory, on your terms.",
+        "description": "Bring agent fleets into the golden path with the compliance and support mission-critical delivery needs.",
         "features": [
-          "Community Support",
-          "Run on any Kubernetes Cluster",
-          "Pipelines for Polyglot Microservice"
-        ],
-        "moreFeatures": [
-          "160 professional service hours*",
-          "3 months minimum**"
+          "KubeRocketCI agents enablement",
+          "Compliance & audit-ready guardrails",
+          "Dedicated solutions architect",
+          "Priority support & advisory"
         ],
         "link": {
-          "label": "Contact US"
+          "label": "Talk to Us"
         }
       }
     },
     "notes": {
-      "professionalServiceHours": "Professional service hours are versatile, blended hours bundled within your subscription plan. They encompass expertise from diverse specialists, including business analysts, architects, lead automation engineers, DevOps (System Engineers), and performance engineers. These multi-functional hours cater to KubeRocketCI installation, configuration, integration, customization, feature implementation, updates, and use case implementation. They empower you to leverage a range of expertise for various aspects of optimizing and enhancing your KubeRocketCI experience.",
-      "minimumCommitment": "Minimum commitment of time for use of a certain subscription package.",
-      "disclaimer": "The values presented in the table are provided for reference purposes only and are subject to change based on the final scope of the work. Please note that these figures serve as estimates and may be adjusted accordingly as the project details are finalized."
+      "disclaimer": "Every plan is scoped to your environment and goals. Talk to us for a proposal tailored to your team."
     },
-    "featuresTable": {
+    "expertiseTable": {
+      "title": "What's included, by tier",
       "headers": {
-        "category": "Service Category",
-        "description": "Description",
-        "hours": "Professional Service Hours*"
+        "capability": "Capability",
+        "openSource": "Open Source",
+        "team": "Team",
+        "scale": "Scale",
+        "enterprise": "Enterprise"
       },
-      "categories": {
-        "deployment": {
-          "title": "Deployment, Installation, Configuration",
-          "items": {
-            "minimum": "Deploy Platform with Minimum Components in the existing Kubernetes Cluster: CI/CD, integration with existing SonarQube, Repository Manager, Container Registry",
-            "full": "Deploy Platform in an empty AWS Account, including components: Infrastructure, CI/CD, SSO integration, SonarQube, DependencyTrack, Nexus Repository, DefectDojo, Logging, Monitoring, Docker registry, Observability",
-            "observability": "Traceability and Observability customization: Storage backend configuration, performance tunning",
-            "monitoring": "Monitoring stack customization: Custom Dashboards, Alerts, Notifications",
-            "logging": "Logging stack customization: Custom filters and processing for fluent-bit, logs rotation policy tunning",
-            "sonarqube": "SonarQube Quality Gate and Quality Profile configuration",
-            "security": "Security (SAST/SCA) report analysis per single codebase"
-          }
+      "groups": [
+        {
+          "label": "Delivery platform",
+          "rows": [
+            {
+              "label": "Deployment & installation",
+              "openSource": "self-serve",
+              "team": "guided setup",
+              "scale": "multi-team rollout",
+              "enterprise": "full-scale rollout"
+            },
+            {
+              "label": "Golden-path pipelines & quality gates",
+              "openSource": "community defaults",
+              "team": "included",
+              "scale": "included",
+              "enterprise": "included"
+            },
+            {
+              "label": "GitOps & environments (Argo CD, ephemeral)",
+              "openSource": "self-serve",
+              "team": "included",
+              "scale": "included",
+              "enterprise": "included"
+            },
+            {
+              "label": "Integrations (Git providers, registries, Jira)",
+              "openSource": "community defaults",
+              "team": "limited",
+              "scale": "included",
+              "enterprise": "included"
+            }
+          ]
         },
-        "framework": {
-          "title": "Framework/Language",
-          "items": {
-            "onboard": "Onboard new Framework or Build tool with CI Pipelines: Implement KubeRocketCI standard CI Pipeline steps (build, test, lint, push)",
-            "template": "Marketplace Template Development: Create new Template, Implement KubeRocketCI standard CI Pipeline steps (build, test, lint, push)"
-          }
+        {
+          "label": "Secure SDLC",
+          "rows": [
+            {
+              "label": "Code security — SAST & quality gates",
+              "openSource": "community defaults",
+              "team": "included",
+              "scale": "included",
+              "enterprise": "included"
+            },
+            {
+              "label": "Supply chain — SCA, SBOM, image scanning",
+              "openSource": "community defaults",
+              "team": "basic setup",
+              "scale": "included",
+              "enterprise": "included"
+            },
+            {
+              "label": "DAST & enterprise security tools",
+              "openSource": "",
+              "team": "",
+              "scale": "add-on",
+              "enterprise": "included"
+            },
+            {
+              "label": "Compliance — audit trails, CIS benchmarks, SSO",
+              "openSource": "",
+              "team": "basic setup",
+              "scale": "included",
+              "enterprise": "included"
+            }
+          ]
         },
-        "integration": {
-          "title": "Custom Tool Integration",
-          "items": {
-            "api": "Integrate custom tool with CI Pipeline over API",
-            "kubernetes": "Integrate custom tool with KubeRocketCI Portal UI over Kubernetes API",
-            "portal": "Integrate custom tool with KubeRocketCI Portal UI over API"
-          }
+        {
+          "label": "Run anywhere",
+          "rows": [
+            {
+              "label": "Cloud platforms (AWS, OpenShift, any Kubernetes)",
+              "openSource": "any Kubernetes",
+              "team": "one cloud, guided",
+              "scale": "multi-cloud",
+              "enterprise": "hybrid & on-prem"
+            },
+            {
+              "label": "Operations — upgrades, backup & DR",
+              "openSource": "self-serve",
+              "team": "guided",
+              "scale": "included",
+              "enterprise": "included"
+            }
+          ]
         },
-        "deployment_platform": {
-          "title": "Target Deployment Platform customization",
-          "items": {
-            "custom": "Add Custom Deployment Platform: Implement custom CD Pipeline"
-          }
+        {
+          "label": "AI Factory",
+          "rows": [
+            {
+              "label": "AI coding agents in the golden path (Claude Code, Cursor, Copilot)",
+              "openSource": "CLI-ready",
+              "team": "CLI-ready",
+              "scale": "add-on",
+              "enterprise": "included"
+            },
+            {
+              "label": "Support & advisory",
+              "openSource": "community",
+              "team": "email support",
+              "scale": "priority support",
+              "enterprise": "architect team"
+            }
+          ]
         }
-      }
+      ]
     }
   },
   "demoForm": {

@@ -1,17 +1,36 @@
+import { withUtm } from "@/lib/utm";
+
+const FOOTER_CAMPAIGN = "footer";
+
 export const FOOTER_LINKS = {
   readings: {
-    whatIs: "https://docs.kuberocketci.io/docs/about-platform",
-    blogs: "https://docs.kuberocketci.io/blog",
-    userGuide: "https://docs.kuberocketci.io/docs/user-guide",
-    developerGuide: "https://docs.kuberocketci.io/docs/developer-guide",
-    apiReference: "https://docs.kuberocketci.io/docs/api/overview",
+    whatIs: withUtm(
+      "https://docs.kuberocketci.io/docs/about-platform",
+      FOOTER_CAMPAIGN,
+    ),
+    blogs: withUtm("https://docs.kuberocketci.io/blog", FOOTER_CAMPAIGN),
+    userGuide: withUtm(
+      "https://docs.kuberocketci.io/docs/user-guide",
+      FOOTER_CAMPAIGN,
+    ),
+    developerGuide: withUtm(
+      "https://docs.kuberocketci.io/docs/developer-guide",
+      FOOTER_CAMPAIGN,
+    ),
+    apiReference: withUtm(
+      "https://docs.kuberocketci.io/docs/api/overview",
+      FOOTER_CAMPAIGN,
+    ),
   },
   learnMore: {
     github: "https://github.com/kuberocketci",
     artifactHub: "https://artifacthub.io/packages/search?repo=epmdedp",
     operatorHub: "https://operatorhub.io/?keyword=edp",
     dockerHub: "https://hub.docker.com/u/epamedp",
-    blogCategories: "https://docs.kuberocketci.io/blog/tags",
+    blogCategories: withUtm(
+      "https://docs.kuberocketci.io/blog/tags",
+      FOOTER_CAMPAIGN,
+    ),
     rssFeed: "https://docs.kuberocketci.io/blog/rss.xml",
     atomFeed: "https://docs.kuberocketci.io/blog/atom.xml",
   },

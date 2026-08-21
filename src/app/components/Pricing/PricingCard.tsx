@@ -9,10 +9,10 @@ interface PricingCardProps extends PricingItem {
 
 export const PricingCard = ({
   title,
-  price,
+  tagline,
+  isFree,
   description,
   features,
-  moreFeatures,
   color,
   label,
   link,
@@ -44,18 +44,15 @@ export const PricingCard = ({
           )}
         </div>
 
-        {/* Price */}
-        <div className="flex items-start gap-1 text-neutral-0">
-          {price ? (
-            <>
-              <span className="text-base mt-1">$</span>
-              <span className="text-[40px] font-semibold leading-none">
-                {price}
-              </span>
-              <span className="text-base mt-1">/month</span>
-            </>
-          ) : (
-            <span className="text-[40px] font-semibold leading-none">Free</span>
+        {/* Tagline */}
+        <div>
+          <p className="text-(length:--font-size-subtitle) font-medium text-neutral-0">
+            {tagline}
+          </p>
+          {isFree && (
+            <span className="inline-block text-(length:--font-size-caption) text-neutral-20">
+              Free forever
+            </span>
           )}
         </div>
 
@@ -75,28 +72,6 @@ export const PricingCard = ({
             </li>
           ))}
         </ul>
-
-        {/* More Features */}
-        {moreFeatures && (
-          <>
-            <div className="flex items-center gap-2 text-neutral-40 text-[10px]">
-              <div className="flex-1 border-b border-dotted border-neutral-60" />
-              <span>more</span>
-              <div className="flex-1 border-b border-dotted border-neutral-60" />
-            </div>
-
-            <ul className="space-y-2">
-              {moreFeatures.features.map((feature) => (
-                <li key={feature} className="flex items-start gap-2">
-                  <Check className="w-5 h-5 text-[#0094ff] flex-shrink-0 mt-0.5" />
-                  <span className="text-(length:--font-size-caption) text-neutral-0">
-                    {feature}
-                  </span>
-                </li>
-              ))}
-            </ul>
-          </>
-        )}
       </div>
 
       {/* Footer Button */}
