@@ -17,6 +17,7 @@ export function PricingClient({
   contactFormTranslations,
 }: PricingClientProps) {
   const [contactModalOpen, setContactModalOpen] = useState(false);
+  const [selectedPlan, setSelectedPlan] = useState<string | undefined>();
 
   return (
     <>
@@ -30,6 +31,7 @@ export function PricingClient({
                   location: "pricing",
                   plan: item.id,
                 });
+                setSelectedPlan(item.id);
                 setContactModalOpen(true);
               }}
             />
@@ -42,6 +44,7 @@ export function PricingClient({
         onOpenChange={setContactModalOpen}
         translations={contactFormTranslations}
         location="pricing"
+        plan={selectedPlan}
       />
     </>
   );
