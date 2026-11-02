@@ -1,28 +1,132 @@
 "use client";
 
 import * as Dialog from "@radix-ui/react-dialog";
-import { addDays } from "date-fns";
-import { toZonedTime } from "date-fns-tz";
-import { Clock, Info, X } from "lucide-react";
-import { useActionState, useEffect, useMemo, useState } from "react";
+import { addDays, addMonths, startOfDay } from "date-fns";
+import { Clock, Info } from "lucide-react";
+import { createContext, use, useState } from "react";
 import { DayPicker } from "react-day-picker";
-import { useFormStatus } from "react-dom";
-import { toast } from "sonner";
+import {
+  controlClass,
+  Field,
+  FieldError,
+  FormAlert,
+  FormBody,
+  FormDialog,
+  FormFooter,
+  SecondaryButton,
+  SubmitButton,
+  SuccessPanel,
+} from "@/components/FormDialog";
 import { PrivacyConsent } from "@/components/PrivacyConsent";
 import { sendDemoRequest } from "@/lib/actions/demo";
 import { trackEvent } from "@/lib/analytics";
+import type { FieldErrors } from "@/lib/form-errors";
+import { useFormAction } from "@/lib/use-form-action";
 import { cn } from "@/lib/utils";
+import { DOCS_ABOUT_URL, withUtm } from "@/lib/utm";
+import { demoFormSchema, isBusinessTime } from "@/lib/validations/demo";
 import type { TranslationDemoForm } from "@/types/translations";
-import "react-day-picker/dist/style.css";
 
-const BUSINESS_TIMEZONE = "Europe/Kyiv"; // Eastern European Time (EET/EEST, UTC+2/+3)
-const BUSINESS_HOURS = { start: 10, end: 18 };
+const FIRST_DAY_SEARCH_LIMIT = 31;
+const DOCS_URL = withUtm(DOCS_ABOUT_URL, "demo_form");
+const FIELDS = {
+  email: "#demo-email",
+  date: '#demo-date [role="gridcell"] button[tabindex="0"]',
+  time: "#demo-time",
+};
+
+interface Slot {
+  value: string;
+  label: string;
+}
+
+function toLocalDateTime(date: Date, hour: number) {
+  return new Date(date.getFullYear(), date.getMonth(), date.getDate(), hour);
+}
+
+function isBusinessSlot(local: Date, now: Date) {
+  return local.getTime() > now.getTime() && isBusinessTime(local);
+}
+
+function getSlotsForDate(date: Date, now: Date): Slot[] {
+  const slots: Slot[] = [];
+  for (let hour = 0; hour < 24; hour++) {
+    if (isBusinessSlot(toLocalDateTime(date, hour), now)) {
+      slots.push({
+        value: String(hour),
+        label: `${String(hour).padStart(2, "0")}:00`,
+      });
+    }
+  }
+  return slots;
+}
+
+// Cache is valid for one local clock hour; slots start on local whole hours.
+const availability = { hour: -1, days: new Map<number, boolean>() };
+
+function hasSlots(date: Date, now: Date) {
+  const hour = new Date(
+    now.getFullYear(),
+    now.getMonth(),
+    now.getDate(),
+    now.getHours(),
+  ).getTime();
+  if (availability.hour !== hour) {
+    availability.hour = hour;
+    availability.days.clear();
+  }
+  const key = startOfDay(date).getTime();
+  let available = availability.days.get(key);
+  if (available === undefined) {
+    available = false;
+    for (let slot = 0; slot < 24 && !available; slot++) {
+      available = isBusinessSlot(toLocalDateTime(date, slot), now);
+    }
+    availability.days.set(key, available);
+  }
+  return available;
+}
+
+function firstAvailableDay(now: Date) {
+  const today = startOfDay(now);
+  for (let offset = 0; offset < FIRST_DAY_SEARCH_LIMIT; offset++) {
+    const day = addDays(today, offset);
+    if (hasSlots(day, now)) return day;
+  }
+  return today;
+}
+
+const DateErrorContext = createContext<string | undefined>(undefined);
+
+function DateGrid(props: React.ComponentProps<"table">) {
+  return <table {...props} aria-describedby={use(DateErrorContext)} />;
+}
+
+const DAY_PICKER_COMPONENTS = { MonthGrid: DateGrid };
+
+function mapServerErrors({ datetime, ...rest }: FieldErrors): FieldErrors {
+  return datetime ? { ...rest, time: datetime } : rest;
+}
+
+function formatLocalPreview(date: Date, hour: number) {
+  return toLocalDateTime(date, hour).toLocaleString(undefined, {
+    weekday: "long",
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+    hour: "2-digit",
+    minute: "2-digit",
+    timeZoneName: "short",
+  });
+}
 
 interface RequestDemoModalProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
   translations: TranslationDemoForm;
   location: string;
+  opener?: HTMLElement | null;
+  returnFocusRef?: React.RefObject<HTMLElement | null>;
 }
 
 export function RequestDemoModal({
@@ -30,284 +134,257 @@ export function RequestDemoModal({
   onOpenChange,
   translations,
   location,
+  opener,
+  returnFocusRef,
 }: RequestDemoModalProps) {
-  const [state, dispatch] = useActionState(sendDemoRequest, undefined);
-  const [selectedDate, setSelectedDate] = useState<Date | undefined>();
-  const [selectedTime, setSelectedTime] = useState<string>("");
-  const [userTimezone] = useState(
-    () => Intl.DateTimeFormat().resolvedOptions().timeZone,
-  );
-
-  useEffect(() => {
-    if (!state) return;
-
-    if ("data" in state) {
-      trackEvent("generate_lead", { form: "demo", location });
-      toast.success(state.data);
-      onOpenChange(false);
-      // Reset form
-      setSelectedDate(undefined);
-      setSelectedTime("");
-    } else if ("error" in state) {
-      toast.error(state.error);
-    }
-  }, [state, onOpenChange, location]);
-
-  // Generate time slots in user's timezone that align with business hours (10:00-17:00)
-  const availableTimeSlots = useMemo(() => {
-    if (!selectedDate) return [];
-
-    const slots: Array<{ value: string; label: string; businessHour: number }> =
-      [];
-
-    // Generate all possible hours in a day (0-23) in user's timezone
-    for (let userHour = 0; userHour < 24; userHour++) {
-      // Create a datetime in user's timezone
-      const userDateTime = new Date(
-        selectedDate.getFullYear(),
-        selectedDate.getMonth(),
-        selectedDate.getDate(),
-        userHour,
-        0,
-        0,
-      );
-
-      // Convert to business timezone (EET) to check if it falls within business hours
-      const businessDateTime = toZonedTime(userDateTime, BUSINESS_TIMEZONE);
-      const businessHour = businessDateTime.getHours();
-      const businessDay = businessDateTime.getDay();
-
-      // Check if this time falls within business hours (10:00-17:00) and weekday
-      if (
-        businessHour >= BUSINESS_HOURS.start &&
-        businessHour < BUSINESS_HOURS.end &&
-        businessDay >= 1 &&
-        businessDay <= 5
-      ) {
-        slots.push({
-          value: userHour.toString(),
-          label: `${userHour.toString().padStart(2, "0")}:00`,
-          businessHour,
-        });
-      }
-    }
-
-    return slots;
-  }, [selectedDate]);
-
-  // Disable past dates only (we'll handle weekends through time slot availability)
-  const disabledDays = [{ before: new Date() }];
-
-  const handleSubmit = (formData: FormData) => {
-    if (!selectedDate || !selectedTime) {
-      toast.error(translations.messages.selectDateTime);
-      return;
-    }
-
-    // Create date in user's local timezone
-    const userDateTime = new Date(
-      selectedDate.getFullYear(),
-      selectedDate.getMonth(),
-      selectedDate.getDate(),
-      Number.parseInt(selectedTime, 10),
-      0,
-      0,
-    );
-
-    // Convert to UTC for storage
-    const utcDateTime = new Date(userDateTime.toISOString());
-
-    formData.set("datetime", utcDateTime.toISOString());
-    dispatch(formData);
-  };
-
-  // Format selected time for display in user's timezone
-  const getLocalTimePreview = () => {
-    if (!selectedDate || !selectedTime) return null;
-
-    // Create datetime in user's local timezone
-    const userDateTime = new Date(
-      selectedDate.getFullYear(),
-      selectedDate.getMonth(),
-      selectedDate.getDate(),
-      Number.parseInt(selectedTime, 10),
-      0,
-      0,
-    );
-
-    // Format in user's timezone
-    return userDateTime.toLocaleString(undefined, {
-      weekday: "long",
-      year: "numeric",
-      month: "long",
-      day: "numeric",
-      hour: "2-digit",
-      minute: "2-digit",
-      timeZoneName: "short",
-    });
-  };
-
   return (
-    <Dialog.Root open={open} onOpenChange={onOpenChange}>
-      <Dialog.Portal>
-        <Dialog.Overlay className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 animate-in fade-in" />
-        <Dialog.Content className="fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-white rounded-lg shadow-xl p-6 w-full max-w-2xl max-h-[90vh] overflow-y-auto z-50 animate-in fade-in zoom-in">
-          <div className="flex items-center justify-between mb-4">
-            <Dialog.Title className="text-2xl font-bold text-gray-900">
-              {translations.title}
-            </Dialog.Title>
-            <Dialog.Close asChild>
-              <button
-                type="button"
-                className="text-gray-500 hover:text-gray-700 transition-colors"
-                aria-label="Close"
-              >
-                <X className="w-5 h-5" />
-              </button>
-            </Dialog.Close>
-          </div>
-
-          <Dialog.Description className="text-gray-600 mb-6">
-            {translations.description}
-          </Dialog.Description>
-
-          {/* Business Hours Info */}
-          <div className="mb-6 p-3 bg-blue-50 rounded-md flex items-start gap-2">
-            <Info className="w-4 h-4 text-blue-600 mt-0.5 flex-shrink-0" />
-            <div className="text-sm text-blue-900">
-              <p className="font-medium">{translations.helper.businessHours}</p>
-            </div>
-          </div>
-
-          <form action={handleSubmit} className="space-y-6">
-            {/* Email Field */}
-            <div>
-              <label
-                htmlFor="email"
-                className="block text-sm font-medium text-gray-700 mb-1"
-              >
-                {translations.fields.email.label}{" "}
-                <span className="text-red-500">*</span>
-              </label>
-              <input
-                id="email"
-                name="email"
-                type="email"
-                required
-                placeholder={translations.fields.email.placeholder}
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-              />
-            </div>
-
-            {/* Date & Time Selection */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {/* Date Picker */}
-              <div>
-                <div className="block text-sm font-medium text-gray-700 mb-2">
-                  {translations.fields.date.label}{" "}
-                  <span className="text-red-500">*</span>
-                </div>
-                <div className="border border-gray-300 rounded-md p-3">
-                  <DayPicker
-                    mode="single"
-                    selected={selectedDate}
-                    onSelect={setSelectedDate}
-                    disabled={disabledDays}
-                    startMonth={addDays(new Date(), 1)}
-                    className="rdp-custom"
-                  />
-                </div>
-              </div>
-
-              {/* Time Picker */}
-              <div>
-                <label
-                  htmlFor="time-select"
-                  className="block text-sm font-medium text-gray-700 mb-2"
-                >
-                  {translations.fields.time.label}{" "}
-                  <span className="text-red-500">*</span>
-                </label>
-                <div className="border border-gray-300 rounded-md p-3">
-                  <div className="flex items-center gap-2 mb-3 text-sm text-gray-600">
-                    <Clock className="w-4 h-4" />
-                    <span>
-                      {selectedDate
-                        ? `Available slots (${userTimezone})`
-                        : "Select a date first"}
-                    </span>
-                  </div>
-                  <select
-                    id="time-select"
-                    value={selectedTime}
-                    onChange={(e) => setSelectedTime(e.target.value)}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                    required
-                    disabled={!selectedDate || availableTimeSlots.length === 0}
-                  >
-                    <option value="">
-                      {availableTimeSlots.length === 0
-                        ? "No available slots for this date"
-                        : translations.fields.time.placeholder}
-                    </option>
-                    {availableTimeSlots.map((slot) => (
-                      <option key={slot.value} value={slot.value}>
-                        {slot.label}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-              </div>
-            </div>
-
-            {/* Selected DateTime Preview */}
-            {selectedDate && selectedTime && (
-              <div className="p-4 bg-green-50 border border-green-200 rounded-md">
-                <p className="text-sm font-medium text-green-900 mb-1">
-                  {translations.helper.selectedTime}
-                </p>
-                <p className="text-base text-green-800 font-semibold">
-                  {getLocalTimePreview()}
-                </p>
-              </div>
-            )}
-
-            <PrivacyConsent
-              translations={translations.privacyConsent}
-              className="mt-4"
-            />
-
-            <div className="flex gap-3 justify-end pt-2">
-              <Dialog.Close asChild>
-                <button
-                  type="button"
-                  className="px-4 py-2 border border-gray-300 rounded-md hover:bg-gray-50 transition-colors"
-                >
-                  {translations.buttons.cancel}
-                </button>
-              </Dialog.Close>
-              <SubmitButton translations={translations} />
-            </div>
-          </form>
-        </Dialog.Content>
-      </Dialog.Portal>
-    </Dialog.Root>
+    <FormDialog
+      open={open}
+      onOpenChange={onOpenChange}
+      title={translations.title}
+      description={translations.description}
+      closeLabel={translations.buttons.close}
+      wide
+      opener={opener}
+      returnFocusRef={returnFocusRef}
+    >
+      <DemoForm
+        translations={translations}
+        location={location}
+        onClose={() => onOpenChange(false)}
+      />
+    </FormDialog>
   );
 }
 
-function SubmitButton({ translations }: { translations: TranslationDemoForm }) {
-  const { pending } = useFormStatus();
+interface DemoFormProps {
+  translations: TranslationDemoForm;
+  location: string;
+  onClose: () => void;
+}
+
+function DemoForm({ translations, location, onClose }: DemoFormProps) {
+  const [selectedDate, setSelectedDate] = useState<Date | undefined>();
+  const [selectedTime, setSelectedTime] = useState("");
+  const [userTimezone] = useState(
+    () => Intl.DateTimeFormat().resolvedOptions().timeZone,
+  );
+  const [defaultMonth] = useState(() => firstAvailableDay(new Date()));
+  const {
+    formRef,
+    succeeded,
+    pending,
+    fieldErrors,
+    formError,
+    clearError,
+    submit,
+  } = useFormAction({
+    action: sendDemoRequest,
+    messages: translations.messages,
+    fields: FIELDS,
+    mapServerErrors,
+    onSuccess: () => trackEvent("generate_lead", { form: "demo", location }),
+  });
+
+  const now = new Date();
+  const today = startOfDay(now);
+  const slots = selectedDate ? getSlotsForDate(selectedDate, now) : [];
+  const time = slots.some((slot) => slot.value === selectedTime)
+    ? selectedTime
+    : "";
+  const isDayUnavailable = (day: Date) => day < today || !hasSlots(day, now);
+
+  const datetimeISO =
+    selectedDate && time
+      ? toLocalDateTime(selectedDate, Number.parseInt(time, 10)).toISOString()
+      : "";
+  const preview =
+    selectedDate && time
+      ? formatLocalPreview(selectedDate, Number.parseInt(time, 10))
+      : null;
+
+  if (succeeded) {
+    return (
+      <SuccessPanel
+        title={translations.success.title}
+        message={translations.messages.success}
+        detailLabel={translations.success.bookedFor}
+        detail={preview ?? undefined}
+        docsHref={DOCS_URL}
+        docsLabel={translations.success.docsLabel}
+        closeLabel={translations.buttons.close}
+        onClose={onClose}
+      />
+    );
+  }
+
+  const validate = (formData: FormData): FieldErrors => {
+    const errors: FieldErrors = {};
+    const email = String(formData.get("email") ?? "");
+    const emailResult = demoFormSchema.shape.email.safeParse(email);
+    if (!emailResult.success) {
+      errors.email = email.trim()
+        ? (emailResult.error.issues[0]?.message ?? "")
+        : translations.messages.emailRequired;
+    }
+    if (!selectedDate) {
+      errors.date = translations.messages.selectDate;
+    } else if (slots.length === 0) {
+      errors.date = translations.helper.noSlots;
+    } else if (!time) {
+      errors.time = translations.messages.selectTime;
+    } else {
+      const result = demoFormSchema.shape.datetime.safeParse(datetimeISO);
+      if (!result.success) {
+        errors.time =
+          result.error.issues[0]?.message ??
+          translations.messages.invalidBusinessHours;
+      }
+    }
+    return errors;
+  };
 
   return (
-    <button
-      type="submit"
-      disabled={pending}
-      className={cn(
-        "px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors",
-        pending && "opacity-50 cursor-not-allowed",
-      )}
+    <form
+      ref={formRef}
+      onSubmit={(event) => submit(event, validate)}
+      noValidate
+      className="flex min-h-0 flex-1 flex-col"
     >
-      {pending ? translations.buttons.submitting : translations.buttons.submit}
-    </button>
+      <input type="hidden" name="datetime" value={datetimeISO} />
+
+      <FormBody>
+        <p className="flex items-start gap-2 text-(length:--font-size-body-2) text-neutral-10">
+          <Info className="mt-0.5 size-4 shrink-0" aria-hidden />
+          <span>{translations.helper.businessHours}</span>
+        </p>
+
+        <FormAlert message={formError} />
+
+        <Field
+          id="demo-email"
+          label={translations.fields.email.label}
+          error={fieldErrors.email}
+        >
+          {(aria) => (
+            <input
+              {...aria}
+              name="email"
+              type="email"
+              autoComplete="email"
+              required
+              placeholder={translations.fields.email.placeholder}
+              className={controlClass}
+              onChange={() => clearError("email")}
+            />
+          )}
+        </Field>
+
+        <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
+          <div>
+            <p
+              id="demo-date-label"
+              className="mb-2 text-(length:--font-size-body-2) font-medium"
+            >
+              {translations.fields.date.label}
+            </p>
+            <div
+              className={cn(
+                "flex justify-center rounded-[3px] border bg-neutral-90 py-2 sm:px-2",
+                fieldErrors.date ? "border-error" : "border-neutral-70",
+              )}
+            >
+              <DateErrorContext
+                value={fieldErrors.date ? "demo-date-error" : undefined}
+              >
+                <DayPicker
+                  id="demo-date"
+                  mode="single"
+                  selected={selectedDate}
+                  onSelect={(date) => {
+                    setSelectedDate(date);
+                    setSelectedTime("");
+                    clearError("date", "time");
+                  }}
+                  disabled={isDayUnavailable}
+                  defaultMonth={defaultMonth}
+                  startMonth={now}
+                  endMonth={addMonths(now, 6)}
+                  aria-labelledby="demo-date-label"
+                  components={DAY_PICKER_COMPONENTS}
+                  className="rdp-custom"
+                />
+              </DateErrorContext>
+            </div>
+            <FieldError id="demo-date-error" message={fieldErrors.date} />
+          </div>
+
+          <Field
+            id="demo-time"
+            label={translations.fields.time.label}
+            error={fieldErrors.time}
+            hint={
+              selectedDate
+                ? `${translations.helper.slotsLabel} (${userTimezone})`
+                : translations.helper.selectDateFirst
+            }
+          >
+            {(aria) => (
+              <select
+                {...aria}
+                value={time}
+                onChange={(event) => {
+                  setSelectedTime(event.target.value);
+                  clearError("time");
+                }}
+                required
+                disabled={!selectedDate || slots.length === 0}
+                className={controlClass}
+              >
+                <option value="">
+                  {selectedDate && slots.length === 0
+                    ? translations.helper.noSlots
+                    : translations.fields.time.placeholder}
+                </option>
+                {slots.map((slot) => (
+                  <option key={slot.value} value={slot.value}>
+                    {slot.label}
+                  </option>
+                ))}
+              </select>
+            )}
+          </Field>
+        </div>
+
+        <div aria-live="polite">
+          {preview ? (
+            <div className="flex items-start gap-3 rounded-sm border border-neutral-70 bg-neutral-90 px-4 py-3">
+              <Clock className="mt-0.5 size-4 shrink-0" aria-hidden />
+              <div>
+                <p className="text-(length:--font-size-caption) text-neutral-20">
+                  {translations.helper.selectedTime}
+                </p>
+                <p className="text-(length:--font-size-body) font-medium">
+                  {preview}
+                </p>
+              </div>
+            </div>
+          ) : null}
+        </div>
+
+        <PrivacyConsent translations={translations.privacyConsent} />
+      </FormBody>
+
+      <FormFooter>
+        <Dialog.Close asChild>
+          <SecondaryButton>{translations.buttons.cancel}</SecondaryButton>
+        </Dialog.Close>
+        <SubmitButton
+          label={translations.buttons.submit}
+          pendingLabel={translations.buttons.submitting}
+          pending={pending}
+        />
+      </FormFooter>
+    </form>
   );
 }

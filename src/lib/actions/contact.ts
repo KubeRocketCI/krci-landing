@@ -3,17 +3,16 @@
 import { checkBotId } from "botid/server";
 import { Resend } from "resend";
 import ContactNotificationEmail from "@/../emails/contact-notification";
+import { type FormState, toFieldErrors } from "@/lib/form-errors";
 import { contactFormSchema } from "@/lib/validations/contact";
 
 const resend =
   process.env.RESEND_API_KEY && new Resend(process.env.RESEND_API_KEY);
 
-type State = { error: string } | { data: string } | undefined;
-
 export async function sendContactEmail(
-  _prevState: State,
+  _prevState: FormState,
   formData: FormData,
-): Promise<State> {
+): Promise<FormState> {
   try {
     // 1. Validate environment variables
     if (!process.env.CONTACT_EMAIL) {
@@ -37,8 +36,6 @@ export async function sendContactEmail(
       question: formData.get("question") as string,
     };
 
-    console.log("Form data received:", rawData);
-
     // 4. Validate with Zod
     const validation = contactFormSchema.safeParse(rawData);
     if (!validation.success) {
@@ -48,6 +45,7 @@ export async function sendContactEmail(
         error: firstError
           ? firstError.message
           : "Please check your form fields and try again.",
+        fieldErrors: toFieldErrors(validation.error.issues),
       };
     }
 
@@ -75,7 +73,7 @@ export async function sendContactEmail(
     }
 
     console.log("Email sent successfully:", data);
-    return { data: "Thank you! We'll get back to you soon." };
+    return { success: true };
   } catch (error) {
     console.error("Contact form error:", error);
     return { error: "An unexpected error occurred. Please try again." };

@@ -10,9 +10,7 @@ export interface PricingItem {
     label: string;
     action?: "contact" | "external";
   };
-  color?: string;
   label?: {
     text: string;
-    color: string;
   };
 }

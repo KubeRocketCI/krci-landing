@@ -11,8 +11,9 @@ const Footer = ({ translations }: { translations: Translations }) => {
 
   return (
     <footer
-      className={cn("relative bg-background border-t pt-22 pb-5")}
-      style={{ borderTopColor: "rgba(198, 19, 247, 0.25)" }}
+      className={cn(
+        "relative bg-background border-t border-action-purple/25 pt-22 pb-5",
+      )}
     >
       <Container>
         <div className={cn("relative z-10 ")}>
@@ -29,13 +30,13 @@ const Footer = ({ translations }: { translations: Translations }) => {
               >
                 {t("footer.sections.readings.title")}
               </h3>
-              <div className={cn("space-y-3 max-w-95")}>
+              <div className={cn("max-w-95")}>
                 <a
                   href={FOOTER_LINKS.readings.whatIs}
                   target="_blank"
                   rel="noopener noreferrer"
                   className={cn(
-                    "block text-body text-neutral-0 hover:text-neutral-20 transition-colors",
+                    "flex min-h-8 items-center pointer-coarse:min-h-11 text-body text-neutral-0 hover:text-neutral-20 transition-colors",
                   )}
                 >
                   {t("footer.sections.readings.links.whatIs")}
@@ -45,7 +46,7 @@ const Footer = ({ translations }: { translations: Translations }) => {
                   target="_blank"
                   rel="noopener noreferrer"
                   className={cn(
-                    "block text-body text-neutral-0 hover:text-neutral-20 transition-colors",
+                    "flex min-h-8 items-center pointer-coarse:min-h-11 text-body text-neutral-0 hover:text-neutral-20 transition-colors",
                   )}
                 >
                   {t("footer.sections.readings.links.blogs")}
@@ -55,7 +56,7 @@ const Footer = ({ translations }: { translations: Translations }) => {
                   target="_blank"
                   rel="noopener noreferrer"
                   className={cn(
-                    "block text-body text-neutral-0 hover:text-neutral-20 transition-colors",
+                    "flex min-h-8 items-center pointer-coarse:min-h-11 text-body text-neutral-0 hover:text-neutral-20 transition-colors",
                   )}
                 >
                   {t("footer.sections.readings.links.userGuide")}
@@ -65,7 +66,7 @@ const Footer = ({ translations }: { translations: Translations }) => {
                   target="_blank"
                   rel="noopener noreferrer"
                   className={cn(
-                    "block text-body text-neutral-0 hover:text-neutral-20 transition-colors",
+                    "flex min-h-8 items-center pointer-coarse:min-h-11 text-body text-neutral-0 hover:text-neutral-20 transition-colors",
                   )}
                 >
                   {t("footer.sections.readings.links.developerGuide")}
@@ -75,7 +76,7 @@ const Footer = ({ translations }: { translations: Translations }) => {
                   target="_blank"
                   rel="noopener noreferrer"
                   className={cn(
-                    "block text-body text-neutral-0 hover:text-neutral-20 transition-colors",
+                    "flex min-h-8 items-center pointer-coarse:min-h-11 text-body text-neutral-0 hover:text-neutral-20 transition-colors",
                   )}
                 >
                   {t("footer.sections.readings.links.apiReference")}
@@ -91,13 +92,13 @@ const Footer = ({ translations }: { translations: Translations }) => {
               >
                 {t("footer.sections.learnMore.title")}
               </h3>
-              <div className={cn("space-y-2.5")}>
+              <div>
                 <a
                   href={FOOTER_LINKS.learnMore.github}
                   target="_blank"
                   rel="noopener noreferrer"
                   className={cn(
-                    "block text-[length:var(--font-size-body-2)] text-neutral-0 hover:text-neutral-20 transition-colors",
+                    "flex min-h-8 items-center pointer-coarse:min-h-11 text-[length:var(--font-size-body-2)] text-neutral-0 hover:text-neutral-20 transition-colors",
                   )}
                 >
                   {t("footer.sections.learnMore.links.github")}
@@ -107,7 +108,7 @@ const Footer = ({ translations }: { translations: Translations }) => {
                   target="_blank"
                   rel="noopener noreferrer"
                   className={cn(
-                    "block text-[length:var(--font-size-body-2)] text-neutral-0 hover:text-neutral-20 transition-colors",
+                    "flex min-h-8 items-center pointer-coarse:min-h-11 text-[length:var(--font-size-body-2)] text-neutral-0 hover:text-neutral-20 transition-colors",
                   )}
                 >
                   {t("footer.sections.learnMore.links.artifactHub")}
@@ -117,7 +118,7 @@ const Footer = ({ translations }: { translations: Translations }) => {
                   target="_blank"
                   rel="noopener noreferrer"
                   className={cn(
-                    "block text-[length:var(--font-size-body-2)] text-neutral-0 hover:text-neutral-20 transition-colors",
+                    "flex min-h-8 items-center pointer-coarse:min-h-11 text-[length:var(--font-size-body-2)] text-neutral-0 hover:text-neutral-20 transition-colors",
                   )}
                 >
                   {t("footer.sections.learnMore.links.operatorHub")}
@@ -127,7 +128,7 @@ const Footer = ({ translations }: { translations: Translations }) => {
                   target="_blank"
                   rel="noopener noreferrer"
                   className={cn(
-                    "block text-[length:var(--font-size-body-2)] text-neutral-0 hover:text-neutral-20 transition-colors",
+                    "flex min-h-8 items-center pointer-coarse:min-h-11 text-[length:var(--font-size-body-2)] text-neutral-0 hover:text-neutral-20 transition-colors",
                   )}
                 >
                   {t("footer.sections.learnMore.links.dockerHub")}
@@ -137,7 +138,7 @@ const Footer = ({ translations }: { translations: Translations }) => {
                   target="_blank"
                   rel="noopener noreferrer"
                   className={cn(
-                    "block text-[length:var(--font-size-body-2)] text-neutral-0 hover:text-neutral-20 transition-colors",
+                    "flex min-h-8 items-center pointer-coarse:min-h-11 text-[length:var(--font-size-body-2)] text-neutral-0 hover:text-neutral-20 transition-colors",
                   )}
                 >
                   {t("footer.sections.learnMore.links.blogCategories")}
@@ -147,7 +148,7 @@ const Footer = ({ translations }: { translations: Translations }) => {
                   target="_blank"
                   rel="noopener noreferrer"
                   className={cn(
-                    "block text-[length:var(--font-size-body-2)] text-neutral-0 hover:text-neutral-20 transition-colors",
+                    "flex min-h-8 items-center pointer-coarse:min-h-11 text-[length:var(--font-size-body-2)] text-neutral-0 hover:text-neutral-20 transition-colors",
                   )}
                 >
                   {t("footer.sections.learnMore.links.rssFeed")}
@@ -157,7 +158,7 @@ const Footer = ({ translations }: { translations: Translations }) => {
                   target="_blank"
                   rel="noopener noreferrer"
                   className={cn(
-                    "block text-[length:var(--font-size-body-2)] text-neutral-0 hover:text-neutral-20 transition-colors",
+                    "flex min-h-8 items-center pointer-coarse:min-h-11 text-[length:var(--font-size-body-2)] text-neutral-0 hover:text-neutral-20 transition-colors",
                   )}
                 >
                   {t("footer.sections.learnMore.links.atomFeed")}
@@ -174,13 +175,13 @@ const Footer = ({ translations }: { translations: Translations }) => {
                 >
                   {t("footer.sections.community.title")}
                 </h3>
-                <div className={cn("flex gap-4")}>
+                <div className={cn("-ml-2.5 flex gap-1")}>
                   <a
                     href={FOOTER_LINKS.community.youtube}
                     target="_blank"
                     rel="noopener noreferrer"
                     className={cn(
-                      "w-6 h-6 text-neutral-0 hover:text-neutral-20 transition-colors",
+                      "inline-flex size-11 items-center justify-center text-neutral-0 hover:text-neutral-20 transition-colors",
                     )}
                     aria-label="YouTube"
                   >
@@ -197,7 +198,7 @@ const Footer = ({ translations }: { translations: Translations }) => {
                     target="_blank"
                     rel="noopener noreferrer"
                     className={cn(
-                      "w-6 h-6 text-neutral-0 hover:text-neutral-20 transition-colors",
+                      "inline-flex size-11 items-center justify-center text-neutral-0 hover:text-neutral-20 transition-colors",
                     )}
                     aria-label="GitHub"
                   >
@@ -214,7 +215,7 @@ const Footer = ({ translations }: { translations: Translations }) => {
                     target="_blank"
                     rel="noopener noreferrer"
                     className={cn(
-                      "w-6 h-6 text-neutral-0 hover:text-neutral-20 transition-colors",
+                      "inline-flex size-11 items-center justify-center text-neutral-0 hover:text-neutral-20 transition-colors",
                     )}
                     aria-label="Medium"
                   >
@@ -239,7 +240,7 @@ const Footer = ({ translations }: { translations: Translations }) => {
                 </h3>
                 <label
                   className={cn(
-                    "block text-[length:var(--font-size-body-2)] text-neutral-0"
+                    "flex min-h-8 items-center pointer-coarse:min-h-11 text-[length:var(--font-size-body-2)] text-neutral-0"
                   )}
                 >
                   Join our newsletter
@@ -275,7 +276,7 @@ const Footer = ({ translations }: { translations: Translations }) => {
               <a
                 href="/privacy"
                 className={cn(
-                  "text-neutral-40 hover:text-neutral-20 transition-colors",
+                  "inline-flex min-h-8 items-center pointer-coarse:min-h-11 text-neutral-40 hover:text-neutral-20 transition-colors",
                 )}
               >
                 {t("footer.legal.privacyPolicy")}
@@ -284,7 +285,7 @@ const Footer = ({ translations }: { translations: Translations }) => {
               <a
                 href="/terms"
                 className={cn(
-                  "text-neutral-40 hover:text-neutral-20 transition-colors",
+                  "inline-flex min-h-8 items-center pointer-coarse:min-h-11 text-neutral-40 hover:text-neutral-20 transition-colors",
                 )}
               >
                 {t("footer.legal.terms")}

@@ -1,14 +1,20 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Alexandria } from "next/font/google";
 import "./globals.css";
-import { Toaster } from "sonner";
 import { Analytics, GAScript } from "@/components/Analytics";
 import { CookieConsent } from "@/components/CookieConsent";
+import { DialogHost } from "@/components/DialogHost";
 import { JsonLd, organizationSchema, websiteSchema } from "@/components/JsonLd";
 import { ConsentProvider } from "@/lib/consent-context";
 import { getTranslations } from "@/lib/i18n";
 
 const font = Alexandria({ subsets: ["latin"] });
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  viewportFit: "cover",
+};
 
 export const metadata: Metadata = {
   title: "KubeRocketCI - The harness for your AI fabric",
@@ -70,11 +76,11 @@ export const metadata: Metadata = {
       "One golden path for developers and AI agent fleets: opinionated pipelines, quality gates, and ephemeral environments to validate hypotheses at machine speed.",
     images: [
       {
-        url: "/kuberocketci-social-card.png",
+        url: "/kuberocketci-social-card.jpg",
         width: 1020,
         height: 615,
         alt: "KubeRocketCI - The harness for your AI fabric",
-        type: "image/png",
+        type: "image/jpeg",
       },
     ],
   },
@@ -83,7 +89,7 @@ export const metadata: Metadata = {
     title: "KubeRocketCI - The harness for your AI fabric",
     description:
       "One golden path for developers and AI agent fleets: opinionated pipelines, quality gates, and ephemeral environments to validate hypotheses at machine speed.",
-    images: ["/kuberocketci-social-card.png"],
+    images: ["/kuberocketci-social-card.jpg"],
     creator: "@KubeRocketCI",
     site: "@KubeRocketCI",
   },
@@ -111,8 +117,7 @@ export default function RootLayout({
   const cookieConsentTranslations = {
     banner: {
       title:
-        translations.cookieConsent?.banner?.title ||
-        "🍪 Cookie Consent Required",
+        translations.cookieConsent?.banner?.title || "Cookie consent required",
       description:
         translations.cookieConsent?.banner?.description ||
         "We use cookies to enhance your experience.",
@@ -161,7 +166,7 @@ export default function RootLayout({
       },
     },
     settingsButton:
-      translations.cookieConsent?.settingsButton || "🍪 Cookie Settings",
+      translations.cookieConsent?.settingsButton || "Cookie settings",
     closeLabel:
       translations.cookieConsent?.closeLabel || "Close cookie preferences",
   };
@@ -174,12 +179,22 @@ export default function RootLayout({
         <JsonLd data={websiteSchema} />
       </head>
       <body className={font.className}>
+        <a
+          href="#main-content"
+          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:rounded-sm focus:bg-neutral-0 focus:px-4 focus:py-3 focus:text-background"
+        >
+          {translations.accessibility?.skipToContent ?? "Skip to main content"}
+        </a>
         <ConsentProvider>
-          <main className="overflow-hidden">{children}</main>
+          <DialogHost
+            demoTranslations={translations.demoForm}
+            contactTranslations={translations.contactForm}
+          >
+            <div className="overflow-x-clip">{children}</div>
+          </DialogHost>
           <CookieConsent translations={cookieConsentTranslations} />
           <Analytics />
         </ConsentProvider>
-        <Toaster position="top-right" />
       </body>
     </html>
   );

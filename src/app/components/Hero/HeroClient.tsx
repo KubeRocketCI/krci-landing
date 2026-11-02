@@ -1,60 +1,63 @@
 "use client";
 
-import { useState } from "react";
-import { ContactModal } from "@/components/ContactModal";
-import { trackEvent } from "@/lib/analytics";
+import { ArrowUpRight } from "lucide-react";
+import { useRef } from "react";
+import { useOffscreenAttribute } from "@/lib/use-offscreen-attribute";
 import { cn } from "@/lib/utils";
-import type {
-  TranslationContactForm,
-  TranslationDemoForm,
-} from "@/types/translations";
+import { DOCS_ABOUT_URL, withUtm } from "@/lib/utm";
+import { ContactButton } from "../CTA/ContactButton";
 import CTAButton from "../CTAButton";
+
+const HEADER_ROOT_MARGIN = "-96px 0px 0px 0px";
 
 interface HeroClientProps {
   contactButtonText: string;
-  contactFormTranslations: TranslationContactForm;
-  demoFormTranslations: TranslationDemoForm;
+  demoButtonText: string;
+  docsLinkText: string;
+  docsLinkNewTabText: string;
+  location?: string;
 }
 
 export function HeroClient({
   contactButtonText,
-  contactFormTranslations,
-  demoFormTranslations,
+  demoButtonText,
+  docsLinkText,
+  docsLinkNewTabText,
+  location = "hero",
 }: HeroClientProps) {
-  const [contactModalOpen, setContactModalOpen] = useState(false);
+  const ctaRef = useRef<HTMLDivElement>(null);
+
+  // Drives .header-cta visibility in globals.css.
+  useOffscreenAttribute(ctaRef, HEADER_ROOT_MARGIN);
 
   return (
     <>
-      <div className={cn("flex items-center gap-4", "flex-col sm:flex-row")}>
-        <button
-          type="button"
-          onClick={() => {
-            trackEvent("contact_open", { location: "hero" });
-            setContactModalOpen(true);
-          }}
-          className={cn(
-            "button-shadow px-5 py-3 text-button",
-            "bg-neutral-90 text-foreground leading-[1] cursor-pointer",
-            "border border-foreground rounded-sm",
-            "hover:[background-image:var(--gradient-button-hover)] transition-colors",
-            "min-w-[160px]",
-          )}
-        >
-          {contactButtonText}
-        </button>
+      <div
+        ref={ctaRef}
+        data-hero-cta
+        className={cn(
+          "flex gap-4",
+          "flex-col items-stretch sm:flex-row sm:items-center",
+        )}
+      >
+        <CTAButton label={demoButtonText} location={location} />
 
-        <CTAButton
-          demoFormTranslations={demoFormTranslations}
-          location="hero"
-        />
+        <ContactButton label={contactButtonText} location={location} />
       </div>
 
-      <ContactModal
-        open={contactModalOpen}
-        onOpenChange={setContactModalOpen}
-        translations={contactFormTranslations}
-        location="hero"
-      />
+      <a
+        href={withUtm(DOCS_ABOUT_URL, location)}
+        target="_blank"
+        rel="noopener noreferrer"
+        className={cn(
+          "mt-5 inline-flex min-h-11 items-center gap-1 text-foreground",
+          "underline underline-offset-4 hover:text-neutral-20 transition-colors",
+        )}
+      >
+        {docsLinkText}
+        <span className="sr-only"> ({docsLinkNewTabText})</span>
+        <ArrowUpRight className="size-4" aria-hidden />
+      </a>
     </>
   );
 }

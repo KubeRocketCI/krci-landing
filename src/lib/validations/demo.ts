@@ -1,8 +1,22 @@
 import { toZonedTime } from "date-fns-tz";
 import { z } from "zod";
 
-const BUSINESS_TIMEZONE = "Europe/Kyiv"; // Eastern European Time (EET/EEST, UTC+2/+3)
-const BUSINESS_HOURS = { start: 10, end: 18 };
+export const BUSINESS_TIMEZONE = "Europe/Kyiv"; // EET/EEST, UTC+2/+3
+export const BUSINESS_HOURS = { start: 10, end: 18 };
+
+export function isBusinessDay(date: Date) {
+  const day = toZonedTime(date, BUSINESS_TIMEZONE).getDay();
+  return day >= 1 && day <= 5;
+}
+
+export function isBusinessHour(date: Date) {
+  const hour = toZonedTime(date, BUSINESS_TIMEZONE).getHours();
+  return hour >= BUSINESS_HOURS.start && hour < BUSINESS_HOURS.end;
+}
+
+export function isBusinessTime(date: Date) {
+  return isBusinessDay(date) && isBusinessHour(date);
+}
 
 /**
  * Demo request validation schema
@@ -26,21 +40,18 @@ export const demoFormSchema = z.object({
         return false;
       }
     }, "Invalid date format")
-    .refine((val) => {
-      // Convert UTC to business timezone and check if it's a weekday
-      const date = new Date(val);
-      const businessDate = toZonedTime(date, BUSINESS_TIMEZONE);
-      const dayOfWeek = businessDate.getDay();
-      // 1 = Monday, 5 = Friday
-      return dayOfWeek >= 1 && dayOfWeek <= 5;
-    }, "Demos are only available Monday through Friday")
-    .refine((val) => {
-      // Convert UTC to business timezone and check business hours
-      const date = new Date(val);
-      const businessDate = toZonedTime(date, BUSINESS_TIMEZONE);
-      const hour = businessDate.getHours();
-      return hour >= BUSINESS_HOURS.start && hour < BUSINESS_HOURS.end;
-    }, "Demos are only available during business hours"),
+    .refine(
+      (val) => new Date(val).getTime() > Date.now(),
+      "Please choose a time in the future",
+    )
+    .refine(
+      (val) => isBusinessDay(new Date(val)),
+      "Demos are only available Monday through Friday",
+    )
+    .refine(
+      (val) => isBusinessHour(new Date(val)),
+      "Demos are only available during business hours",
+    ),
 });
 
 export type DemoFormData = z.infer<typeof demoFormSchema>;

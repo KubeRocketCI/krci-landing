@@ -23,9 +23,13 @@ export default function PrivacyPage() {
 
   return (
     <div className="min-h-screen bg-background">
-      <Header translations={translations} />
+      <Header newTabLabel={translations.accessibility.newTab} />
 
-      <div className="container mx-auto px-4 pt-32 pb-16 max-w-4xl">
+      <main
+        id="main-content"
+        tabIndex={-1}
+        className="container mx-auto px-4 pt-32 pb-16 max-w-4xl outline-none"
+      >
         {/* Breadcrumb Navigation */}
         <Link
           href="/"
@@ -53,7 +57,7 @@ export default function PrivacyPage() {
         <h1
           className={cn(
             "text-4xl md:text-5xl font-bold mb-8 text-center",
-            "bg-gradient-to-r from-purple-400 to-pink-600 bg-clip-text text-transparent",
+            "[background-image:var(--gradient-h1)] bg-clip-text text-transparent",
           )}
         >
           {t("privacy.title")}
@@ -302,7 +306,7 @@ export default function PrivacyPage() {
                   href="https://docs.kuberocketci.io"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-purple-400 hover:text-purple-300"
+                  className="text-neutral-0 underline underline-offset-2 hover:text-neutral-20"
                 >
                   docs.kuberocketci.io
                 </a>
@@ -346,7 +350,7 @@ export default function PrivacyPage() {
             </p>
           </div>
         </div>
-      </div>
+      </main>
 
       <Footer translations={translations} />
     </div>

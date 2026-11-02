@@ -1,13 +1,10 @@
-import { withUtm } from "@/lib/utm";
+import { DOCS_ABOUT_URL, withUtm } from "@/lib/utm";
 
 const FOOTER_CAMPAIGN = "footer";
 
 export const FOOTER_LINKS = {
   readings: {
-    whatIs: withUtm(
-      "https://docs.kuberocketci.io/docs/about-platform",
-      FOOTER_CAMPAIGN,
-    ),
+    whatIs: withUtm(DOCS_ABOUT_URL, FOOTER_CAMPAIGN),
     blogs: withUtm("https://docs.kuberocketci.io/blog", FOOTER_CAMPAIGN),
     userGuide: withUtm(
       "https://docs.kuberocketci.io/docs/user-guide",

@@ -1,4 +1,4 @@
-import { withUtm } from "@/lib/utm";
+import { DOCS_ABOUT_URL, withUtm } from "@/lib/utm";
 
 export interface NavItem {
   label: string;
@@ -21,7 +21,7 @@ export const navigationItems: NavItem[] = [
   },
   {
     label: "Documentation",
-    href: withUtm("https://docs.kuberocketci.io/docs/about-platform", "header"),
+    href: withUtm(DOCS_ABOUT_URL, "header"),
     target: "_blank",
   },
 ];

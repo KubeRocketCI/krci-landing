@@ -20,7 +20,7 @@ const CellValue = ({ value }: { value: string }) => {
 
   return (
     <span className="flex items-center gap-2">
-      <Check className="w-5 h-5 text-[#0094ff] flex-shrink-0" />
+      <Check className="w-5 h-5 text-neutral-0 flex-shrink-0" aria-hidden />
       <span className="text-(length:--font-size-body-2) text-neutral-0">
         {value}
       </span>

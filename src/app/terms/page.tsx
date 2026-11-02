@@ -23,9 +23,13 @@ export default function TermsPage() {
 
   return (
     <div className="min-h-screen bg-background">
-      <Header translations={translations} />
+      <Header newTabLabel={translations.accessibility.newTab} />
 
-      <div className="container mx-auto px-4 pt-32 pb-16 max-w-4xl">
+      <main
+        id="main-content"
+        tabIndex={-1}
+        className="container mx-auto px-4 pt-32 pb-16 max-w-4xl outline-none"
+      >
         {/* Breadcrumb Navigation */}
         <Link
           href="/"
@@ -53,7 +57,7 @@ export default function TermsPage() {
         <h1
           className={cn(
             "text-4xl md:text-5xl font-bold mb-8 text-center",
-            "bg-gradient-to-r from-purple-400 to-pink-600 bg-clip-text text-transparent",
+            "[background-image:var(--gradient-h1)] bg-clip-text text-transparent",
           )}
         >
           {t("terms.title")}
@@ -139,7 +143,7 @@ export default function TermsPage() {
               2. KubeRocketCI Platform Usage
             </h2>
 
-            <div className="bg-red-950/30 border border-red-800/50 rounded-lg p-6 mb-4">
+            <div className="bg-neutral-90/50 border border-error/70 rounded-lg p-6 mb-4">
               <h4 className="font-semibold mb-3 text-neutral-0 text-lg">
                 CRITICAL: OPEN SOURCE PROJECT DISCLAIMERS
               </h4>
@@ -204,7 +208,7 @@ export default function TermsPage() {
               </li>
             </ul>
 
-            <div className="bg-red-950/30 border border-red-800/50 rounded-lg p-6 mb-4">
+            <div className="bg-neutral-90/50 border border-error/70 rounded-lg p-6 mb-4">
               <h4 className="font-semibold mb-2 text-neutral-0">
                 PRODUCTION USE WARNING
               </h4>
@@ -404,7 +408,7 @@ export default function TermsPage() {
                   href="https://docs.kuberocketci.io"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-purple-400 hover:text-purple-300"
+                  className="text-neutral-0 underline underline-offset-2 hover:text-neutral-20"
                 >
                   docs.kuberocketci.io
                 </a>
@@ -430,7 +434,7 @@ export default function TermsPage() {
             </h2>
 
             <div className="grid md:grid-cols-3 gap-4 mb-6">
-              <div className="bg-green-950/30 border border-green-800/50 rounded-lg p-4">
+              <div className="bg-neutral-90/50 border border-neutral-70 rounded-lg p-4">
                 <h4 className="font-medium mb-2 text-neutral-0">LOW RISK:</h4>
                 <ul className="text-sm space-y-1">
                   <li>• Learning and development</li>
@@ -440,7 +444,7 @@ export default function TermsPage() {
                 </ul>
               </div>
 
-              <div className="bg-yellow-950/30 border border-yellow-800/50 rounded-lg p-4">
+              <div className="bg-neutral-90/50 border border-neutral-70 rounded-lg p-4">
                 <h4 className="font-medium mb-2 text-neutral-0">
                   MEDIUM RISK:
                 </h4>
@@ -451,7 +455,7 @@ export default function TermsPage() {
                 </ul>
               </div>
 
-              <div className="bg-red-950/30 border border-red-800/50 rounded-lg p-4">
+              <div className="bg-neutral-90/50 border border-error/70 rounded-lg p-4">
                 <h4 className="font-medium mb-2 text-neutral-0">HIGH RISK:</h4>
                 <ul className="text-sm space-y-1">
                   <li>• Production without enterprise support</li>
@@ -471,7 +475,7 @@ export default function TermsPage() {
             </p>
           </div>
         </div>
-      </div>
+      </main>
 
       <Footer translations={translations} />
     </div>

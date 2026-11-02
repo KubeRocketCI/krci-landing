@@ -1,28 +1,3 @@
-export interface TranslationStatistics {
-  migrationTime: string;
-  fasterDeploy: string;
-  automatedTasks: string;
-  hoursSaved: string;
-}
-
-export interface TranslationBenefitItem {
-  title: string;
-  description: string;
-}
-
-export interface TranslationBenefits {
-  title: string;
-  description: string;
-  items: {
-    quickStart: TranslationBenefitItem;
-    cloudAgnostic: TranslationBenefitItem;
-    easySetup: TranslationBenefitItem;
-    reduceCosts: TranslationBenefitItem;
-    healthMonitor: TranslationBenefitItem;
-    aiAdoption: TranslationBenefitItem;
-  };
-}
-
 export interface TranslationAiFabricPillar {
   title: string;
   description: string;
@@ -46,22 +21,49 @@ export interface TranslationAiFabric {
   };
 }
 
+export interface TranslationPlatformItem {
+  title: string;
+  description: string;
+}
+
+export interface TranslationStat {
+  value: string;
+  label: string;
+}
+
+export interface TranslationPlatform {
+  title: string;
+  description: string;
+  githubLink: string;
+  items: {
+    goldenPath: TranslationPlatformItem;
+    gates: TranslationPlatformItem;
+    openSource: TranslationPlatformItem;
+    quickStart: TranslationPlatformItem;
+  };
+}
+
 export interface TranslationAiFactoryItem {
   title: string;
   description: string;
 }
 
+export interface TranslationAiFactoryDeliveryItem {
+  description: string;
+  linkLabel: string;
+}
+
 export interface TranslationAiFactory {
   title: string;
+  descriptionLead: string;
   description: string;
   market: {
-    title: string;
     description: string;
     stats: {
-      commits: string;
-      agentPRs: string;
-      ciMinutes: string;
-      capacity: string;
+      commits: TranslationStat;
+      agentPRs: TranslationStat;
+      ciMinutes: TranslationStat;
+      capacity: TranslationStat;
     };
     statsSource: string;
   };
@@ -71,6 +73,8 @@ export interface TranslationAiFactory {
     paragraph2: string;
     warningValue: string;
     warning: string;
+    warningSource: string;
+    survivors: string;
   };
   needs: {
     title: string;
@@ -85,48 +89,23 @@ export interface TranslationAiFactory {
     };
   };
   delivery: {
-    title: string;
     description: string;
-    linkLabel: string;
+    needLabel: string;
+    deliveryLabel: string;
     items: {
-      harness: TranslationAiFactoryItem;
-      qualityGates: TranslationAiFactoryItem;
-      guardrails: TranslationAiFactoryItem;
-      auditTrail: TranslationAiFactoryItem;
-      ephemeral: TranslationAiFactoryItem;
-      observability: TranslationAiFactoryItem;
+      harness: TranslationAiFactoryDeliveryItem;
+      qualityGates: TranslationAiFactoryDeliveryItem;
+      guardrails: TranslationAiFactoryDeliveryItem;
+      auditTrail: TranslationAiFactoryDeliveryItem;
+      ephemeral: TranslationAiFactoryDeliveryItem;
+      observability: TranslationAiFactoryDeliveryItem;
     };
   };
-}
-
-export interface TranslationFeatureItem {
-  title: string;
-  description: string;
-}
-
-export interface TranslationFeatures {
-  title: string;
-  description: string;
-  items: {
-    appTemplates: TranslationFeatureItem;
-    sso: TranslationFeatureItem;
-    openSource: TranslationFeatureItem;
-    kubernetes: TranslationFeatureItem;
-  };
-}
-
-export interface TranslationKeyDifferentiationItem {
-  title: string;
-  description: string;
-}
-
-export interface TranslationKeyDifferentiation {
-  title: string;
-  description: string;
-  items: {
-    goldenPath: TranslationKeyDifferentiationItem;
-    security: TranslationKeyDifferentiationItem;
-    flexibility: TranslationKeyDifferentiationItem;
+  cta: {
+    title: string;
+    subtitle: string;
+    docsLink: string;
+    pricingLink: string;
   };
 }
 
@@ -135,12 +114,42 @@ export interface TranslationHero {
   description: string;
   contactButton: string;
   demoButton: string;
-}
-
-export interface TranslationAbout {
-  title: string;
-  description: string;
-  statistics: TranslationStatistics;
+  docsLink: string;
+  visual: {
+    label: string;
+    sources: {
+      agent: string;
+      developer: string;
+    };
+    legend: {
+      agent: string;
+      developer: string;
+      blocked: string;
+      tornDown: string;
+      loop: string;
+    };
+    stagesShort: {
+      pipeline: string;
+      gates: string;
+      environment: string;
+      merge: string;
+      audit: string;
+    };
+    stages: {
+      pipeline: string;
+      gates: string;
+      environment: string;
+      merge: string;
+      audit: string;
+    };
+    status: {
+      passed: string;
+      blocked: string;
+      tornDown: string;
+      skipped: string;
+      committed: string;
+    };
+  };
 }
 
 export interface TranslationCTA {
@@ -223,11 +232,6 @@ export interface TranslationTerms {
   date: string;
 }
 
-export interface TranslationTestimonials {
-  title: string;
-  description: string;
-}
-
 export interface PrivacyConsentTranslation {
   prefix: string;
   privacyLink: string;
@@ -257,14 +261,17 @@ export interface TranslationContactForm {
     submit: string;
     submitting: string;
     cancel: string;
+    close: string;
   };
   privacyConsent: PrivacyConsentTranslation;
   messages: {
     success: string;
-    error: string;
-    configError: string;
-    securityError: string;
-    validationError: string;
+    networkError: string;
+    unexpectedError: string;
+  };
+  success: {
+    title: string;
+    docsLabel: string;
   };
 }
 
@@ -327,7 +334,6 @@ export interface TranslationDemoForm {
     };
     date: {
       label: string;
-      placeholder: string;
     };
     time: {
       label: string;
@@ -338,30 +344,37 @@ export interface TranslationDemoForm {
     submit: string;
     submitting: string;
     cancel: string;
+    close: string;
   };
   privacyConsent: PrivacyConsentTranslation;
   messages: {
     success: string;
-    error: string;
-    selectDateTime: string;
+    selectDate: string;
+    selectTime: string;
+    emailRequired: string;
     invalidBusinessHours: string;
+    networkError: string;
+    unexpectedError: string;
   };
   helper: {
-    yourTimezone: string;
     businessHours: string;
     selectedTime: string;
+    slotsLabel: string;
+    selectDateFirst: string;
+    noSlots: string;
+  };
+  success: {
+    title: string;
+    bookedFor: string;
+    docsLabel: string;
   };
 }
 
 export interface Translations {
   hero: TranslationHero;
-  about: TranslationAbout;
-  benefits: TranslationBenefits;
   aiFabric: TranslationAiFabric;
+  platform: TranslationPlatform;
   aiFactory: TranslationAiFactory;
-  features: TranslationFeatures;
-  keyDifferentiation: TranslationKeyDifferentiation;
-  testimonials: TranslationTestimonials;
   cta: TranslationCTA;
   footer: TranslationFooter;
   cookieConsent: TranslationCookieConsent;
@@ -370,4 +383,8 @@ export interface Translations {
   contactForm: TranslationContactForm;
   pricing: TranslationPricing;
   demoForm: TranslationDemoForm;
+  accessibility: {
+    skipToContent: string;
+    newTab: string;
+  };
 }

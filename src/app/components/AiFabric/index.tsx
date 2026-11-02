@@ -76,7 +76,9 @@ const AiFabric = ({ translations }: AiFabricProps) => {
           {statsData.map((statistic) => (
             <div key={statistic.id} className="md:flex-1">
               <div
-                className={cn("text-(length:--font-size-h1) font-bold mb-1")}
+                className={cn(
+                  "text-5xl lg:text-(length:--font-size-h1) font-bold mb-1",
+                )}
               >
                 <span
                   className={cn(
