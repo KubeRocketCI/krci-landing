@@ -1,57 +1,50 @@
 "use client";
 
-import { useState } from "react";
-import { RequestDemoModal } from "@/components/RequestDemoModal";
-import { trackEvent } from "@/lib/analytics";
+import type { RefObject } from "react";
+import { useDialogs } from "@/components/DialogHost";
 import { cn } from "@/lib/utils";
-import type { TranslationDemoForm } from "@/types/translations";
 
 export const ctaButton = {
   label: "Request Demo",
 };
 
 interface CTAButtonProps {
+  label?: string;
+  className?: string;
   onClick?: () => void;
-  demoFormTranslations: TranslationDemoForm;
   location: string;
+  returnFocusRef?: RefObject<HTMLElement | null>;
 }
 
 const CTAButton = ({
+  label = ctaButton.label,
+  className,
   onClick,
-  demoFormTranslations,
   location,
+  returnFocusRef,
 }: CTAButtonProps) => {
-  const [demoModalOpen, setDemoModalOpen] = useState(false);
-
-  const handleClick = () => {
-    trackEvent("demo_request_open", { location });
-    setDemoModalOpen(true);
-    onClick?.();
-  };
+  const { openDemo, preloadDemo } = useDialogs();
 
   return (
-    <>
-      <button
-        type="button"
-        onClick={handleClick}
-        className={cn(
-          "inline-flex items-center justify-center px-5 py-3",
-          "text-foreground leading-[1.25] cursor-pointer rounded-sm",
-          "[background-image:var(--gradient-button)]",
-          "hover:[background-image:var(--gradient-button-hover)] transition-colors",
-          "shadow-button-hover",
-        )}
-      >
-        {ctaButton.label}
-      </button>
-
-      <RequestDemoModal
-        open={demoModalOpen}
-        onOpenChange={setDemoModalOpen}
-        translations={demoFormTranslations}
-        location={location}
-      />
-    </>
+    <button
+      type="button"
+      onClick={(event) => {
+        openDemo(location, { opener: event.currentTarget, returnFocusRef });
+        onClick?.();
+      }}
+      onPointerEnter={preloadDemo}
+      onFocus={preloadDemo}
+      className={cn(
+        "inline-flex min-h-11 items-center justify-center px-5 py-3",
+        "text-foreground leading-[1.25] cursor-pointer rounded-sm",
+        "[background-image:var(--gradient-button)]",
+        "hover:[background-image:var(--gradient-button-hover)] transition-colors",
+        "shadow-button-hover",
+        className,
+      )}
+    >
+      {label}
+    </button>
   );
 };
 

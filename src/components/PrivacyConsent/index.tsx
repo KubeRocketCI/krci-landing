@@ -12,13 +12,18 @@ export function PrivacyConsent({
   className,
 }: PrivacyConsentProps) {
   return (
-    <p className={cn("text-xs text-gray-500", className)}>
+    <p
+      className={cn(
+        "text-(length:--font-size-caption) text-neutral-20",
+        className,
+      )}
+    >
       {translations.prefix}
       <Link
         href="/privacy"
         target="_blank"
         rel="noopener noreferrer"
-        className="text-blue-600 hover:text-blue-700 underline"
+        className="text-neutral-0 underline underline-offset-2 hover:text-neutral-20"
       >
         {translations.privacyLink}
       </Link>
@@ -27,7 +32,7 @@ export function PrivacyConsent({
         href="/terms"
         target="_blank"
         rel="noopener noreferrer"
-        className="text-blue-600 hover:text-blue-700 underline"
+        className="text-neutral-0 underline underline-offset-2 hover:text-neutral-20"
       >
         {translations.termsLink}
       </Link>

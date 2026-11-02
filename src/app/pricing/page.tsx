@@ -23,7 +23,7 @@ export const metadata: Metadata = {
     siteName: "KubeRocketCI",
     images: [
       {
-        url: "https://kuberocketci.io/kuberocketci-social-card.png",
+        url: "https://kuberocketci.io/kuberocketci-social-card.jpg",
         width: 1020,
         height: 615,
         alt: "KubeRocketCI Pricing",
@@ -43,15 +43,18 @@ export default function PricingPage() {
   return (
     <>
       <JsonLd data={breadcrumbSchema("Pricing", "/pricing")} />
-      <Header translations={translations} />
-      <main className="bg-background min-h-screen">
+      <Header newTabLabel={translations.accessibility.newTab} />
+      <main
+        id="main-content"
+        tabIndex={-1}
+        className="bg-background min-h-screen outline-none"
+      >
         <section className={cn("pt-24 pb-20")}>
           <Container>
-            {/* Page Header */}
             <div className="mb-10">
               <h1
                 className={cn(
-                  "text-(length:--font-size-h1) leading-tight mb-6",
+                  "text-4xl sm:text-5xl lg:text-(length:--font-size-h1) leading-tight mb-6",
                   "bg-gradient-h1 bg-clip-text text-transparent",
                 )}
               >
@@ -62,16 +65,10 @@ export default function PricingPage() {
               </p>
             </div>
 
-            {/* Pricing Cards Grid */}
-            <PricingClient
-              pricingList={pricingList}
-              contactFormTranslations={translations.contactForm}
-            />
+            <PricingClient pricingList={pricingList} />
 
-            {/* Expertise Table */}
             <ExpertiseTable translations={translations} />
 
-            {/* Disclaimer Note */}
             <Note>{t("pricing.notes.disclaimer")}</Note>
           </Container>
         </section>

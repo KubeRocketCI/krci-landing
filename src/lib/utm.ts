@@ -12,3 +12,6 @@ export function withUtm(url: string, campaign: string): string {
   tagged.searchParams.set("utm_campaign", campaign);
   return tagged.toString();
 }
+
+export const DOCS_BASE_URL = "https://docs.kuberocketci.io/docs";
+export const DOCS_ABOUT_URL = `${DOCS_BASE_URL}/about-platform`;

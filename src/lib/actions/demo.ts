@@ -4,18 +4,16 @@ import { checkBotId } from "botid/server";
 import { formatInTimeZone } from "date-fns-tz";
 import { Resend } from "resend";
 import DemoNotificationEmail from "@/../emails/demo-notification";
-import { demoFormSchema } from "@/lib/validations/demo";
+import { type FormState, toFieldErrors } from "@/lib/form-errors";
+import { BUSINESS_TIMEZONE, demoFormSchema } from "@/lib/validations/demo";
 
 const resend =
   process.env.RESEND_API_KEY && new Resend(process.env.RESEND_API_KEY);
-const BUSINESS_TIMEZONE = "Europe/Kyiv"; // Eastern European Time (EET/EEST, UTC+2/+3)
-
-type State = { error: string } | { data: string } | undefined;
 
 export async function sendDemoRequest(
-  _prevState: State,
+  _prevState: FormState,
   formData: FormData,
-): Promise<State> {
+): Promise<FormState> {
   try {
     // 1. Validate environment variables
     const demoEmail = process.env.DEMO_EMAIL || process.env.CONTACT_EMAIL;
@@ -39,8 +37,6 @@ export async function sendDemoRequest(
       datetime: formData.get("datetime") as string,
     };
 
-    console.log("Demo form data received:", rawData);
-
     // 4. Validate with Zod
     const validation = demoFormSchema.safeParse(rawData);
     if (!validation.success) {
@@ -48,6 +44,7 @@ export async function sendDemoRequest(
       const firstError = validation.error.issues[0];
       return {
         error: firstError?.message || "Please check your form fields.",
+        fieldErrors: toFieldErrors(validation.error.issues),
       };
     }
 
@@ -87,9 +84,7 @@ export async function sendDemoRequest(
     }
 
     console.log("Demo request email sent successfully:", data);
-    return {
-      data: "Demo scheduled! We'll send you a confirmation email shortly.",
-    };
+    return { success: true };
   } catch (error) {
     console.error("Demo form error:", error);
     return { error: "An unexpected error occurred. Please try again." };

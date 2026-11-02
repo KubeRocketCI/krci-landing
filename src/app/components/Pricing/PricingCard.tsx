@@ -4,7 +4,8 @@ import { cn } from "@/lib/utils";
 import type { PricingItem } from "./types";
 
 interface PricingCardProps extends PricingItem {
-  onContactClick?: () => void;
+  onContactClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
+  onContactIntent?: () => void;
 }
 
 export const PricingCard = ({
@@ -13,100 +14,92 @@ export const PricingCard = ({
   isFree,
   description,
   features,
-  color,
   label,
   link,
   onContactClick,
+  onContactIntent,
 }: PricingCardProps) => {
   const isContactAction = link.action === "contact";
   return (
-    <div
-      className={cn(
-        "flex flex-col h-full rounded-lg overflow-hidden",
-        "bg-gradient-dark-purple",
-        "shadow-card",
-      )}
-      style={{ borderLeft: `4px solid ${color}` }}
-    >
-      <div className="flex-1 flex flex-col gap-4 p-6">
-        {/* Title and Label */}
-        <div className="flex items-center gap-2">
-          <h3 className="text-(length:--font-size-subtitle) font-medium text-neutral-0">
-            {title}
-          </h3>
-          {label && (
-            <span
-              className="px-2 py-0.5 rounded-full text-[13px] text-white"
-              style={{ backgroundColor: label.color }}
-            >
-              {label.text}
-            </span>
-          )}
-        </div>
-
-        {/* Tagline */}
-        <div>
-          <p className="text-(length:--font-size-subtitle) font-medium text-neutral-0">
-            {tagline}
-          </p>
-          {isFree && (
-            <span className="inline-block text-(length:--font-size-caption) text-neutral-20">
-              Free forever
-            </span>
-          )}
-        </div>
-
-        {/* Description */}
-        <p className="text-(length:--font-size-caption) text-neutral-20 line-clamp-3 min-h-[54px]">
-          {description}
-        </p>
-
-        {/* Features */}
-        <ul className="space-y-2">
-          {features.map((feature) => (
-            <li key={feature} className="flex items-start gap-2">
-              <Check className="w-5 h-5 text-[#0094ff] flex-shrink-0 mt-0.5" />
-              <span className="text-(length:--font-size-caption) text-neutral-0">
-                {feature}
+    <div className="h-full rounded-lg p-px [background-image:var(--gradient-stroke)] bg-size-[150%]">
+      <div className="flex h-full flex-col rounded-[calc(0.5rem-1px)] bg-gradient-dark-purple">
+        <div className="flex-1 flex flex-col gap-4 p-6">
+          <div className="flex items-center gap-2">
+            <h3 className="text-(length:--font-size-subtitle) font-medium text-neutral-0">
+              {title}
+            </h3>
+            {label && (
+              <span className="rounded-[4px] border border-signal-cyan px-2 py-0.5 text-(length:--font-size-caption) text-neutral-0">
+                {label.text}
               </span>
-            </li>
-          ))}
-        </ul>
-      </div>
+            )}
+          </div>
 
-      {/* Footer Button */}
-      <div className="p-6 pt-0">
-        {isContactAction ? (
-          <button
-            type="button"
-            onClick={onContactClick}
-            className={cn(
-              "block w-full py-3 px-6 text-center rounded-lg",
-              "text-(length:--font-size-button) font-medium uppercase",
-              "bg-gradient-button text-white",
-              "hover:bg-gradient-button-hover",
-              "transition-all duration-200",
-              "shadow-button hover:shadow-button-hover",
-              "cursor-pointer",
+          <div>
+            <p className="text-(length:--font-size-subtitle) font-medium text-neutral-0">
+              {tagline}
+            </p>
+            {isFree && (
+              <span className="inline-block text-(length:--font-size-caption) text-neutral-20">
+                Free forever
+              </span>
             )}
-          >
-            {link.label}
-          </button>
-        ) : (
-          <Link
-            href={link.href}
-            className={cn(
-              "block w-full py-3 px-6 text-center rounded-lg",
-              "text-(length:--font-size-button) font-medium uppercase",
-              "bg-gradient-button text-white",
-              "hover:bg-gradient-button-hover",
-              "transition-all duration-200",
-              "shadow-button hover:shadow-button-hover",
-            )}
-          >
-            {link.label}
-          </Link>
-        )}
+          </div>
+
+          <p className="min-h-[60px] text-(length:--font-size-body-2) text-neutral-20 line-clamp-3">
+            {description}
+          </p>
+
+          <ul className="space-y-2">
+            {features.map((feature) => (
+              <li key={feature} className="flex items-start gap-2">
+                <Check
+                  className="mt-0.5 size-5 flex-shrink-0 text-neutral-0"
+                  aria-hidden
+                />
+                <span className="text-(length:--font-size-body-2) text-neutral-0">
+                  {feature}
+                </span>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div className="p-6 pt-0">
+          {isContactAction ? (
+            <button
+              type="button"
+              onClick={onContactClick}
+              onPointerEnter={onContactIntent}
+              onFocus={onContactIntent}
+              className={cn(
+                "block min-h-11 w-full rounded-sm px-6 py-3 text-center",
+                "text-(length:--font-size-button) font-medium text-white",
+                "[background-image:var(--gradient-button)]",
+                "hover:[background-image:var(--gradient-button-hover)]",
+                "transition-colors duration-200",
+                "shadow-button hover:shadow-button-hover",
+                "cursor-pointer",
+              )}
+            >
+              {link.label}
+            </button>
+          ) : (
+            <Link
+              href={link.href}
+              className={cn(
+                "block min-h-11 w-full rounded-sm px-6 py-3 text-center",
+                "text-(length:--font-size-button) font-medium text-white",
+                "[background-image:var(--gradient-button)]",
+                "hover:[background-image:var(--gradient-button-hover)]",
+                "transition-colors duration-200",
+                "shadow-button hover:shadow-button-hover",
+              )}
+            >
+              {link.label}
+            </Link>
+          )}
+        </div>
       </div>
     </div>
   );

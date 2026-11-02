@@ -16,7 +16,7 @@ export const Note = ({ children }: NoteProps) => {
       )}
     >
       <div className="flex gap-1 pt-0.5">
-        <Asterisk className="w-3 h-3 text-[#a821ff]" />
+        <Asterisk className="w-3 h-3 text-action-purple" aria-hidden />
       </div>
       <div>{children}</div>
     </div>

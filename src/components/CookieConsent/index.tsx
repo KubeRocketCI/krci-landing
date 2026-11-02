@@ -1,8 +1,16 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useConsent } from "@/lib/consent-context";
 import { cn } from "@/lib/utils";
+
+const buttonBase =
+  "min-h-11 rounded-sm px-4 py-2 text-sm font-medium transition-colors";
+const buttonOutline = cn(
+  buttonBase,
+  "border border-neutral-0 bg-neutral-90 text-neutral-0",
+  "hover:[background-image:var(--gradient-button-hover)]",
+);
 
 interface ConsentState {
   necessary: boolean;
@@ -47,6 +55,7 @@ export function CookieConsent({
     updateConsent,
   } = useConsent();
 
+  const bannerRef = useRef<HTMLElement>(null);
   const [showPreferences, setShowPreferences] = useState(false);
   const [tempConsent, setTempConsent] = useState<ConsentState>({
     necessary: true,
@@ -59,7 +68,31 @@ export function CookieConsent({
     }
   }, [consent]);
 
-  if (isLoading || !showBanner) return null;
+  const visible = !isLoading && showBanner;
+
+  useEffect(() => {
+    const root = document.documentElement;
+    const element = bannerRef.current;
+    if (!visible || !element) return;
+
+    const update = () =>
+      root.style.setProperty(
+        "--cookie-banner-height",
+        `${element.offsetHeight}px`,
+      );
+    root.dataset.cookieBanner = showPreferences ? "preferences" : "banner";
+    update();
+    const observer = new ResizeObserver(update);
+    observer.observe(element);
+
+    return () => {
+      observer.disconnect();
+      root.style.removeProperty("--cookie-banner-height");
+      delete root.dataset.cookieBanner;
+    };
+  }, [visible, showPreferences]);
+
+  if (!visible) return null;
 
   const handleSavePreferences = () => {
     updateConsent(tempConsent);
@@ -82,61 +115,50 @@ export function CookieConsent({
   ];
 
   return (
-    <div className="fixed bottom-0 left-0 right-0 z-50 px-4 pb-4">
+    <section
+      ref={bannerRef}
+      aria-label={
+        showPreferences
+          ? translations.preferences.title
+          : translations.banner.title
+      }
+      className="fixed bottom-0 left-0 right-0 z-50 pb-[max(1rem,env(safe-area-inset-bottom))] pr-[max(1rem,env(safe-area-inset-right))] pl-[max(1rem,env(safe-area-inset-left))]"
+    >
       <div className="container mx-auto max-w-6xl">
         <div
           className={cn(
-            "bg-gradient-to-br from-black/90 via-neutral-80/95 to-black/90",
-            "backdrop-blur-lg border border-purple-500/30 shadow-2xl rounded-lg",
+            "rounded-lg border border-neutral-70 bg-neutral-90 shadow-card",
           )}
         >
           {!showPreferences ? (
             // Consent Banner
-            <div className="p-6 space-y-4">
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-                <div className="flex-1">
-                  <h2 className="text-base font-semibold mb-2 text-neutral-0">
-                    {translations.banner.title}
-                  </h2>
-                  <p className="text-sm text-neutral-20">
-                    {translations.banner.description}
-                  </p>
-                </div>
+            <div className="p-4 sm:px-5">
+              <div className="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between lg:gap-6">
+                <p className="flex-1 text-sm text-neutral-20">
+                  {translations.banner.description}{" "}
+                  <button
+                    type="button"
+                    onClick={() => setShowPreferences(true)}
+                    className="inline py-2 text-neutral-0 underline underline-offset-2 transition-colors hover:text-neutral-20"
+                  >
+                    {translations.banner.customize}
+                  </button>
+                </p>
 
-                <div className="flex flex-row gap-2 sm:gap-3 flex-shrink-0">
+                <div className="grid grid-cols-2 gap-2 sm:flex sm:gap-3 lg:shrink-0">
                   <button
                     type="button"
                     onClick={acceptAll}
-                    className={cn(
-                      "px-4 py-2 text-sm font-medium rounded-lg transition-all",
-                      "bg-gradient-to-r from-purple-600 to-pink-600",
-                      "hover:from-purple-500 hover:to-pink-500",
-                      "text-white shadow-lg",
-                    )}
+                    className={buttonOutline}
                   >
                     {translations.banner.acceptAll}
                   </button>
                   <button
                     type="button"
                     onClick={acceptNecessary}
-                    className={cn(
-                      "px-4 py-2 text-sm font-medium rounded-lg transition-all",
-                      "border border-purple-500/50 text-neutral-0",
-                      "hover:bg-purple-500/10 hover:border-purple-500",
-                    )}
+                    className={buttonOutline}
                   >
                     {translations.banner.onlyNecessary}
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => setShowPreferences(true)}
-                    className={cn(
-                      "px-4 py-2 text-sm font-medium rounded-lg transition-all",
-                      "text-neutral-20 hover:text-neutral-0",
-                      "hover:bg-neutral-70/50",
-                    )}
-                  >
-                    {translations.banner.customize}
                   </button>
                 </div>
               </div>
@@ -152,6 +174,7 @@ export function CookieConsent({
                   type="button"
                   onClick={() => setShowPreferences(false)}
                   className={cn(
+                    "-mr-2 flex size-11 items-center justify-center",
                     "text-neutral-40 hover:text-neutral-0 transition-colors",
                   )}
                   aria-label={translations.closeLabel}
@@ -173,7 +196,7 @@ export function CookieConsent({
                 </button>
               </div>
 
-              <div className="max-h-[60vh] overflow-y-auto pr-2 -mr-2">
+              <div className="max-h-[60dvh] overflow-y-auto pr-2 -mr-2">
                 <div className="grid gap-2 lg:gap-4">
                   {categories.map((category) => {
                     const isEnabled = tempConsent[category.id];
@@ -190,12 +213,12 @@ export function CookieConsent({
                           <h3 className="text-sm font-medium text-neutral-0 lg:text-base">
                             {category.title}
                             {category.required && (
-                              <span className="ml-2 text-xs text-green-400">
+                              <span className="ml-2 text-xs text-neutral-20">
                                 {translations.categories.necessary.required}
                               </span>
                             )}
                           </h3>
-                          <p className="text-xs mt-1 text-neutral-40 lg:text-sm">
+                          <p className="text-xs mt-1 text-neutral-20 lg:text-sm">
                             {category.description}
                           </p>
                         </div>
@@ -211,11 +234,14 @@ export function CookieConsent({
                             }
                           }}
                           disabled={category.required}
+                          role="switch"
+                          aria-checked={isEnabled}
+                          aria-label={category.title}
                           className={cn(
-                            "flex-shrink-0 w-12 h-6 rounded-full transition-all duration-200",
-                            "focus:outline-none focus:ring-2 focus:ring-purple-500/50",
+                            "relative flex-shrink-0 w-12 h-6 rounded-full transition-all duration-200",
+                            "before:absolute before:-inset-3 before:content-['']",
                             isEnabled
-                              ? "bg-gradient-to-r from-purple-600 to-pink-600"
+                              ? "[background-image:var(--gradient-button)]"
                               : "bg-neutral-60",
                             category.required &&
                               "cursor-not-allowed opacity-75",
@@ -242,10 +268,10 @@ export function CookieConsent({
                     type="button"
                     onClick={handleSavePreferences}
                     className={cn(
-                      "flex-1 px-4 py-2 text-sm font-medium rounded-lg transition-all",
-                      "bg-gradient-to-r from-purple-600 to-pink-600",
-                      "hover:from-purple-500 hover:to-pink-500",
-                      "text-white shadow-lg",
+                      buttonBase,
+                      "[background-image:var(--gradient-button)] text-white shadow-button",
+                      "hover:[background-image:var(--gradient-button-hover)]",
+                      "flex-1",
                     )}
                   >
                     {translations.preferences.savePreferences}
@@ -253,11 +279,7 @@ export function CookieConsent({
                   <button
                     type="button"
                     onClick={acceptAll}
-                    className={cn(
-                      "flex-1 px-4 py-2 text-sm font-medium rounded-lg transition-all",
-                      "border border-purple-500/50 text-neutral-0",
-                      "hover:bg-purple-500/10 hover:border-purple-500",
-                    )}
+                    className={cn(buttonOutline, "flex-1")}
                   >
                     {translations.preferences.acceptAll}
                   </button>
@@ -265,11 +287,7 @@ export function CookieConsent({
                 <button
                   type="button"
                   onClick={acceptNecessary}
-                  className={cn(
-                    "px-4 py-2 text-sm font-medium rounded-lg transition-all sm:flex-1",
-                    "text-neutral-20 hover:text-neutral-0",
-                    "hover:bg-neutral-70/50",
-                  )}
+                  className={cn(buttonOutline, "sm:flex-1")}
                 >
                   {translations.preferences.onlyNecessary}
                 </button>
@@ -277,12 +295,12 @@ export function CookieConsent({
 
               <div className="border-t border-neutral-70 pt-2 lg:pt-4" />
 
-              <div className="text-xs text-neutral-40">
+              <div className="text-xs text-neutral-20">
                 <p>
                   {translations.preferences.privacyLink}{" "}
                   <a
                     href="/privacy"
-                    className="text-purple-400 hover:text-purple-300 hover:underline"
+                    className="text-neutral-0 underline underline-offset-2 hover:text-neutral-20"
                   >
                     {translations.preferences.privacyPolicy}
                   </a>
@@ -293,7 +311,7 @@ export function CookieConsent({
           )}
         </div>
       </div>
-    </div>
+    </section>
   );
 }
 
@@ -312,7 +330,7 @@ export function CookieSettingsButton({
       type="button"
       onClick={showPreferences}
       className={cn(
-        "text-xs transition-colors",
+        "inline-flex min-h-8 items-center pointer-coarse:min-h-11 text-xs transition-colors",
         "text-neutral-40 hover:text-neutral-20",
         className,
       )}

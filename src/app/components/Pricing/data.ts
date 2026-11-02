@@ -19,7 +19,6 @@ export function getPricingList(translations: Translations): PricingItem[] {
         label: translations.pricing.tiers.openSource.link.label,
         action: "external",
       },
-      color: "#efefff",
     },
     {
       id: "team",
@@ -32,10 +31,8 @@ export function getPricingList(translations: Translations): PricingItem[] {
         label: translations.pricing.tiers.team.link.label,
         action: "contact",
       },
-      color: "#0094ff",
       label: {
         text: translations.pricing.tiers.team.label || "",
-        color: "#2196f3",
       },
     },
     {
@@ -49,7 +46,6 @@ export function getPricingList(translations: Translations): PricingItem[] {
         label: translations.pricing.tiers.scale.link.label,
         action: "contact",
       },
-      color: "#18be94",
     },
     {
       id: "enterprise",
@@ -62,7 +58,6 @@ export function getPricingList(translations: Translations): PricingItem[] {
         label: translations.pricing.tiers.enterprise.link.label,
         action: "contact",
       },
-      color: "#9955ef",
     },
   ];
 }

@@ -1,47 +1,43 @@
 {
   "hero": {
     "title": "The harness for your AI fabric.",
-    "description": "Delivery infrastructure for your engineers — and their agents. One golden path of opinionated pipelines, quality gates, and ephemeral environments to validate hypotheses at machine speed, safely.",
-    "contactButton": "Contact Us",
-    "demoButton": "Request Demo"
-  },
-  "about": {
-    "title": "You will get",
-    "description": "KubeRocketCI users gain essential productivity boost throughout entire software development lifecycle.",
-    "statistics": {
-      "migrationTime": "days to migrate to KubeRocketCI",
-      "fasterDeploy": "faster code push to deploy time",
-      "automatedTasks": "routine tasks automated",
-      "hoursSaved": "hours saved per developer annually"
-    }
-  },
-  "benefits": {
-    "title": "Benefits",
-    "description": "Experience the proven advantages of a mature development acceleration platform.",
-    "items": {
-      "quickStart": {
-        "title": "Quick start",
-        "description": "Elementary setup, predefined pipelines and application templates let users scaffold or migrate to a CI/CD flow in a few hours."
+    "description": "KubeRocketCI is an open-source, Kubernetes-native delivery platform. Engineers and their AI agents ship through one golden path: Tekton pipelines, quality gates, and ephemeral environments.",
+    "contactButton": "Ask a question",
+    "demoButton": "Request Demo",
+    "docsLink": "Read the docs",
+    "visual": {
+      "label": "Changes from agents and developers moving through one delivery path",
+      "stages": {
+        "pipeline": "Pipeline",
+        "gates": "Quality gates",
+        "environment": "Environment",
+        "merge": "Merge",
+        "audit": "Audit commit"
       },
-      "cloudAgnostic": {
-        "title": "Cloud agnostic",
-        "description": "Go beyond any cloud provider without limiting your project's infrastructure flexibility, ensuring broad infrastructure compatibility."
+      "status": {
+        "passed": "passed",
+        "blocked": "blocked",
+        "tornDown": "torn down",
+        "skipped": "not reached",
+        "committed": "recorded"
       },
-      "easySetup": {
-        "title": "Easy setup and maintenance",
-        "description": "KubeRocketCI follows the GitOps approach and stores configurations as code in Git for simple and reliable maintenance."
+      "sources": {
+        "agent": "agent",
+        "developer": "developer"
       },
-      "reduceCosts": {
-        "title": "Reduce development time and cost",
-        "description": "Automated event-driven scalers reduce infrastructure costs while automated pipeline code reviews, builds, and deployments save days of developer work."
+      "legend": {
+        "agent": "Agent",
+        "developer": "Human",
+        "blocked": "Blocked",
+        "tornDown": "Environment",
+        "loop": "Loops back"
       },
-      "healthMonitor": {
-        "title": "Delivery health monitor",
-        "description": "Code quality and vulnerability scanners, plus persistent logging tools with smart alerts, allow you to detect deviations and prevent downtime at the earliest stage."
-      },
-      "aiAdoption": {
-        "title": "Agent-ready platform",
-        "description": "Built-in AI helps manage the platform, and KubeRocketCI agents join feature development — inside the pipelines and quality gates your team trusts."
+      "stagesShort": {
+        "pipeline": "Pipeline",
+        "gates": "Gates",
+        "environment": "Env",
+        "merge": "Merge",
+        "audit": "Audit"
       }
     }
   },
@@ -54,7 +50,7 @@
       "capacity": "capacity growth GitHub discovered it needed for agentic workloads — triple its plan",
       "governance": "of agentic AI projects Gartner predicts will be canceled by 2027 over governance gaps"
     },
-    "statsSource": "Sources: GitHub platform reports, 2026 · Gartner Hype Cycle for Platform Engineering, 2026",
+    "statsSource": "2.1B, 17M, 30x: GitHub platform reports, 2026. 40%: Gartner Hype Cycle for Platform Engineering, 2026.",
     "learnMore": "Explore the AI Factory",
     "pillars": {
       "harness": {
@@ -71,26 +67,63 @@
       }
     }
   },
+  "platform": {
+    "title": "How the harness works",
+    "description": "Everything runs on your Kubernetes cluster, with configuration stored as code in Git.",
+    "items": {
+      "goldenPath": {
+        "title": "One golden path",
+        "description": "One road from commit to production: predefined pipelines and self-service that developers and AI agents share, so every change follows the same path."
+      },
+      "gates": {
+        "title": "Quality gates and security",
+        "description": "Quality gates, code and vulnerability scanners, and RBAC guardrails are built into every pipeline, with single sign-on through OIDC or SAML."
+      },
+      "openSource": {
+        "title": "Open source and Kubernetes-native",
+        "description": "Runs on any Kubernetes cluster and any cloud, built on open-source CNCF tooling and operated through an intuitive UI and API."
+      },
+      "quickStart": {
+        "title": "Up and running in hours",
+        "description": "Application templates and predefined pipelines let you scaffold a new service, or migrate an existing one to a CI/CD flow, in a few hours."
+      }
+    },
+    "githubLink": "View on GitHub"
+  },
   "aiFactory": {
     "title": "From CI/CD platform to AI factory",
-    "description": "AI fabrics — fleets of agents that plan, code, test, and ship — don't replace delivery infrastructure. They multiply the demand for it. KubeRocketCI is the factory floor: the harness, guardrails, and disposable environments your agents need to produce software you can trust.",
+    "descriptionLead": "KubeRocketCI is an open-source, Kubernetes-native delivery platform: one golden path for engineers and their AI agents.",
+    "description": "As agent fleets multiply delivery demand, it supplies the gates, guardrails, and disposable environments they need.",
     "market": {
-      "title": "The market already moved",
-      "description": "In 2026 agentic development stopped being a pilot. The numbers from GitHub alone show a delivery layer under more load than at any point in its history.",
+      "description": "In 2026 agentic development stopped being a pilot. GitHub's numbers alone show the load on the delivery layer.",
       "stats": {
-        "commits": "commits processed by GitHub weekly — on pace for 14 billion in 2026",
-        "agentPRs": "pull requests opened by AI agents in a single month — 4x growth in six months",
-        "ciMinutes": "GitHub Actions CI minutes in one week — up from 500M weekly in 2023",
-        "capacity": "the infrastructure capacity GitHub discovered it needed — it had planned for 10x"
+        "commits": {
+          "value": "275M",
+          "label": "commits processed by GitHub every week"
+        },
+        "agentPRs": {
+          "value": "17M",
+          "label": "pull requests opened by AI agents in one month"
+        },
+        "ciMinutes": {
+          "value": "2.1B",
+          "label": "GitHub Actions CI minutes in one week"
+        },
+        "capacity": {
+          "value": "30x",
+          "label": "the infrastructure capacity GitHub found it needed, against a plan of 10x"
+        }
       },
-      "statsSource": "Sources: GitHub platform reports, 2026 · Gartner Hype Cycle for Platform Engineering, 2026"
+      "statsSource": "Source: GitHub platform reports, 2026. Commits are on pace for 14 billion in 2026, agent pull requests grew 4x in six months, and weekly CI minutes were 500M in 2023."
     },
     "shift": {
       "title": "The layer that didn't vanish",
-      "paragraph1": "When coding agents arrived, some predicted pipelines and quality gates would fade away. The opposite happened: every agent-opened pull request triggers a pipeline, a review, a scan, a deployment. The delivery layer transformed from a developer convenience into the control point of the whole factory — and it has never been more active.",
-      "paragraph2": "Agents don't get tired, but they do get things wrong — at machine speed. A fabric only compounds value when every hypothesis it produces is validated by infrastructure that can spin up guardrailed environments in minutes, run the gates, promote what passes, and destroy the rest.",
+      "paragraph1": "When coding agents arrived, some predicted pipelines and quality gates would fade away. Instead, every agent-opened pull request now triggers a pipeline, a review, a scan, and a deployment. The delivery layer became the control point of the whole factory.",
+      "paragraph2": "Agents get things wrong at machine speed. A fabric compounds value only when each hypothesis gets a guardrailed environment, runs the gates, promotes what passes, and destroys the rest.",
       "warningValue": "40%",
-      "warning": "of agentic AI projects will be canceled by 2027, Gartner predicts — not because models fail, but because governance wasn't built for autonomous actors. The platforms that survive route agents through the same golden paths as humans."
+      "warning": "of agentic AI projects will be canceled by 2027 over governance gaps, Gartner predicts.",
+      "warningSource": "40%: Gartner Hype Cycle for Platform Engineering, 2026.",
+      "survivors": "The platforms that survive route agents through the same golden paths as humans."
     },
     "needs": {
       "title": "What an AI fabric needs from its factory",
@@ -106,97 +139,59 @@
         },
         "guardrails": {
           "title": "Guardrails and governance",
-          "description": "Agents are a new class of platform user. RBAC, scoped permissions, and policy-aware self-service keep the fleet on the paved road."
+          "description": "Agents get the same identity and RBAC boundaries as every developer, with no side door around the paved road."
         },
         "auditTrail": {
           "title": "Audit trail by design",
-          "description": "GitOps stores every configuration and every change as a commit. Everything an agent does is reviewable, revertible, and attributable."
+          "description": "Every configuration and every change lives in Git as a commit, so whatever an agent changes is reviewable and revertible."
         },
         "ephemeral": {
           "title": "Ephemeral environments",
-          "description": "A disposable, production-like environment per hypothesis: create, validate, tear down clean. Fast enough that agents never queue."
+          "description": "A disposable, production-like environment per hypothesis: create, validate, tear down clean. No agent waits for a shared staging slot."
         },
         "observability": {
           "title": "Fleet observability",
-          "description": "Logs, metrics, and alerts across every pipeline run — so you notice drift, flakiness, and runaway costs before they compound."
+          "description": "Logs, metrics, and alerts across every pipeline run — so you notice drift and flakiness before they compound."
         }
       }
     },
     "delivery": {
-      "title": "How KubeRocketCI delivers it today",
       "description": "No roadmap promises — each capability maps to a platform feature you can use right now.",
-      "linkLabel": "Read the docs",
       "items": {
         "harness": {
-          "title": "Execution harness",
-          "description": "Predefined Tekton pipelines for polyglot microservices, plus custom pipelines when your flow needs its own steps."
+          "description": "Predefined Tekton pipelines for polyglot microservices, plus custom pipelines when your flow needs its own steps.",
+          "linkLabel": "Custom pipelines flow"
         },
         "qualityGates": {
-          "title": "Quality gates",
-          "description": "Autotests as quality gates in CD pipelines — reliable versions get promoted, failures stop at the gate."
+          "description": "Autotests as quality gates in CD pipelines — reliable versions get promoted, failures stop at the gate.",
+          "linkLabel": "Autotests as quality gates"
         },
         "guardrails": {
-          "title": "Guardrails and governance",
-          "description": "Single Sign-On with OIDC/SAML identity providers and Kubernetes RBAC across the whole platform."
+          "description": "Single Sign-On with OIDC/SAML identity providers and Kubernetes RBAC across the whole platform.",
+          "linkLabel": "Platform overview"
         },
         "auditTrail": {
-          "title": "Audit trail by design",
-          "description": "The GitOps approach stores platform and application configuration as code in Git — every change is a commit."
+          "description": "The GitOps approach stores platform and application configuration as code in Git — every change is a commit.",
+          "linkLabel": "Platform overview"
         },
         "ephemeral": {
-          "title": "Ephemeral environments",
-          "description": "Deploy any feature branch into its own environment, test it deeply, and destroy it when the hypothesis is answered."
+          "description": "Deploy any feature branch into its own environment, test it deeply, and destroy it when the hypothesis is answered.",
+          "linkLabel": "Deploy from a feature branch"
         },
         "observability": {
-          "title": "Fleet observability",
-          "description": "Logging, monitoring, and alerting stacks with code-quality and vulnerability scanning built into the platform."
+          "description": "Logging, monitoring, and alerting stacks with code-quality and vulnerability scanning built into the platform.",
+          "linkLabel": "Platform overview"
         }
-      }
+      },
+      "needLabel": "The need",
+      "deliveryLabel": "KubeRocketCI today"
+    },
+    "cta": {
+      "title": "Put your agents through the gate",
+      "subtitle": "Walk through the golden path in a demo. The core is open source, so you can inspect it first.",
+      "docsLink": "Read the docs",
+      "pricingLink": "See pricing"
     }
-  },
-  "features": {
-    "title": "Features",
-    "description": "KubeRocketCI stands out with powerful features that enable teams to build advanced, secure, and robust CI/CD workflows.",
-    "items": {
-      "appTemplates": {
-        "title": "Application Templates",
-        "description": "Quickly scaffold and deploy applications with predefined pipelines, leveraging solution scaffolding and template governance for streamlined development."
-      },
-      "sso": {
-        "title": "Single Sign-On with Identity Providers",
-        "description": "Easily integrate using OIDC or SAML for secure access across the platform, simplifying workflow and enhancing security."
-      },
-      "openSource": {
-        "title": "Open Source and CNCF Toolsets",
-        "description": "Embrace the power of open-source and Cloud Native Computing Foundation (CNCF) principles for innovative and collaborative project development."
-      },
-      "kubernetes": {
-        "title": "Kubernetes-Native",
-        "description": "Deploy in a Kubernetes cluster for unmatched scalability, access management, and cloud-agnostic deployment, all accessible via an intuitive UI and API."
-      }
-    }
-  },
-  "keyDifferentiation": {
-    "title": "Key differentiation",
-    "description": "The KubeRocketCI architecture was designed to address the unique challenges of modern software development teams.",
-    "items": {
-      "goldenPath": {
-        "title": "Golden Path",
-        "description": "One paved road from commit to production — application templates, predefined pipelines, and self-service that developers and AI agents share, so every change follows the same proven path."
-      },
-      "security": {
-        "title": "Security and Quality Assurance",
-        "description": "Built-in security features and quality assurance tools ensure your applications meet the highest standards."
-      },
-      "flexibility": {
-        "title": "Flexibility & Modular deployment",
-        "description": "Modular architecture allows for flexible deployment options that adapt to your specific infrastructure needs."
-      }
-    }
-  },
-  "testimonials": {
-    "title": "Testimonials",
-    "description": "Leading organizations worldwide trust KubeRocketCI to accelerate their software delivery and enhance development workflows."
   },
   "cta": {
     "title": "Ready to run your AI fabric on rails?",
@@ -245,8 +240,8 @@
   },
   "cookieConsent": {
     "banner": {
-      "title": "🍪 Cookie Consent Required",
-      "description": "We use cookies to enhance your experience on our KubeRocketCI platform. Analytics cookies help us understand how you interact with our site.",
+      "title": "Cookie consent required",
+      "description": "We use cookies, including analytics, to understand how the site is used.",
       "acceptAll": "Accept All",
       "onlyNecessary": "Only Necessary",
       "customize": "Customize"
@@ -270,7 +265,7 @@
         "description": "Help us understand site usage to improve performance"
       }
     },
-    "settingsButton": "🍪 Cookie Settings",
+    "settingsButton": "Cookie settings",
     "closeLabel": "Close cookie preferences"
   },
   "privacy": {
@@ -289,8 +284,58 @@
   },
   "useCases": {
     "title": "Use Cases",
-    "description": "Explore practical scenarios and solutions with KubeRocketCI. Learn how to scaffold applications, implement quality gates, manage secrets, and more.",
-    "readMore": "Read Full Story"
+    "description": "Practical scenarios on the golden path: scaffold a service, gate every change, and deploy to disposable environments. Each one links to a step-by-step guide.",
+    "linkLabel": "Read the guide",
+    "groups": {
+      "scaffold": {
+        "title": "Scaffold",
+        "description": "Start a service on the golden path, with templates or your own frameworks."
+      },
+      "secure": {
+        "title": "Secure and gate",
+        "description": "Keep secrets out of pipelines and let tests decide what ships, whether a person or an agent wrote the change."
+      },
+      "deploy": {
+        "title": "Deploy and extend",
+        "description": "Validate changes in disposable environments and shape the pipelines to your workflow."
+      }
+    },
+    "items": {
+      "scaffoldDeploy": {
+        "title": "Ship a FastAPI service from a template",
+        "description": "Go from nothing to a deployed FastAPI service with a scaffolding tool and standard pipelines, so new services start with quality built in."
+      },
+      "customFramework": {
+        "title": "Bring your own framework",
+        "description": "Put your own tools and frameworks on the golden path by adding custom Tekton libraries and adjusting pipelines and tasks."
+      },
+      "secretsManagement": {
+        "title": "Keep secrets out of your pipelines",
+        "description": "Use an external secret store to handle sensitive data safely across namespaces, including database connections in development and deployment."
+      },
+      "autotestQualityGate": {
+        "title": "Let autotests decide what ships",
+        "description": "Run autotests as a quality gate in the deployment pipeline to verify stability before promotion. The same gate checks agent-generated code."
+      },
+      "envVariables": {
+        "title": "Tune test runs without changing test code",
+        "description": "Add, change or remove test suite parameters through environment variables in CD pipelines, so one gate adapts to different environments."
+      },
+      "customPipelines": {
+        "title": "Adapt the pipelines to your project",
+        "description": "Start from the pre-configured Tekton pipelines and create custom ones that fit your project's requirements."
+      },
+      "featureBranch": {
+        "title": "Test a feature branch in its own environment",
+        "description": "Deploy a feature branch to a separate environment and test it without touching the main branch. It works for hypotheses proposed by AI agents too."
+      }
+    },
+    "jumpLabel": "Jump to a stage",
+    "agentTag": "For agent changes",
+    "cta": {
+      "title": "Want these on your own cluster?",
+      "subtitle": "See the golden path run end to end in a demo."
+    }
   },
   "contactForm": {
     "title": "Contact Us",
@@ -312,7 +357,8 @@
     "buttons": {
       "submit": "Submit",
       "submitting": "Sending...",
-      "cancel": "Cancel"
+      "cancel": "Cancel",
+      "close": "Close"
     },
     "privacyConsent": {
       "prefix": "By submitting this form, you agree to the processing of your personal data as described in our ",
@@ -323,10 +369,12 @@
     },
     "messages": {
       "success": "Thank you! We'll get back to you soon.",
-      "error": "Failed to send message. Please try again.",
-      "configError": "Email service is not configured. Please contact support.",
-      "securityError": "Security check failed. Please try again.",
-      "validationError": "Please check your form fields and try again."
+      "networkError": "Couldn't reach the server. Check your connection and try again.",
+      "unexpectedError": "Something went wrong on our side. Please try again."
+    },
+    "success": {
+      "title": "Message sent",
+      "docsLabel": "While you wait, read the docs"
     }
   },
   "pricing": {
@@ -518,8 +566,7 @@
         "placeholder": "your.email@company.com"
       },
       "date": {
-        "label": "Select Date",
-        "placeholder": "Choose a date"
+        "label": "Select Date"
       },
       "time": {
         "label": "Select Time",
@@ -529,7 +576,8 @@
     "buttons": {
       "submit": "Schedule Demo",
       "submitting": "Scheduling...",
-      "cancel": "Cancel"
+      "cancel": "Cancel",
+      "close": "Close"
     },
     "privacyConsent": {
       "prefix": "By scheduling this demo, you agree to the processing of your personal data as described in our ",
@@ -539,15 +587,29 @@
       "suffix": "."
     },
     "messages": {
-      "success": "Demo scheduled! We'll send you a confirmation email shortly.",
-      "error": "Failed to schedule demo. Please try again.",
-      "selectDateTime": "Please select both date and time.",
-      "invalidBusinessHours": "Please select a time during business hours on a weekday."
+      "success": "We'll send you a confirmation email shortly.",
+      "invalidBusinessHours": "Please select a time during business hours on a weekday.",
+      "selectDate": "Select a date.",
+      "selectTime": "Select a time.",
+      "networkError": "Couldn't reach the server. Check your connection and try again.",
+      "emailRequired": "Enter your email address.",
+      "unexpectedError": "Something went wrong on our side. Please try again."
     },
     "helper": {
-      "yourTimezone": "Your timezone:",
-      "businessHours": "Available time slots are shown in your local timezone.",
-      "selectedTime": "Selected time:"
+      "businessHours": "Demos run Monday to Friday, 10:00–18:00 Kyiv time. Slots are shown in your local timezone.",
+      "selectedTime": "Selected time:",
+      "slotsLabel": "Available slots",
+      "selectDateFirst": "Select a date first",
+      "noSlots": "No slots on this date. Pick a weekday within business hours."
+    },
+    "success": {
+      "title": "Demo scheduled",
+      "bookedFor": "Booked for",
+      "docsLabel": "While you wait, read the docs"
     }
+  },
+  "accessibility": {
+    "skipToContent": "Skip to main content",
+    "newTab": "opens in a new tab"
   }
 }
