@@ -1,7 +1,7 @@
 {
   "hero": {
-    "title": "The harness for your AI fabric.",
-    "description": "KubeRocketCI is an open-source, Kubernetes-native delivery platform. Engineers and their AI agents ship through one golden path: Tekton pipelines, quality gates, and ephemeral environments.",
+    "title": "The harness for your AI fabric",
+    "description": "KubeRocketCI is an open-source, Kubernetes-native delivery platform. Engineers and their AI agents ship through one golden path: opinionated pipelines, quality gates, and ephemeral environments.",
     "contactButton": "Ask a question",
     "demoButton": "Request Demo",
     "docsLink": "Read the docs",
@@ -240,56 +240,56 @@
         "workflows": "Multi-step tasks, run end to end"
       },
       "plan": {
-        "title": "Plan: spec-driven, your way.",
+        "title": "Plan: spec-driven, your way",
         "description": "Specs live in Git and trace through to the version and environment that runs them. Bring the spec-driven approach your team already uses. Our agents and skills follow one too, from brief to requirements, epics, and stories, each approved before the next.",
         "agents": "Product and business analysis",
         "skills": "Requirements, user journeys, story tracing",
         "workflows": "Brief → requirements → epics → stories"
       },
       "design": {
-        "title": "Design: decisions before code.",
+        "title": "Design: decisions before code",
         "description": "Application templates give every new service a known starting point, and ephemeral environments let you try a design as a prototype before you commit to it. An architect agent turns approved stories into an architecture and a feature plan across repositories, then reviews the design against your standards.",
         "agents": "Architecture and design review",
         "skills": "Architecture standards",
         "workflows": "Plan a feature, technical review"
       },
       "build": {
-        "title": "Build: every push runs the same pipeline.",
+        "title": "Build: every push runs the same pipeline",
         "description": "A webhook on every push starts the same predefined pipeline for agents and engineers, and agents read the results through the CLI. Developer agents work with skills for your stack and workflows that take an issue to a pull request.",
         "agents": "Developers for your stack, DevOps",
         "skills": "Stack standards, pipeline authoring",
         "workflows": "Implement a feature, fix an issue"
       },
       "test": {
-        "title": "Test: prove it in its own environment.",
+        "title": "Test: prove it in its own environment",
         "description": "Each change can run in an ephemeral environment, and autotests act as quality gates. QA agents write test plans, test cases, and automated tests, and a workflow verifies the change on a live cluster.",
         "agents": "Manual and automation QA",
         "skills": "Test cases, test automation",
         "workflows": "Verify a change on a test cluster"
       },
       "review": {
-        "title": "Review: the gate is the trust boundary.",
+        "title": "Review: the gate is the trust boundary",
         "description": "Every pull request runs a review pipeline with code quality and security scans, and only changes that pass every check reach a human. A review agent checks the change against your conventions, and merge rights stay with people.",
         "agents": "Code review",
         "skills": "Review conventions",
         "workflows": "Review a change, write the commit"
       },
       "deploy": {
-        "title": "Deploy: agents propose, the pipeline applies.",
+        "title": "Deploy: agents propose, the pipeline applies",
         "description": "Deployment Flows promote what passed the gates from one environment to the next through GitOps. Manual or autotest gates guard each promotion, RBAC decides who approves, and every release traces back to its story. Agents propose through the same flow, and workflows draft release notes and upgrade guides.",
         "agents": "DevOps",
         "skills": "Trace a story to its environment",
         "workflows": "Release notes, upgrade guides"
       },
       "operate": {
-        "title": "Operate: learnings feed the next plan.",
+        "title": "Operate: learnings feed the next plan",
         "description": "Observability covers every pipeline run and environment, and agent telemetry shows token cost per story. A skill explains why an environment is unhealthy or out of sync and who owns the fix. What you learn goes back into Plan.",
         "agents": "Triage and fix",
         "skills": "Diagnose an environment",
         "workflows": "Reproduce, fix, and verify an issue"
       },
       "own": {
-        "title": "Ours, yours, or both.",
+        "title": "Ours, yours, or both",
         "description": "Use our agents, skills, and workflows, bring the ones your team already has, or build custom ones to deliver other solutions on the platform. The phases and the platform underneath stay the same.",
         "agents": "Use ours or bring your own",
         "skills": "Package your own conventions",
@@ -489,7 +489,7 @@
     }
   },
   "pricing": {
-    "title": "The harness for your AI fabric, sized to your team.",
+    "title": "The harness for your AI fabric, sized to your team",
     "description": "Every tier ships the same golden path — opinionated pipelines, quality gates, and guardrails. What changes is how much of it we build and run with you.",
     "tiers": {
       "openSource": {
