@@ -12,6 +12,10 @@ export const navigationItems: NavItem[] = [
     href: "/ai-factory",
   },
   {
+    label: "AI SDLC",
+    href: "/ai-sdlc",
+  },
+  {
     label: "Use cases",
     href: "/use-cases",
   },
