@@ -494,7 +494,7 @@
     "tiers": {
       "openSource": {
         "title": "Open Source",
-        "tagline": "Start free, self-serve.",
+        "tagline": "Start free, self-serve",
         "description": "Run the full platform yourself. Community-supported, no strings attached.",
         "features": [
           "Community support",
@@ -507,7 +507,7 @@
       },
       "team": {
         "title": "Team",
-        "tagline": "Get to production with expert guidance.",
+        "tagline": "Get to production with expert guidance",
         "description": "We stand up your golden path and get your first services shipping through it.",
         "features": [
           "Guided platform install & onboarding",
@@ -521,7 +521,7 @@
       },
       "scale": {
         "title": "Scale",
-        "tagline": "Govern many teams.",
+        "tagline": "Govern many teams",
         "description": "SSO, guardrails, and integrations that hold as you add teams and environments.",
         "features": [
           "SSO & centralized access control",
@@ -535,7 +535,7 @@
       },
       "enterprise": {
         "title": "Enterprise",
-        "tagline": "Your AI factory, on your terms.",
+        "tagline": "Your AI factory, on your terms",
         "description": "Bring agent fleets into the golden path with the compliance and support mission-critical delivery needs.",
         "features": [
           "KubeRocketCI agents enablement",
