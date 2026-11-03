@@ -370,11 +370,74 @@ export interface TranslationDemoForm {
   };
 }
 
+export type AiSdlcPhaseId =
+  | "plan"
+  | "design"
+  | "build"
+  | "test"
+  | "review"
+  | "deploy"
+  | "operate";
+
+export type AiSdlcNarratedStepId = AiSdlcPhaseId | "own";
+
+export type AiSdlcStepId = "overview" | AiSdlcNarratedStepId;
+
+export type AiSdlcLayerId = "agents" | "skills" | "workflows";
+
+export type AiSdlcChipId =
+  | "git"
+  | "templates"
+  | "webhooks"
+  | "pipelines"
+  | "cli"
+  | "environments"
+  | "gates"
+  | "security"
+  | "flows"
+  | "gitops"
+  | "rbac"
+  | "observability";
+
+export type TranslationAiSdlcLines = Record<AiSdlcLayerId, string>;
+
+export type TranslationAiSdlcStep = TranslationAiSdlcLines & {
+  title: string;
+  description: string;
+};
+
+export interface TranslationAiSdlc {
+  title: string;
+  description: string;
+  layersSummary: string;
+  storyLabel: string;
+  progressLabel: string;
+  phases: Record<AiSdlcPhaseId, string>;
+  diagram: {
+    aiLayer: string;
+    platform: string;
+    loop: string;
+    litLabel: string;
+    layers: Record<AiSdlcLayerId, string>;
+    chips: Record<AiSdlcChipId, string>;
+  };
+  steps: Record<"overview", TranslationAiSdlcLines> &
+    Record<AiSdlcNarratedStepId, TranslationAiSdlcStep>;
+  cta: {
+    title: string;
+    subtitle: string;
+    aiFactoryLink: string;
+    docsLink: string;
+    pricingLink: string;
+  };
+}
+
 export interface Translations {
   hero: TranslationHero;
   aiFabric: TranslationAiFabric;
   platform: TranslationPlatform;
   aiFactory: TranslationAiFactory;
+  aiSdlc: TranslationAiSdlc;
   cta: TranslationCTA;
   footer: TranslationFooter;
   cookieConsent: TranslationCookieConsent;

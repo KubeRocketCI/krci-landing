@@ -8,6 +8,7 @@ KubeRocketCI positions itself as the harness for AI fabrics — the delivery inf
 
 - [Home](https://kuberocketci.io/): Platform overview — benefits, features, and why agent fleets need a delivery harness
 - [AI Factory](https://kuberocketci.io/ai-factory): Why the delivery layer became the control point of the AI factory, and how KubeRocketCI provides the execution harness, quality gates, guardrails, audit trail, ephemeral environments, and fleet observability
+- [AI SDLC](https://kuberocketci.io/ai-sdlc): The seven AI SDLC phases (plan, design, build, test, review, deploy, operate) and where the KubeRocketCI platform and its agents, skills, and workflows help in each
 - [Use Cases](https://kuberocketci.io/use-cases): Practical scenarios — application scaffolding, autotest quality gates, secrets management, custom Tekton pipelines, feature-branch deployments
 - [Pricing](https://kuberocketci.io/pricing): Open-source core plus professional service subscription tiers
 
