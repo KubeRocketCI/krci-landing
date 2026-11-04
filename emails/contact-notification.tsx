@@ -15,12 +15,16 @@ interface ContactNotificationEmailProps {
   name: string;
   email: string;
   question: string;
+  plan?: string;
+  location?: string;
 }
 
 export default function ContactNotificationEmail({
   name = "Test User",
   email = "test@example.com",
   question = "This is a test question.",
+  plan,
+  location,
 }: ContactNotificationEmailProps) {
   return (
     <Html>
@@ -40,6 +44,16 @@ export default function ContactNotificationEmail({
               <Text className="text-base mb-2">
                 <strong>Email:</strong> {email}
               </Text>
+              {plan ? (
+                <Text className="text-base mb-2">
+                  <strong>Plan:</strong> {plan}
+                </Text>
+              ) : null}
+              {location ? (
+                <Text className="text-base mb-2">
+                  <strong>Sent from:</strong> {location}
+                </Text>
+              ) : null}
             </Section>
 
             <Hr className="my-4" />

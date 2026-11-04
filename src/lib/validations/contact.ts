@@ -1,35 +1,41 @@
 import { z } from "zod";
+import { emailSchema } from "./email";
 
-/**
- * Contact form validation schema with enhanced email validation
- */
+// Letters, digits and the punctuation people type in a name; no line breaks.
+const NAME_PATTERN = /^[\p{L}\p{M}\p{N} '\u2019.,()&/-]+$/u;
+// Lower-case identifiers set by the page that opened the form, such as a pricing tier.
+const IDENTIFIER_PATTERN = /^[a-z0-9_-]*$/;
+
+const identifier = z
+  .string()
+  .trim()
+  .max(40)
+  .regex(IDENTIFIER_PATTERN)
+  .optional();
+
 export const contactFormSchema = z.object({
   name: z
     .string()
     .trim()
-    .min(2, "Name must be at least 2 characters")
-    .max(50, "Name must be less than 50 characters")
-    .regex(/^[\p{L}\p{M}\s'\u2019.-]+$/u, "Name contains invalid characters"),
+    .transform((value) => value.replace(/\s+/g, " "))
+    .pipe(
+      z
+        .string()
+        .min(2, "Name must be at least 2 characters")
+        .max(50, "Name must be less than 50 characters")
+        .regex(NAME_PATTERN, "Name contains invalid characters"),
+    ),
 
-  email: z
-    .string()
-    .trim()
-    .email({
-      message: "Please enter a valid email address",
-      // Use Unicode regex for international email support
-      // This is more permissive than the default Gmail rules
-      // and better for global audiences
-      pattern: z.regexes.unicodeEmail,
-    })
-    .toLowerCase()
-    // Additional length check as defense-in-depth
-    .max(254, "Email address is too long"),
+  email: emailSchema,
 
   question: z
     .string()
     .trim()
     .min(10, "Question must be at least 10 characters")
     .max(1000, "Question must be less than 1000 characters"),
+
+  plan: identifier,
+  location: identifier,
 });
 
 export type ContactFormData = z.infer<typeof contactFormSchema>;

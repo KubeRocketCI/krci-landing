@@ -2,7 +2,7 @@ import { isProduction } from "./env";
 
 const GA_MEASUREMENT_ID = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID;
 
-// Track if GA script has been loaded to prevent duplicate loading
+// Set once the gtag script is injected, so a second consent never injects it again
 let gaScriptLoaded = false;
 
 // Live consent state - the gtag script stays loaded after a mid-session
@@ -65,10 +65,7 @@ export const loadGtagScript = (): Promise<void> => {
       gtagScript.src = `https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`;
       gtagScript.async = true;
 
-      gtagScript.onload = () => {
-        gaScriptLoaded = true;
-        resolve();
-      };
+      gtagScript.onload = () => resolve();
 
       gtagScript.onerror = () => {
         console.error("Failed to load Google Analytics script");
@@ -76,6 +73,7 @@ export const loadGtagScript = (): Promise<void> => {
       };
 
       document.head.appendChild(gtagScript);
+      gaScriptLoaded = true;
     } catch (error) {
       console.error("Failed to initialize Google Analytics:", error);
       reject(error);
@@ -90,6 +88,12 @@ export const initGA = () => {
   analyticsConsentGranted = true;
 
   if (!isProduction()) {
+    return;
+  }
+
+  // After a revoke the injected script sits in denied mode; grant it again.
+  if (gaScriptLoaded) {
+    updateGtagConsent({ analytics: true });
     return;
   }
 
@@ -109,8 +113,8 @@ export const trackPageView = (path: string, title?: string) => {
 
   if (typeof window !== "undefined" && window.gtag && GA_MEASUREMENT_ID) {
     try {
-      window.gtag("config", GA_MEASUREMENT_ID, {
-        page_path: path,
+      window.gtag("event", "page_view", {
+        page_location: window.location.origin + path,
         page_title: title || document.title,
       });
     } catch (error) {

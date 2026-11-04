@@ -232,10 +232,13 @@ function markerPosition(activePhase: number, own: boolean) {
 export function PhaseDiagram({
   copy,
   step,
+  compact = false,
   className,
 }: {
   copy: TranslationAiSdlc;
   step: number;
+  // Only the chips this step lights, for the copy that follows each step on small screens.
+  compact?: boolean;
   className?: string;
 }) {
   const ref = useRef<HTMLDivElement>(null);
@@ -247,6 +250,8 @@ export function PhaseDiagram({
   const own = stepId === "own";
   const lines = copy.steps[stepId];
   const { diagram } = copy;
+  const chips =
+    compact && !own ? CHIPS.filter((chip) => lit.includes(chip.id)) : CHIPS;
 
   return (
     <div
@@ -383,7 +388,7 @@ export function PhaseDiagram({
           {diagram.platform}
         </p>
         <ul className="grid grid-cols-2 gap-1.5 sm:grid-cols-4 sm:gap-2">
-          {CHIPS.map(({ id, Icon }, index) => (
+          {chips.map(({ id, Icon }, index) => (
             <li
               key={id}
               data-state={lit.includes(id) ? "lit" : own ? "open" : "idle"}

@@ -25,9 +25,9 @@ export const PricingCard = ({
       <div className="flex h-full flex-col rounded-[calc(0.5rem-1px)] bg-gradient-dark-purple">
         <div className="flex-1 flex flex-col gap-4 p-6">
           <div className="flex items-center gap-2">
-            <h3 className="text-(length:--font-size-subtitle) font-medium text-neutral-0">
+            <h2 className="text-(length:--font-size-subtitle) font-medium text-neutral-0">
               {title}
-            </h3>
+            </h2>
             {label && (
               <span className="rounded-[4px] border border-signal-cyan px-2 py-0.5 text-(length:--font-size-caption) text-neutral-0">
                 {label.text}
@@ -46,7 +46,7 @@ export const PricingCard = ({
             )}
           </div>
 
-          <p className="min-h-[60px] text-(length:--font-size-body-2) text-neutral-20 line-clamp-3">
+          <p className="min-h-[60px] text-(length:--font-size-body-2) text-neutral-20">
             {description}
           </p>
 

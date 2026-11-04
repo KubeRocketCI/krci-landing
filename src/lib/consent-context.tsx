@@ -18,10 +18,13 @@ interface ConsentContextType {
   consent: ConsentState | null;
   isLoading: boolean;
   showBanner: boolean;
+  // The control that re-opened the banner, so focus can return to it.
+  bannerOpener: HTMLElement | null;
   acceptAll: () => void;
   acceptNecessary: () => void;
   updateConsent: (newConsent: Partial<ConsentState>) => void;
-  showPreferences: () => void;
+  showPreferences: (opener?: HTMLElement | null) => void;
+  hideBanner: () => void;
 }
 
 const ConsentContext = createContext<ConsentContextType | undefined>(undefined);
@@ -37,6 +40,7 @@ export function ConsentProvider({ children }: { children: ReactNode }) {
   const [consent, setConsent] = useState<ConsentState | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [showBanner, setShowBanner] = useState(false);
+  const [bannerOpener, setBannerOpener] = useState<HTMLElement | null>(null);
 
   useEffect(() => {
     const stored = localStorage.getItem(CONSENT_STORAGE_KEY);
@@ -95,8 +99,13 @@ export function ConsentProvider({ children }: { children: ReactNode }) {
     saveConsent(updatedConsent);
   };
 
-  const showPreferences = () => {
+  const showPreferences = (opener?: HTMLElement | null) => {
+    setBannerOpener(opener ?? null);
     setShowBanner(true);
+  };
+
+  const hideBanner = () => {
+    setShowBanner(false);
   };
 
   return (
@@ -105,10 +114,12 @@ export function ConsentProvider({ children }: { children: ReactNode }) {
         consent,
         isLoading,
         showBanner,
+        bannerOpener,
         acceptAll,
         acceptNecessary,
         updateConsent,
         showPreferences,
+        hideBanner,
       }}
     >
       {children}

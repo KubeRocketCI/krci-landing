@@ -14,6 +14,10 @@ export const metadata: Metadata = {
     description:
       "Terms and conditions for using KubeRocketCI platform and website.",
     type: "website",
+    url: "/terms",
+  },
+  alternates: {
+    canonical: "/terms",
   },
 };
 
@@ -74,9 +78,9 @@ export default function TermsPage() {
           </div>
 
           <div className="bg-neutral-90/50 border border-neutral-70 rounded-lg p-6 mb-8">
-            <h3 className="text-lg font-semibold mb-3 text-neutral-0">
+            <h2 className="text-lg font-semibold mb-3 text-neutral-0">
               🚀 Project Notice
-            </h3>
+            </h2>
             <p className="text-sm">
               KubeRocketCI is an open-source CI/CD platform. This is open-source
               software provided "AS IS" with NO commercial backing, warranties,
@@ -144,9 +148,9 @@ export default function TermsPage() {
             </h2>
 
             <div className="bg-neutral-90/50 border border-error/70 rounded-lg p-6 mb-4">
-              <h4 className="font-semibold mb-3 text-neutral-0 text-lg">
+              <h3 className="font-semibold mb-3 text-neutral-0 text-lg">
                 CRITICAL: OPEN SOURCE PROJECT DISCLAIMERS
-              </h4>
+              </h3>
               <div className="text-sm space-y-2">
                 <p>
                   <strong>No Commercial Support:</strong> This is an open-source
@@ -435,7 +439,7 @@ export default function TermsPage() {
 
             <div className="grid md:grid-cols-3 gap-4 mb-6">
               <div className="bg-neutral-90/50 border border-neutral-70 rounded-lg p-4">
-                <h4 className="font-medium mb-2 text-neutral-0">LOW RISK:</h4>
+                <h3 className="font-medium mb-2 text-neutral-0">LOW RISK:</h3>
                 <ul className="text-sm space-y-1">
                   <li>• Learning and development</li>
                   <li>• Testing environments</li>
@@ -445,9 +449,9 @@ export default function TermsPage() {
               </div>
 
               <div className="bg-neutral-90/50 border border-neutral-70 rounded-lg p-4">
-                <h4 className="font-medium mb-2 text-neutral-0">
+                <h3 className="font-medium mb-2 text-neutral-0">
                   MEDIUM RISK:
-                </h4>
+                </h3>
                 <ul className="text-sm space-y-1">
                   <li>• Internal/staging environments</li>
                   <li>• Commercial development (with testing)</li>
@@ -456,7 +460,7 @@ export default function TermsPage() {
               </div>
 
               <div className="bg-neutral-90/50 border border-error/70 rounded-lg p-4">
-                <h4 className="font-medium mb-2 text-neutral-0">HIGH RISK:</h4>
+                <h3 className="font-medium mb-2 text-neutral-0">HIGH RISK:</h3>
                 <ul className="text-sm space-y-1">
                   <li>• Production without enterprise support</li>
                   <li>• Mission-critical systems</li>

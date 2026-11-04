@@ -171,12 +171,6 @@ export interface TranslationFooter {
     community: {
       title: string;
     };
-    subscribe: {
-      title: string;
-      label: string;
-      placeholder: string;
-      button: string;
-    };
   };
   copyright: string;
   legal: {
@@ -230,6 +224,13 @@ export interface TranslationTerms {
   effectiveDate: string;
   lastUpdated: string;
   date: string;
+}
+
+export interface TranslationNotFound {
+  title: string;
+  description: string;
+  backToHome: string;
+  docsLink: string;
 }
 
 export interface PrivacyConsentTranslation {
@@ -443,6 +444,7 @@ export interface Translations {
   cookieConsent: TranslationCookieConsent;
   privacy: TranslationPrivacy;
   terms: TranslationTerms;
+  notFound: TranslationNotFound;
   contactForm: TranslationContactForm;
   pricing: TranslationPricing;
   demoForm: TranslationDemoForm;

@@ -1,81 +1,54 @@
 "use server";
 
-import { checkBotId } from "botid/server";
-import { Resend } from "resend";
 import ContactNotificationEmail from "@/../emails/contact-notification";
-import { type FormState, toFieldErrors } from "@/lib/form-errors";
+import { enforceRateLimit, guardSubmission } from "@/lib/actions/guard";
+import { GENERIC_ERROR, sendNotification } from "@/lib/actions/notify";
+import {
+  type FormState,
+  readField,
+  validationRejection,
+} from "@/lib/form-errors";
 import { contactFormSchema } from "@/lib/validations/contact";
-
-const resend =
-  process.env.RESEND_API_KEY && new Resend(process.env.RESEND_API_KEY);
 
 export async function sendContactEmail(
   _prevState: FormState,
   formData: FormData,
 ): Promise<FormState> {
   try {
-    // 1. Validate environment variables
-    if (!process.env.CONTACT_EMAIL) {
-      console.error("CONTACT_EMAIL environment variable is not set");
-      return {
-        error: "Email service is not configured. Please contact support.",
-      };
-    }
+    const blocked = await guardSubmission(formData);
+    if (blocked) return blocked;
 
-    // 2. Bot protection with BotID
-    const checkResult = await checkBotId();
-    if (checkResult.isBot) {
-      console.log("Bot detected:", checkResult);
-      return { error: "Security check failed. Please try again." };
-    }
-
-    // 3. Extract form data
-    const rawData = {
-      name: formData.get("name") as string,
-      email: formData.get("email") as string,
-      question: formData.get("question") as string,
-    };
-
-    // 4. Validate with Zod
-    const validation = contactFormSchema.safeParse(rawData);
-    if (!validation.success) {
-      console.error("Validation errors:", validation.error.issues);
-      const firstError = validation.error.issues[0];
-      return {
-        error: firstError
-          ? firstError.message
-          : "Please check your form fields and try again.",
-        fieldErrors: toFieldErrors(validation.error.issues),
-      };
-    }
-
-    const { name, email, question } = validation.data;
-
-    if (!resend) {
-      console.error("Resend is not configured");
-      return {
-        error: "Email service is not configured. Please contact support.",
-      };
-    }
-
-    // 5. Send email via Resend
-    const { data, error } = await resend.emails.send({
-      from: process.env.FROM_EMAIL || "onboarding@resend.dev",
-      to: [process.env.CONTACT_EMAIL],
-      replyTo: email,
-      subject: `Contact Form: ${name}`,
-      react: ContactNotificationEmail({ name, email, question }),
+    const validation = contactFormSchema.safeParse({
+      name: readField(formData, "name"),
+      email: readField(formData, "email"),
+      question: readField(formData, "question"),
+      plan: readField(formData, "plan"),
+      location: readField(formData, "location"),
     });
-
-    if (error) {
-      console.error("Resend error:", error);
-      return { error: "Failed to send message. Please try again." };
+    if (!validation.success) {
+      return validationRejection(validation.error.issues);
     }
+    const { name, email, question, plan, location } = validation.data;
 
-    console.log("Email sent successfully:", data);
-    return { success: true };
+    const limited = await enforceRateLimit();
+    if (limited) return limited;
+
+    return await sendNotification({
+      to: process.env.CONTACT_EMAIL,
+      replyTo: email,
+      subject: plan
+        ? `Contact Form: ${name} (${plan} plan)`
+        : `Contact Form: ${name}`,
+      react: ContactNotificationEmail({
+        name,
+        email,
+        question,
+        plan,
+        location,
+      }),
+    });
   } catch (error) {
     console.error("Contact form error:", error);
-    return { error: "An unexpected error occurred. Please try again." };
+    return { error: GENERIC_ERROR };
   }
 }

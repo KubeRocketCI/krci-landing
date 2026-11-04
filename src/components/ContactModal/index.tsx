@@ -9,6 +9,7 @@ import {
   FormDialog,
   FormFooter,
   SecondaryButton,
+  SpamGuardFields,
   SubmitButton,
   SuccessPanel,
 } from "@/components/FormDialog";
@@ -28,6 +29,11 @@ const FIELDS = {
   email: "#contact-email",
   question: "#contact-question",
 };
+const visibleFieldsSchema = contactFormSchema.pick({
+  name: true,
+  email: true,
+  question: true,
+});
 
 interface ContactModalProps {
   open: boolean;
@@ -116,7 +122,7 @@ function ContactForm({
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) =>
     submit(event, (formData) => {
-      const result = contactFormSchema.safeParse(
+      const result = visibleFieldsSchema.safeParse(
         Object.fromEntries(formData) as Record<string, string>,
       );
       return result.success ? {} : toFieldErrors(result.error.issues);
@@ -129,6 +135,10 @@ function ContactForm({
       noValidate
       className="flex min-h-0 flex-1 flex-col"
     >
+      <SpamGuardFields id="contact" />
+      <input type="hidden" name="plan" value={plan ?? ""} />
+      <input type="hidden" name="location" value={location} />
+
       <FormBody>
         <FormAlert message={formError} />
 

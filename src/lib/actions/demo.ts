@@ -1,92 +1,53 @@
 "use server";
 
-import { checkBotId } from "botid/server";
 import { formatInTimeZone } from "date-fns-tz";
-import { Resend } from "resend";
 import DemoNotificationEmail from "@/../emails/demo-notification";
-import { type FormState, toFieldErrors } from "@/lib/form-errors";
+import { enforceRateLimit, guardSubmission } from "@/lib/actions/guard";
+import { GENERIC_ERROR, sendNotification } from "@/lib/actions/notify";
+import {
+  type FormState,
+  readField,
+  validationRejection,
+} from "@/lib/form-errors";
 import { BUSINESS_TIMEZONE, demoFormSchema } from "@/lib/validations/demo";
-
-const resend =
-  process.env.RESEND_API_KEY && new Resend(process.env.RESEND_API_KEY);
 
 export async function sendDemoRequest(
   _prevState: FormState,
   formData: FormData,
 ): Promise<FormState> {
   try {
-    // 1. Validate environment variables
-    const demoEmail = process.env.DEMO_EMAIL || process.env.CONTACT_EMAIL;
-    if (!demoEmail) {
-      console.error("DEMO_EMAIL environment variable not set");
-      return {
-        error: "Demo service is not configured. Please contact support.",
-      };
-    }
+    const blocked = await guardSubmission(formData);
+    if (blocked) return blocked;
 
-    // 2. Bot protection with BotID
-    const checkResult = await checkBotId();
-    if (checkResult.isBot) {
-      console.log("Bot detected:", checkResult);
-      return { error: "Security check failed. Please try again." };
-    }
-
-    // 3. Extract form data
-    const rawData = {
-      email: formData.get("email") as string,
-      datetime: formData.get("datetime") as string,
-    };
-
-    // 4. Validate with Zod
-    const validation = demoFormSchema.safeParse(rawData);
+    const validation = demoFormSchema.safeParse({
+      email: readField(formData, "email"),
+      datetime: readField(formData, "datetime"),
+    });
     if (!validation.success) {
-      console.error("Validation errors:", validation.error.issues);
-      const firstError = validation.error.issues[0];
-      return {
-        error: firstError?.message || "Please check your form fields.",
-        fieldErrors: toFieldErrors(validation.error.issues),
-      };
+      return validationRejection(validation.error.issues);
     }
-
     const { email, datetime } = validation.data;
     const requestedDate = new Date(datetime);
 
-    // 5. Format date for email in business timezone
-    const businessTime = formatInTimeZone(
-      requestedDate,
-      BUSINESS_TIMEZONE,
-      "PPPP 'at' HH:mm (zzz)",
-    );
+    const limited = await enforceRateLimit();
+    if (limited) return limited;
 
-    // 6. Send email via Resend
-    if (!resend) {
-      console.error("Resend is not configured");
-      return {
-        error: "Demo service is not configured. Please contact support.",
-      };
-    }
-
-    const { data, error } = await resend.emails.send({
-      from: process.env.FROM_EMAIL || "onboarding@resend.dev",
-      to: [demoEmail],
+    return await sendNotification({
+      to: process.env.DEMO_EMAIL || process.env.CONTACT_EMAIL,
       replyTo: email,
       subject: `Demo Request from ${email}`,
       react: DemoNotificationEmail({
         email,
-        datetime: businessTime,
-        datetimeISO: datetime,
+        datetime: formatInTimeZone(
+          requestedDate,
+          BUSINESS_TIMEZONE,
+          "PPPP 'at' HH:mm (zzz)",
+        ),
+        datetimeISO: requestedDate.toISOString(),
       }),
     });
-
-    if (error) {
-      console.error("Resend error:", error);
-      return { error: "Failed to schedule demo. Please try again." };
-    }
-
-    console.log("Demo request email sent successfully:", data);
-    return { success: true };
   } catch (error) {
     console.error("Demo form error:", error);
-    return { error: "An unexpected error occurred. Please try again." };
+    return { error: GENERIC_ERROR };
   }
 }

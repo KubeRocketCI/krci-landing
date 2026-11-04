@@ -27,16 +27,20 @@ interface HeaderProps {
 }
 
 const Header = ({ className, newTabLabel }: HeaderProps) => {
-  const { isMobileMenuOpen, toggleMobileMenu, closeMobileMenu } =
-    useMobileMenu();
+  const panelRef = useRef<HTMLDivElement>(null);
+  const menuToggleRef = useRef<HTMLButtonElement>(null);
+  const { isMobileMenuOpen, toggleMobileMenu, closeMobileMenu } = useMobileMenu(
+    panelRef,
+    menuToggleRef,
+  );
   const showStickyCta = useStickyCta();
   const pathname = usePathname();
-  const menuToggleRef = useRef<HTMLButtonElement>(null);
 
   return (
     <header className={cn("fixed top-4 z-50 left-0 right-0 w-full", className)}>
       <Container>
         <div
+          ref={panelRef}
           className={cn(
             "bg-gradient-to-br from-black/20 via-neutral-80/30 to-black/30 backdrop-blur-lg border border-neutral-70 shadow-card rounded-lg px-4 py-3 sm:px-6 sm:py-4",
           )}
@@ -90,7 +94,7 @@ const Header = ({ className, newTabLabel }: HeaderProps) => {
               type="button"
               onClick={toggleMobileMenu}
               aria-expanded={isMobileMenuOpen}
-              aria-controls="mobile-menu"
+              aria-controls={isMobileMenuOpen ? "mobile-menu" : undefined}
               className={cn(
                 "lg:hidden flex items-center justify-center size-11",
                 "text-neutral-0 hover:bg-neutral-70/50 rounded transition-colors",
