@@ -2,7 +2,12 @@
 
 import * as Dialog from "@radix-ui/react-dialog";
 import { AlertCircle, CheckCircle2, X } from "lucide-react";
-import { useLayoutEffect, useRef } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import {
+  HONEYPOT_FIELD,
+  STARTED_AT_FIELD,
+  SUBMITTED_AT_FIELD,
+} from "@/lib/spam-guard";
 import { cn } from "@/lib/utils";
 
 function isFocusable(element: HTMLElement | null | undefined) {
@@ -330,6 +335,48 @@ export function SuccessPanel({
       <FormFooter>
         <SecondaryButton onClick={onClose}>{closeLabel}</SecondaryButton>
       </FormFooter>
+    </>
+  );
+}
+
+// Hidden fields the server checks: a honeypot bots fill, and when the form was opened and submitted.
+export function SpamGuardFields({ id }: { id: string }) {
+  const [startedAt] = useState(() => String(Date.now()));
+  const submittedAtRef = useRef<HTMLInputElement>(null);
+  const honeypotId = `${id}-${HONEYPOT_FIELD}`;
+
+  // Stamp before React reads the form data: a capturing listener runs ahead of the submit handler.
+  useEffect(() => {
+    const input = submittedAtRef.current;
+    const form = input?.form;
+    if (!input || !form) return;
+    const stamp = () => {
+      input.value = String(Date.now());
+    };
+    form.addEventListener("submit", stamp, true);
+    return () => form.removeEventListener("submit", stamp, true);
+  }, []);
+
+  return (
+    <>
+      <input type="hidden" name={STARTED_AT_FIELD} value={startedAt} />
+      <input
+        ref={submittedAtRef}
+        type="hidden"
+        name={SUBMITTED_AT_FIELD}
+        defaultValue=""
+      />
+      <div className="hidden" aria-hidden="true">
+        <label htmlFor={honeypotId}>Additional information</label>
+        <input
+          id={honeypotId}
+          name={HONEYPOT_FIELD}
+          type="text"
+          tabIndex={-1}
+          autoComplete="off"
+          defaultValue=""
+        />
+      </div>
     </>
   );
 }

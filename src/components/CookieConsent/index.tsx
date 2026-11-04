@@ -1,5 +1,6 @@
 "use client";
 
+import { X } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { useConsent } from "@/lib/consent-context";
 import { cn } from "@/lib/utils";
@@ -10,6 +11,10 @@ const buttonOutline = cn(
   buttonBase,
   "border border-neutral-0 bg-neutral-90 text-neutral-0",
   "hover:[background-image:var(--gradient-button-hover)]",
+);
+const closeButtonClass = cn(
+  "-mr-2 flex size-11 shrink-0 items-center justify-center",
+  "text-neutral-40 hover:text-neutral-0 transition-colors",
 );
 
 interface ConsentState {
@@ -50,9 +55,11 @@ export function CookieConsent({
     consent,
     isLoading,
     showBanner,
+    bannerOpener,
     acceptAll,
     acceptNecessary,
     updateConsent,
+    hideBanner,
   } = useConsent();
 
   const bannerRef = useRef<HTMLElement>(null);
@@ -62,13 +69,14 @@ export function CookieConsent({
     analytics: false,
   });
 
-  useEffect(() => {
-    if (consent) {
-      setTempConsent(consent);
-    }
-  }, [consent]);
-
   const visible = !isLoading && showBanner;
+
+  // Every open starts on the banner view with the stored choice.
+  useEffect(() => {
+    if (visible) return;
+    setShowPreferences(false);
+    if (consent) setTempConsent(consent);
+  }, [visible, consent]);
 
   useEffect(() => {
     const root = document.documentElement;
@@ -92,7 +100,19 @@ export function CookieConsent({
     };
   }, [visible, showPreferences]);
 
+  // Opened from the footer control: take focus, and give it back on close.
+  useEffect(() => {
+    if (!visible || !bannerOpener) return;
+    bannerRef.current?.focus();
+    return () => {
+      if (bannerOpener.isConnected) bannerOpener.focus();
+    };
+  }, [visible, bannerOpener]);
+
   if (!visible) return null;
+
+  // A visitor who already chose can simply close the banner again.
+  const closeBanner = consent ? hideBanner : undefined;
 
   const handleSavePreferences = () => {
     updateConsent(tempConsent);
@@ -117,12 +137,13 @@ export function CookieConsent({
   return (
     <section
       ref={bannerRef}
+      tabIndex={-1}
       aria-label={
         showPreferences
           ? translations.preferences.title
           : translations.banner.title
       }
-      className="fixed bottom-0 left-0 right-0 z-50 pb-[max(1rem,env(safe-area-inset-bottom))] pr-[max(1rem,env(safe-area-inset-right))] pl-[max(1rem,env(safe-area-inset-left))]"
+      className="fixed bottom-0 left-0 right-0 z-50 outline-none pb-[max(1rem,env(safe-area-inset-bottom))] pr-[max(1rem,env(safe-area-inset-right))] pl-[max(1rem,env(safe-area-inset-left))]"
     >
       <div className="container mx-auto max-w-6xl">
         <div
@@ -161,6 +182,17 @@ export function CookieConsent({
                     {translations.banner.onlyNecessary}
                   </button>
                 </div>
+
+                {closeBanner ? (
+                  <button
+                    type="button"
+                    onClick={closeBanner}
+                    className={cn(closeButtonClass, "self-end lg:self-auto")}
+                    aria-label={translations.closeLabel}
+                  >
+                    <X className="size-5" aria-hidden />
+                  </button>
+                ) : null}
               </div>
             </div>
           ) : (
@@ -172,27 +204,11 @@ export function CookieConsent({
                 </h2>
                 <button
                   type="button"
-                  onClick={() => setShowPreferences(false)}
-                  className={cn(
-                    "-mr-2 flex size-11 items-center justify-center",
-                    "text-neutral-40 hover:text-neutral-0 transition-colors",
-                  )}
+                  onClick={closeBanner ?? (() => setShowPreferences(false))}
+                  className={closeButtonClass}
                   aria-label={translations.closeLabel}
                 >
-                  <svg
-                    className="w-5 h-5"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                    aria-hidden="true"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M6 18L18 6M6 6l12 12"
-                    />
-                  </svg>
+                  <X className="size-5" aria-hidden />
                 </button>
               </div>
 
@@ -328,7 +344,7 @@ export function CookieSettingsButton({
   return (
     <button
       type="button"
-      onClick={showPreferences}
+      onClick={(event) => showPreferences(event.currentTarget)}
       className={cn(
         "inline-flex min-h-8 items-center pointer-coarse:min-h-11 text-xs transition-colors",
         "text-neutral-40 hover:text-neutral-20",

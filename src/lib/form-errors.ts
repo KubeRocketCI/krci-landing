@@ -21,8 +21,21 @@ export function toFieldErrors(issues: Issue[]): FieldErrors {
   return errors;
 }
 
+export function validationRejection(issues: Issue[]): FormState {
+  return {
+    error: issues[0]?.message ?? "Please check your form fields and try again.",
+    fieldErrors: toFieldErrors(issues),
+  };
+}
+
 export function hasFieldErrors(errors: FieldErrors | undefined) {
   return errors !== undefined && Object.keys(errors).length > 0;
+}
+
+// A missing or non-text entry reads as an empty string, so the schema reports it as such.
+export function readField(formData: FormData, name: string): string {
+  const value = formData.get(name);
+  return typeof value === "string" ? value : "";
 }
 
 export type ServerAction = (

@@ -14,6 +14,7 @@ import {
   FormDialog,
   FormFooter,
   SecondaryButton,
+  SpamGuardFields,
   SubmitButton,
   SuccessPanel,
 } from "@/components/FormDialog";
@@ -108,6 +109,19 @@ function mapServerErrors({ datetime, ...rest }: FieldErrors): FieldErrors {
   return datetime ? { ...rest, time: datetime } : rest;
 }
 
+// The zone's display name; the IANA id browsers report still uses legacy spellings such as Europe/Kiev.
+function zoneLabel() {
+  const zoneId = Intl.DateTimeFormat().resolvedOptions().timeZone;
+  try {
+    const parts = new Intl.DateTimeFormat(undefined, {
+      timeZoneName: "longGeneric",
+    }).formatToParts(new Date());
+    return parts.find((part) => part.type === "timeZoneName")?.value ?? zoneId;
+  } catch {
+    return zoneId;
+  }
+}
+
 function formatLocalPreview(date: Date, hour: number) {
   return toLocalDateTime(date, hour).toLocaleString(undefined, {
     weekday: "long",
@@ -166,9 +180,7 @@ interface DemoFormProps {
 function DemoForm({ translations, location, onClose }: DemoFormProps) {
   const [selectedDate, setSelectedDate] = useState<Date | undefined>();
   const [selectedTime, setSelectedTime] = useState("");
-  const [userTimezone] = useState(
-    () => Intl.DateTimeFormat().resolvedOptions().timeZone,
-  );
+  const [userTimezone] = useState(zoneLabel);
   const [defaultMonth] = useState(() => firstAvailableDay(new Date()));
   const {
     formRef,
@@ -252,6 +264,7 @@ function DemoForm({ translations, location, onClose }: DemoFormProps) {
       className="flex min-h-0 flex-1 flex-col"
     >
       <input type="hidden" name="datetime" value={datetimeISO} />
+      <SpamGuardFields id="demo" />
 
       <FormBody>
         <p className="flex items-start gap-2 text-(length:--font-size-body-2) text-neutral-10">

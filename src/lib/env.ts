@@ -41,8 +41,9 @@ export const isProduction = (): boolean => {
 
   // Client-side check - validate both NODE_ENV and domain
   const isProductionEnv = process.env.NODE_ENV === "production";
-  const isAllowedDomain = PRODUCTION_DOMAINS.some((domain) =>
-    window.location.hostname.includes(domain),
+  const { hostname } = window.location;
+  const isAllowedDomain = PRODUCTION_DOMAINS.some(
+    (domain) => hostname === domain || hostname.endsWith(`.${domain}`),
   );
 
   return isProductionEnv && isAllowedDomain;

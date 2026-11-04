@@ -166,7 +166,7 @@ const Footer = ({ translations }: { translations: Translations }) => {
               </div>
             </div>
 
-            <div className={cn("lg:max-w-73 space-y-12 w-full lg:w-auto")}>
+            <div className={cn("lg:max-w-73 w-full lg:w-auto")}>
               <div className={cn("space-y-3")}>
                 <h3
                   className={cn(
@@ -229,39 +229,6 @@ const Footer = ({ translations }: { translations: Translations }) => {
                   </a>
                 </div>
               </div>
-
-              {/* <div className={cn("space-y-2")}>
-                <h3
-                  className={cn(
-                    "text-button font-medium bg-gradient-numbers bg-clip-text text-transparent"
-                  )}
-                >
-                  Subscribe
-                </h3>
-                <label
-                  className={cn(
-                    "flex min-h-8 items-center pointer-coarse:min-h-11 text-[length:var(--font-size-body-2)] text-neutral-0"
-                  )}
-                >
-                  Join our newsletter
-                </label>
-                <div className={cn("flex")}>
-                  <input
-                    type="email"
-                    placeholder="Enter your email"
-                    className={cn(
-                      "flex-1 w-full px-3 py-2 bg-neutral-90 border border-neutral-20 rounded-l text-body-2 text-neutral-0 placeholder-neutral-20 focus:outline-none focus:border-neutral-10"
-                    )}
-                  />
-                  <button
-                    className={cn(
-                      "px-2 py-2 bg-neutral-40 border border-neutral-40 rounded-r text-body text-neutral-0 hover:bg-neutral-30 transition-colors"
-                    )}
-                  >
-                    Subscribe
-                  </button>
-                </div>
-              </div> */}
             </div>
           </div>
 

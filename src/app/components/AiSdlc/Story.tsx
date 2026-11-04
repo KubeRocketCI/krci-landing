@@ -100,6 +100,7 @@ export function Story({
                 <PhaseDiagram
                   copy={copy}
                   step={index}
+                  compact
                   className="mt-10 lg:hidden"
                 />
               </article>

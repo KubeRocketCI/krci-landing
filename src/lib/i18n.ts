@@ -2,10 +2,10 @@ import fs from "node:fs";
 import path from "node:path";
 import type { Translations } from "@/types/translations";
 
-export type Locale = "en" | "es";
+export type Locale = "en";
 
 export const defaultLocale: Locale = "en";
-export const locales: Locale[] = ["en", "es"];
+export const locales: Locale[] = ["en"];
 
 export function getTranslations(locale: Locale = defaultLocale): Translations {
   const translationPath = path.join(

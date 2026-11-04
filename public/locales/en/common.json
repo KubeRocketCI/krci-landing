@@ -335,12 +335,6 @@
       },
       "community": {
         "title": "Our Community"
-      },
-      "subscribe": {
-        "title": "Subscribe",
-        "label": "Join our newsletter",
-        "placeholder": "Enter your email",
-        "button": "Subscribe"
       }
     },
     "copyright": "Copyright © {year} KubeRocketCI.",
@@ -722,5 +716,11 @@
   "accessibility": {
     "skipToContent": "Skip to main content",
     "newTab": "opens in a new tab"
+  },
+  "notFound": {
+    "title": "Page not found",
+    "description": "The page you are looking for does not exist or has moved. Start again from the home page or the documentation.",
+    "backToHome": "Back to Home",
+    "docsLink": "Read the docs"
   }
 }

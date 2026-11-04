@@ -3,6 +3,7 @@
 import type { RefObject } from "react";
 import { useDialogs } from "@/components/DialogHost";
 import { cn } from "@/lib/utils";
+import { ctaButtonClassName } from "./styles";
 
 export const ctaButton = {
   label: "Request Demo",
@@ -34,14 +35,7 @@ const CTAButton = ({
       }}
       onPointerEnter={preloadDemo}
       onFocus={preloadDemo}
-      className={cn(
-        "inline-flex min-h-11 items-center justify-center px-5 py-3",
-        "text-foreground leading-[1.25] cursor-pointer rounded-sm",
-        "[background-image:var(--gradient-button)]",
-        "hover:[background-image:var(--gradient-button-hover)] transition-colors",
-        "shadow-button-hover",
-        className,
-      )}
+      className={cn(ctaButtonClassName, className)}
     >
       {label}
     </button>

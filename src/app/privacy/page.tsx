@@ -14,6 +14,10 @@ export const metadata: Metadata = {
     description:
       "Learn how KubeRocketCI collects, uses, and protects your personal information.",
     type: "website",
+    url: "/privacy",
+  },
+  alternates: {
+    canonical: "/privacy",
   },
 };
 
@@ -74,9 +78,9 @@ export default function PrivacyPage() {
           </div>
 
           <div className="bg-neutral-90/50 border border-neutral-70 rounded-lg p-6 mb-8">
-            <h3 className="text-lg font-semibold mb-3 text-neutral-0">
+            <h2 className="text-lg font-semibold mb-3 text-neutral-0">
               Project Notice
-            </h3>
+            </h2>
             <p className="text-sm">
               KubeRocketCI is an open-source platform developed by the community
               for the community. We collect only essential data and prioritize
